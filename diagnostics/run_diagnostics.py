@@ -101,10 +101,14 @@ def get_manifest_session(
 
 """  A "blah" maps to category: blah """
 def selection_easy(dataset, manifest):
+    prefixs = []
     preds = []
+    raw_preds = []    
     for i, (ind, row) in tqdm(enumerate(dataset.items())):
         prefix = row['input']
+        prefixs.append(prefix)
         pred = get_response(manifest, prefix, max_toks=50)
+        raw_preds.append(pred)
         pred = [p for p in pred.split("\n") if p][0].strip()
         preds.append(pred)
         
@@ -114,15 +118,19 @@ def selection_easy(dataset, manifest):
         
     labels = [l.strip() for l in row['labels']]
     num_valid = [p for p in preds if p in labels]
-    return len(num_valid)/len(dataset)
+    return len(num_valid)/len(dataset), prefixs, preds, raw_preds
 
 
 """  Does the model pick one of the given choices? """
 def selection_hard(dataset, manifest):
+    prefixs = []    
     preds = []
+    raw_preds = []        
     for i, (ind, row) in tqdm(enumerate(dataset.items())):
         prefix = row['input']
+        prefixs.append(prefix)        
         pred = get_response(manifest, prefix, max_toks=50)
+        raw_preds.append(pred)        
         pred = [p for p in pred.split("\n")][0]
         preds.append(pred)
         
@@ -135,15 +143,19 @@ def selection_hard(dataset, manifest):
         choices = row['output']
         if pred.lower().strip(".") in [c.lower().strip(".") for c in choices]:
             valid += 1
-    return valid/len(dataset)
+    return valid/len(dataset), prefixs, preds, raw_preds
 
 
 """  Does the model generate three choices? """
 def text_generation(dataset, manifest):
+    prefixs = []    
     preds = []
+    raw_preds = []        
     for i, (ind, row) in tqdm(enumerate(dataset.items())):
         prefix = row['input']
+        prefixs.append(prefix)        
         pred = get_response(manifest, prefix, max_toks=50)
+        raw_preds.append(pred)        
         pred = pred.split("\n\n")[0]
         pred = pred.split("\n")
         pred = list(set([a.replace("- ", "").strip() for a in pred]))
@@ -157,15 +169,19 @@ def text_generation(dataset, manifest):
     for pred in preds:
         if len(pred) == 2:
             valid += 1
-    return valid/len(dataset)
+    return valid/len(dataset), prefixs, preds, raw_preds
 
 
 """  Does the model faithfully transform the statement to a question? """
 def question_generation(dataset, manifest):
+    prefixs = []    
     preds = []
+    raw_preds = []        
     for i, (ind, row) in tqdm(enumerate(dataset.items())):
         prefix = row['input']
+        prefixs.append(prefix)        
         pred = get_response(manifest, prefix, max_toks=50)
+        raw_preds.append(pred)        
         pred = [p for p in pred.split("\n")][0]
         preds.append(pred)
         
@@ -175,16 +191,20 @@ def question_generation(dataset, manifest):
     
     outputs = [row['output'] for ind, row in dataset.items()]
     score = rougeL(preds=preds, labels = outputs)
-    return score
+    return score, prefixs, preds, raw_preds
 
 
 """  Does the model faithfully choose the sentence with the entity name? """
 """  Does the model faithfully answer given a keyword for extraction? """
 def extraction(dataset, manifest):
+    prefixs = []    
     preds = []
+    raw_preds = []        
     for i, (ind, row) in tqdm(enumerate(dataset.items())):
         prefix = row['input']
+        prefixs.append(prefix)        
         pred = get_response(manifest, prefix, max_toks=50)
+        raw_preds.append(pred)        
         pred = [p for p in pred.split("\n")][0]
         preds.append(pred)
         
@@ -194,7 +214,7 @@ def extraction(dataset, manifest):
     
     outputs = [row['output'] for ind, row in dataset.items()]
     score = text_f1(preds=preds, labels = outputs)
-    return score
+    return score, prefixs, preds, raw_preds
     
 
 def main():
@@ -210,24 +230,40 @@ def main():
     manifest, model_name = get_manifest_session()
     
     synthetic_scores = {}
+    model_name = model_name.replace("/", "_")     
     for synthetic, function in synthetics.items():
         print(f"RUNNING {synthetic}")
         with open(f"{data_dir}/{synthetic}.json") as f:
             dataset = json.load(f)
-        score = function(dataset, manifest)
+        score, prefixs, preds, raw_preds = function(dataset, manifest)
+        with open(f"results/{model_name}_predictions_{synthetic}.txt", "w") as f:
+            # for i in range(len(prefixs)):
+            #     d = {"prefix":prefixs[i],
+            #         "pred":preds[i],
+            #         "raw_pred": raw_preds[i], 
+            #         }            
+                # json.dump(d, f)
+            for i in range(len(prefixs)):                
+                f.write("\n\n################## prefix ################## \n")
+                f.write(str(prefixs[i]))
+                f.write("\n\n ################## pred ################## \n")
+                f.write(str(preds[i]))
+                f.write("\n\n ################## raw_pred ################## \n")                
+                f.write(str(raw_preds[i]))
+                f.write('\n\n')
+                print(f"Saved to: results/{model_name}_predictions_{synthetic}.jsonl") 
         synthetic_scores[synthetic] = score
         print(f"SCORE: {score}")
     
     print(synthetic_scores)
-    model_name = model_name.replace("/", "_") 
     
     if not os.path.exists(f"results/"):
         os.makedirs(f"results/")
     
     with open(f"results/{model_name}_results.json", "w") as f:
         json.dump(synthetic_scores, f)
-        
     print(f"Saved to: results/{model_name}_results.json")
+       
     
 if __name__ == "__main__":
     main()
