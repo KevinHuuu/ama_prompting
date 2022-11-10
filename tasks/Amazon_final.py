@@ -406,11 +406,11 @@ def main():
     data_dir = (
         f"{DATA_DIR}/amazon_products/"
     )
-    if not Path(data_dir).exists():
-        raise ValueError(
-            f"Data directory {data_dir} does not exist."
-            "Download from https://github.com/allenai/flex/blob/75d6d1cea66df2c8a7e3d429c6af5008ccf1544b/fewshot/hf_datasets_scripts/amazon/amazon.py"
-        )
+    # if not Path(data_dir).exists():
+    #     raise ValueError(
+    #         f"Data directory {data_dir} does not exist."
+    #         "Download from https://github.com/allenai/flex/blob/75d6d1cea66df2c8a7e3d429c6af5008ccf1544b/fewshot/hf_datasets_scripts/amazon/amazon.py"
+    #     )
     decomp = AmazonProduct(task_name, data_dir, val_split="test")
     decomp.run(args)
 
