@@ -153,6 +153,7 @@ class NQDecomp(Decomposition):
         save_data = Path(f"{save_dir}/{self.task_name}/data.feather")
         if not save_data.exists() or overwrite_data:
             test_data = pd.read_csv(f"{self.data_dir}/{self.task_name}/nq-test.qa.csv", sep="\t", header=None)
+            test_data.rename({0: 'question', 1: 'answers'}, axis=1, inplace=True)
             test_data.to_feather(f"{save_data}")
         else:
             print(f"Reading test data from {save_data}")

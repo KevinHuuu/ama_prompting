@@ -9,7 +9,7 @@ from manifest import Manifest
 openai.api_key = "" # Find this on the OpenAI Website
 
 from datasets import load_metric
-rouge = load_metric("rouge")
+rouge = load_metric("rouge", cache_dir='./')
 
 ######################### HELPER FUNCTIONS  #########################
 
@@ -68,7 +68,7 @@ def get_response(manifest, prompt, max_toks=10, temperature = 0, gold_choices=[]
 
 def get_manifest_session(
     client_name="huggingface",
-    client_connection="http://127.0.0.1:5000",
+    client_connection=None,
     cache_connection=None,
     temperature=0,
     top_p=1.0,
@@ -227,7 +227,9 @@ def main():
         "question_generation": question_generation
     }
     
-    manifest, model_name = get_manifest_session()
+    port = int(os.environ.get("FLASK_PORT", 5000))
+    client_connection=f"http://127.0.0.1:{port}"    
+    manifest, model_name = get_manifest_session(client_connection=client_connection)
     
     synthetic_scores = {}
     model_name = model_name.replace("/", "_")     

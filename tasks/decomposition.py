@@ -134,6 +134,7 @@ class Decomposition:
         else:
             print(f"Reading train data from {save_data}")
             train_data = pd.read_feather(save_data)
+            
         print(f"Test Data Size: {len(test_data)}")
         print(f"Train Data Size: {len(train_data)}")
         return test_data, train_data
@@ -224,6 +225,13 @@ class Decomposition:
         save_path = Path(f"{args.save_dir}/{self.task_name}")
         save_path.mkdir(parents=True, exist_ok=True)
         data_test, data_train = self.read_data(args.save_dir, bool(args.overwrite_data))
+        
+        # #########################
+        # # For debug purposes only
+        # data_test = data_test.iloc[:1]
+        # #########################       
+        
+        
         # Subsample train for boost exps
         if args.boost_train_examples >= 0:
             boost_data_train = data_train.head(min(len(data_train), args.boost_train_examples))

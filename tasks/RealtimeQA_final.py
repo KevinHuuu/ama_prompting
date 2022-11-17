@@ -13,7 +13,7 @@ from decomposition import Decomposition, get_args, DATA_DIR
 from utils import get_response, InputOutputPrompt
 
 realtime_qa_path = Path(f"{DATA_DIR}/realtimeqa_public/scripts/utils")
-sys.path.append(str(realtime_qa_path))
+sys.path.insert(0,str(realtime_qa_path))
 try:
     from tools import f1_score, metric_max_over_ground_truths, fall_back, read_jsonl, check_jsonls
 except ModuleNotFoundError:
@@ -238,9 +238,12 @@ class RealtimeQADecomp(Decomposition):
         for i, (ind, row) in tqdm(
             enumerate(test_data.iterrows()), total=len(test_data)
         ):  
-            row["answer"] = row["answer"].tolist()
-            row["choices"] = row["choices"].tolist()
-            row["gold_answers"] = row["gold_answers"].tolist()
+            try:
+                row["answer"] = row["answer"].tolist()
+                row["choices"] = row["choices"].tolist()
+                row["gold_answers"] = row["gold_answers"].tolist()
+            except:
+                pass
             question = row["question_sentence"]
             passages = row["passages"]
             golds = row["gold_answers"]

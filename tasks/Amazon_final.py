@@ -216,7 +216,7 @@ class AmazonProduct(Decomposition):
         random.seed(0)
         np.random.seed(0)
         save_data = Path(f"{save_dir}/{self.task_name}/data.feather")
-        dataset = load_dataset('amazon')
+        dataset = load_dataset('amazon',cache_dir='../fm_in_context_eval_data/cache')
         all_data = dataset['test']
         all_data = pd.DataFrame(all_data).sample(frac=1, random_state=0)
         if not save_data.exists() or overwrite_data:
