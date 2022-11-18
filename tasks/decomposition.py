@@ -93,24 +93,43 @@ def get_args():
         choices=["davinci"],
     )
     parser.add_argument(
-        "--client_connection",
+        "--client_connection_question_module",
         type=str,
         default="http://127.0.0.1:5000",
-        help="Client connection str",
+        help="Client connection str for the question module",
     )
     parser.add_argument(
-        "--cache_connection",
+        "--client_connection_answer_module",
         type=str,
-        default="/home/manifest/final_runs.sqlite",
+        default="http://127.0.0.1:5001",
+        help="Client connection str for the answer module",
+    )    
+    parser.add_argument(
+        "--cache_connection_question_module",
+        type=str,
+        default="/home/manifest/final_runs_question_module.sqlite",
         help="Cache connection str",
     )
     parser.add_argument(
-        "--overwrite_manifest",
+        "--cache_connection_answer_module",
+        type=str,
+        default="/home/manifest/final_runs_answer_module.sqlite",
+        help="Cache connection str",
+    )    
+    parser.add_argument(
+        "--overwrite_manifest_question_module",
         type=int,
         default=0,
-        help="Overwrite manifest",
+        help="Overwrite manifest for the question module",
         choices=[0, 1],
     )
+    parser.add_argument(
+        "--overwrite_manifest_answer_module",
+        type=int,
+        default=0,
+        help="Overwrite manifest for the answer module",
+        choices=[0, 1],
+    )    
     return parser.parse_args()
 
 class Decomposition:
@@ -148,13 +167,13 @@ class Decomposition:
         raise NotImplementedError()
 
     def zero_few_baseline(
-        self, test_data, few_shot_df, manifest, overwrite_manifest, do_few_shot=True
+        self, test_data, few_shot_df, manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer, do_few_shot=True
     ):
         """Zero and few shot baseline"""
         raise NotImplementedError()
 
     def run_decomposed_prompt(
-        self, test_data, boost_data_train, boost_dfs, manifest, overwrite_manifest
+        self, test_data, boost_data_train, boost_dfs, manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer
     ):
         """Decomposition run"""
         raise NotImplementedError()
@@ -250,15 +269,25 @@ class Decomposition:
             data_test = data_test.iloc[:num_run]
             save_results = False
 
-        runner, model_name = get_manifest_session(
+        runner_question, model_name_question = get_manifest_session(
             client_name=args.client_name,
             client_engine=args.client_engine,
-            client_connection=args.client_connection,
-            cache_connection=args.cache_connection,
+            client_connection=args.client_connection_question_module,
+            cache_connection=args.cache_connection_question_module,
+        )
+        runner_answer, model_name_answer = get_manifest_session(
+            client_name=args.client_name,
+            client_engine=args.client_engine,
+            client_connection=args.client_connection_answer_module,
+            cache_connection=args.cache_connection_answer_module,
         )
 
-        model_name = model_name.replace("/", "_")
-        print("Model name:", model_name)
+        
+        model_name_question = model_name_question.replace("/", "_")
+        print("Model name question module:", model_name_question)
+        
+        model_name_answer = model_name_answer.replace("/", "_")
+        print("Model name answer module:", model_name_answer)        
 
         # Read in few shot examples
         few_shot_path = save_path /f"{args.k_shot}_shot_examples.feather"
@@ -306,8 +335,10 @@ class Decomposition:
             exp_zero, metric_zero = self.zero_few_baseline(
                 test_data=data_test,
                 few_shot_df=mini_df,
-                manifest=runner,
-                overwrite_manifest=args.overwrite_manifest,
+                manifest_question=runner_question,
+                manifest_answer=runner_answer,                
+                overwrite_manifest_question=args.overwrite_manifest_question,
+                overwrite_manifest_answer=args.overwrite_manifest_answer,                
                 do_few_shot=False,
             )
             if save_results:
@@ -319,8 +350,10 @@ class Decomposition:
             exp_few, metric_few = self.zero_few_baseline(
                 test_data=data_test,
                 few_shot_df=mini_df,
-                manifest=runner,
-                overwrite_manifest=args.overwrite_manifest,
+                manifest_question=runner_question,
+                manifest_answer=runner_answer,                
+                overwrite_manifest_question=args.overwrite_manifest_question,
+                overwrite_manifest_answer=args.overwrite_manifest_answer,                
                 do_few_shot=True,
             )
             if save_results:
@@ -328,10 +361,9 @@ class Decomposition:
 
         if bool(args.run_decomp):
             # Decomp
-            run_name = f"{model_name}_decomposed_{today}"
+            run_name = f"QUESTION_{model_name_question}_ANSWER_{model_name_answer}_decomposed_{today}"
             exp_decomposed, exp_decomposed_train, metric_decomposed, metric_decomposed_by_boost = self.run_decomposed_prompt(
-                test_data=data_test, boost_data_train=boost_data_train, boost_dfs=boost_examples, manifest=runner, overwrite_manifest=args.overwrite_manifest
-            )
+                test_data=data_test, boost_data_train=boost_data_train, boost_dfs=boost_examples,                 manifest_question=runner_question, manifest_answer=runner_answer, overwrite_manifest_question=args.overwrite_manifest_question, overwrite_manifest_answer=args.overwrite_manifest_answer)
             if save_results:
                 save_log(
                     self.task_name,
@@ -350,14 +382,17 @@ class Decomposition:
         # Zero shot decomp
         exp_zeroshot_decomposed = []
         if bool(args.run_zeroshot_decomp):
-            run_name = f"{model_name}_decomposed_0shot_{today}"
+            run_name = f"QUESTION_{model_name_question}_ANSWER_{model_name_answer}_decomposed_0shot_{today}"
             (
                 exp_zeroshot_decomposed,
                 exp_zeroshot_decomposed_train,
                 metric_zeroshot_decomposed,
                 _,
             ) = self.run_decomposed_prompt(
-                test_data=data_test, boost_data_train=boost_data_train, boost_dfs=[[pd.DataFrame() for _ in range(len(boost_examples[0]))]], manifest=runner, overwrite_manifest=args.overwrite_manifest,
+                test_data=data_test, boost_data_train=boost_data_train, boost_dfs=[[pd.DataFrame() for _ in range(len(boost_examples[0]))]],                 manifest_question=runner_question,
+                manifest_answer=runner_answer,                
+                overwrite_manifest_question=args.overwrite_manifest_question,
+                overwrite_manifest_answer=args.overwrite_manifest_answer,                
             )
             if save_results and len(exp_zeroshot_decomposed) > 0:
                 save_log(
@@ -383,7 +418,8 @@ class Decomposition:
             print("Accuracy Zero Shot Decomposed", metric_zeroshot_decomposed)
         
         metrics = {
-            "model_name": model_name,
+            "model_name_question": model_name,
+            "model_name_answer": model_name,            
             "task_name": self.task_name,
             "today": today,
             "zero_shot": metric_zero,

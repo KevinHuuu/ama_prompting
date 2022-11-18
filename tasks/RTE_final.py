@@ -323,8 +323,7 @@ class RTEDecomp(Decomposition):
         self,
         test_data,
         few_shot_df,
-        manifest,
-        overwrite_manifest,
+        manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer,
         prompt_suffix="",
         do_few_shot=True,
     ):
@@ -357,8 +356,8 @@ class RTEDecomp(Decomposition):
 
                 raw_answer = get_response(
                     pmp,
-                    manifest,
-                    overwrite=bool(overwrite_manifest),
+                    manifest_answer,
+                    overwrite=bool(overwrite_manifest_answer),
                     max_toks=30,
                 )
                 answer = raw_answer.strip().lower()
@@ -522,10 +521,10 @@ class RTEDecomp(Decomposition):
         return answer, prompt
 
     def run_decomposed_prompt(
-        self, test_data, boost_data_train, boost_dfs, manifest, overwrite_manifest
+        self, test_data, boost_data_train, boost_dfs, manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer
     ):
-        expt_log, all_boost_preds, labels = self._run_decomp_single_data(test_data, boost_dfs, manifest, overwrite_manifest)
-        expt_log_train, all_boost_train_preds, train_labels = self._run_decomp_single_data(boost_data_train, boost_dfs, manifest, overwrite_manifest, run_limit=1000)
+        expt_log, all_boost_preds, labels = self._run_decomp_single_data(test_data, boost_dfs, manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer)
+        expt_log_train, all_boost_train_preds, train_labels = self._run_decomp_single_data(boost_data_train, boost_dfs, manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer, run_limit=1000)
         # Do WS
         preds = self.merge_boosted_preds(all_boost_preds, all_boost_train_preds, train_labels, expt_log, expt_log_train)
         
@@ -536,7 +535,7 @@ class RTEDecomp(Decomposition):
         report = classification_report(labels, preds, output_dict=True)
         return expt_log, expt_log_train, report["accuracy"], individual_accuracies 
 
-    def _run_decomp_single_data(self, test_data, boost_dfs, manifest, overwrite_manifest, run_limit=-1):
+    def _run_decomp_single_data(self, test_data, boost_dfs, manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer, run_limit=-1):
         expt_log = {}
         all_boost_preds = []
         labels = []
@@ -559,14 +558,14 @@ class RTEDecomp(Decomposition):
 
                 if boost_num < 4:
                     question, proposed_answer, question_final_prompt = self.get_question(
-                        statement, questioner, boost_examples[0], manifest, overwrite_manifest
+                        statement, questioner, boost_examples[0], manifest_question, overwrite_manifest_question
                     )
                     if i == 0:
                         print("PROMPT:")
                         print(question_final_prompt)
 
                     open_answer, answer_final_prompt = self.open_qa(
-                        question, passage, openended_qa, boost_examples[1], manifest, overwrite_manifest
+                        question, passage, openended_qa, boost_examples[1], manifest_answer, overwrite_manifest_answer
                     )
                     if i == 0:
                         print("\nPROMPT:")
@@ -589,13 +588,13 @@ class RTEDecomp(Decomposition):
                         pred = self.resolve_pred(open_answer.lower(), open_answer)
                 else:
                     chopped_answer, cuttoff, chopper_prompt = self.get_chopping(
-                        statement, cloze_convertor, boost_examples[0], manifest, cuttoff_size=2)
+                        statement, cloze_convertor, boost_examples[0], manifest_question, cuttoff_size=2)
 
                     choices_answer, choices_prompt = self.get_choices_answer(
-                        chopped_answer, cuttoff, cloze_choices, boost_examples[1], manifest)
+                        chopped_answer, cuttoff, cloze_choices, boost_examples[1], manifest_question)
 
                     pred, selector_prompt = self.get_final_selection(
-                        choices_answer, passage, chopped_answer, cloze_completion, boost_examples[2], manifest)
+                        choices_answer, passage, chopped_answer, cloze_completion, boost_examples[2], manifest_answer)
 
                 prompts_across_boost.append(all_prompts)
                 preds_across_boost.append(pred)
