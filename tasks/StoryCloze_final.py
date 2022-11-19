@@ -377,8 +377,7 @@ class StoryCloze(Decomposition):
         self,
         test_data,
         few_shot_df,
-        manifest,
-        overwrite_manifest,
+        manifest        manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer,
         prompt_suffix="",
         do_few_shot=True,
     ):
@@ -414,7 +413,7 @@ class StoryCloze(Decomposition):
                     gold = row['sentence_quiz2']
                 prompt = f"{instruction}\n\n\n{icl_str}{text}{choices}Answer: "
 
-                raw_answer = get_response(prompt, manifest, max_toks=50) 
+                raw_answer = get_response(prompt, manifest_answer, max_toks=50) 
                 answer = raw_answer.split("\n")
                 answer = [a for a in answer if a]
                 if answer:
@@ -586,10 +585,10 @@ class StoryCloze(Decomposition):
         return pred, what_next_prompt
 
     def run_decomposed_prompt(
-        self, test_data, boost_data_train, boost_dfs, manifest, overwrite_manifest
+        self, test_data, boost_data_train, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer
     ):
-        expt_log, all_boost_preds, labels = self._run_decomp_single_data(test_data, boost_dfs, manifest, overwrite_manifest, run_limit=-1)
-        expt_log_train, all_boost_train_preds, train_labels = self._run_decomp_single_data(boost_data_train, boost_dfs, manifest, overwrite_manifest, run_limit=1000)
+        expt_log, all_boost_preds, labels = self._run_decomp_single_data(test_data, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer, run_limit=-1)
+        expt_log_train, all_boost_train_preds, train_labels = self._run_decomp_single_data(boost_data_train, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer,run_limit=1000)
         # Do WS
         
         preds = self.merge_boosted_preds(all_boost_preds, all_boost_train_preds, train_labels, expt_log, expt_log_train)
@@ -600,7 +599,7 @@ class StoryCloze(Decomposition):
         report = classification_report(labels, preds, output_dict=True)
         return expt_log, expt_log_train, report["accuracy"], individual_accuracies
 
-    def _run_decomp_single_data(self, test_data, boost_dfs, manifest, overwrite_manifest, run_limit=-1):
+    def _run_decomp_single_data(self, test_data, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer,run_limit=-1):
         expt_log = {}
         all_boost_preds = []
         labels = []
@@ -625,7 +624,7 @@ class StoryCloze(Decomposition):
 
                 if boost_num < 3:
                     pred, questioner_prompt, answerer_prompt = self.get_one_by_one(
-                        example, choice_a, choice_b, [questioner, openended_qa], boost_examples, manifest, overwrite_manifest
+                        example, choice_a, choice_b, [questioner, openended_qa], boost_examples, manifest_answer, overwrite_manifest_answer
                     )
                     if i == 0:
                         print(questioner_prompt)
@@ -637,16 +636,16 @@ class StoryCloze(Decomposition):
 
                     if not pred:
                         pred, sentiment_prompt = self.combine_sentiments(
-                            example, choice_a, choice_b, [sentiment, sentiment_more_positive], boost_examples, manifest, boost_num, overwrite_manifest
+                            example, choice_a, choice_b, [sentiment, sentiment_more_positive], boost_examples, manifest_answer, boost_num, overwrite_manifest_answer
                         )
                         all_prompts.append(sentiment_prompt)
 
                     if not pred:
                         pred, what_next_prompt = self.get_what_next(
-                            example, choice_a, choice_b, [what_next], boost_examples, manifest, overwrite_manifest
+                            example, choice_a, choice_b, [what_next], boost_examples, manifest_answer, overwrite_manifest_answer
                         )
                         pred2, what_next_prompt = self.get_what_next(
-                            example, choice_b, choice_a, [what_next], boost_examples, manifest, overwrite_manifest
+                            example, choice_b, choice_a, [what_next], boost_examples, manifest_answer, overwrite_manifest_answer
                         )
                         if pred != pred2:
                             pred = ""
@@ -677,9 +676,9 @@ class StoryCloze(Decomposition):
                     all_prompts.append(prompt)
                     raw_answer, _ = get_response(
                         prompt.format(text=text),
-                        manifest,
+                        manifest_answer,
                         gold_choices=[options[0].replace("- ", "").strip(), options[1].replace("- ", "").strip()],
-                        overwrite=bool(overwrite_manifest),
+                        overwrite=bool(overwrite_manifest_answer),
                         max_toks=max(len(opt) for opt in options)*4,
                     )
                     

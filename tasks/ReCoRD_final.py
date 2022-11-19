@@ -161,8 +161,7 @@ class ReCoRDDecomp(Decomposition):
         self,
         test_data,
         few_shot_df,
-        manifest,
-        overwrite_manifest,
+        manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer,
         do_few_shot=True,
     ):
         expt_log = {}
@@ -204,7 +203,7 @@ class ReCoRDDecomp(Decomposition):
             text = text.replace(query, "").strip().replace("@highlight", "").replace("\n\n", ". ")
             # gold = row['targets_pretokenized']
             answer_choices = row['answer_choices']
-            answer, prompt = self.get_final_answer_full_sentence(answer_choices, None, None, text, query, manifest, icl_str=icl_str)
+            answer, prompt = self.get_final_answer_full_sentence(answer_choices, None, None, text, query, manifest_answer, icl_str=icl_str)
 
             pred = answer
             entry = {
@@ -268,10 +267,10 @@ class ReCoRDDecomp(Decomposition):
 
 
     def run_decomposed_prompt(
-        self, test_data, boost_data_train, boost_dfs, manifest, overwrite_manifest
+        self, test_data, boost_data_train, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer
     ):
-        expt_log, all_boost_preds, labels = self._run_decomp_single_data(test_data, boost_dfs, manifest, overwrite_manifest, run_limit=-1)
-        expt_log_train, all_boost_train_preds, train_labels = self._run_decomp_single_data(boost_data_train, boost_dfs, manifest, overwrite_manifest, run_limit=1000, is_train=True)
+        expt_log, all_boost_preds, labels = self._run_decomp_single_data(test_data, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer, run_limit=-1)
+        expt_log_train, all_boost_train_preds, train_labels = self._run_decomp_single_data(boost_data_train, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer,run_limit=1000, is_train=True)
         # Do WS
         preds = self.merge_boosted_preds(all_boost_preds, all_boost_train_preds, train_labels, expt_log, expt_log_train)
         # Get accuracies across all boost sets
@@ -281,7 +280,7 @@ class ReCoRDDecomp(Decomposition):
         report = evaluate(labels, preds)
         return expt_log, expt_log_train, report["exact_match"], individual_accuracies
 
-    def _run_decomp_single_data(self, test_data, boost_dfs, manifest, overwrite_manifest, run_limit=-1, is_train=False):
+    def _run_decomp_single_data(self, test_data, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer,run_limit=-1, is_train=False):
         expt_log = {}
         all_boost_preds = []
         all_boost_answers = []
@@ -312,7 +311,7 @@ class ReCoRDDecomp(Decomposition):
                 if "@highlight" not in boost_examples[0]:
                     text = text.replace(query, "").strip().replace("@highlight", "").replace("\n\n", ". ")
                 
-                final_answer, prompt = self.get_final_answer_full_sentence(answer_choices, cloze_completion, boost_examples[0], text, query, manifest)
+                final_answer, prompt = self.get_final_answer_full_sentence(answer_choices, cloze_completion, boost_examples[0], text, query, manifest_answer)
 
                 if i == 0:
                     print(prompt)

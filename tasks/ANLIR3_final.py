@@ -314,8 +314,7 @@ class ANLIDecomp(Decomposition):
         self,
         test_data,
         few_shot_df,
-        manifest,
-        overwrite_manifest,
+        manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer,
         do_few_shot=True,
     ):
         expt_log = {}
@@ -349,8 +348,8 @@ class ANLIDecomp(Decomposition):
 
                 raw_answer = get_response(
                     pmp,
-                    manifest,
-                    overwrite=bool(overwrite_manifest),
+                    manifest_answer,
+                    overwrite=bool(overwrite_manifest_answer),
                     max_toks=20,
                 )
 
@@ -460,10 +459,10 @@ class ANLIDecomp(Decomposition):
         return pred
 
     def run_decomposed_prompt(
-        self, test_data, boost_data_train, boost_dfs, manifest, overwrite_manifest
+        self, test_data, boost_data_train, boost_dfs, manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer
     ):
-        expt_log, all_boost_preds, labels = self._run_decomp_single_data(test_data, boost_dfs, manifest, overwrite_manifest, run_limit=-1)
-        expt_log_train, all_boost_train_preds, train_labels = self._run_decomp_single_data(boost_data_train, boost_dfs, manifest, overwrite_manifest, run_limit=1000)
+        expt_log, all_boost_preds, labels = self._run_decomp_single_data(test_data, boost_dfs, manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer, run_limit=-1)
+        expt_log_train, all_boost_train_preds, train_labels = self._run_decomp_single_data(boost_data_train, boost_dfs, manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer, run_limit=1000)
         # Do WS
         preds = self.merge_boosted_preds(all_boost_preds, all_boost_train_preds, train_labels, expt_log, expt_log_train, indecisive_ans="neither")
         # Get accuracies across all boost sets
@@ -478,7 +477,7 @@ class ANLIDecomp(Decomposition):
         return expt_log, expt_log_train, report["accuracy"], individual_accuracies    
     
     def _run_decomp_single_data(
-        self, test_data, boost_dfs, manifest, overwrite_manifest, run_limit = -1
+        self, test_data, boost_dfs, manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer, run_limit = -1
     ):
         expt_log = {}
         all_boost_preds = []
@@ -509,7 +508,7 @@ class ANLIDecomp(Decomposition):
                 # question / extract prompt
                 if boost_num < 3:
                     question, question_final_prompt = self.get_question(
-                        statement, questioner_prompt, boost_examples[0], manifest, overwrite_manifest
+                        statement, questioner_prompt, boost_examples[0], manifest_question, overwrite_manifest_question
                     )
                     all_prompts.append(question_final_prompt)
 
@@ -518,8 +517,8 @@ class ANLIDecomp(Decomposition):
                         passage,
                         extraction_qa,
                         boost_examples[1],
-                        manifest,
-                        overwrite_manifest,
+                        manifest_answer,
+                        overwrite_manifest_answer,
                     )
                     all_prompts.append(extraction_final_prompt)
                     if i == 0:
@@ -560,8 +559,8 @@ class ANLIDecomp(Decomposition):
                         print(pmp)
                     pred = get_response(
                         pmp,
-                        manifest,
-                        overwrite=bool(overwrite_manifest),
+                        manifest_answer,
+                        overwrite=bool(overwrite_manifest_answer),
                         max_toks=10,
                         stop_token="\n",
                     )

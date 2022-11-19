@@ -383,7 +383,7 @@ class RTEDecomp(Decomposition):
                     pred = "False"
                 elif not is_no and not is_yes:
                     pred = "False"
-                else:
+
                     
                 entry = {
                     "ind": ind,

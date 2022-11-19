@@ -356,8 +356,7 @@ class COPADecomp(Decomposition):
         self,
         test_data,
         few_shot_df,
-        manifest,
-        overwrite_manifest,
+        manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer,
         do_few_shot=True,
     ):
         expt_log = {}
@@ -403,9 +402,9 @@ class COPADecomp(Decomposition):
                     print(pmp)
                 raw_answer, _ = get_response(
                     pmp,
-                    manifest,
+                    manifest_answer,
                     gold_choices=[options[0].replace("- ", "").strip(), options[1].replace("- ", "").strip()],
-                    overwrite=bool(overwrite_manifest),
+                    overwrite=bool(overwrite_manifest_answer),
                     max_toks=50,
                 )
                 answer = raw_answer.strip().lower()
@@ -641,10 +640,10 @@ class COPADecomp(Decomposition):
 
 
     def run_decomposed_prompt(
-        self, test_data, boost_data_train, boost_dfs, manifest, overwrite_manifest
+        self, test_data, boost_data_train, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer
     ):
-        expt_log, all_boost_preds, labels = self._run_decomp_single_data(test_data, boost_dfs, manifest, overwrite_manifest)
-        expt_log_train, all_boost_train_preds, train_labels = self._run_decomp_single_data(boost_data_train, boost_dfs, manifest, overwrite_manifest, run_limit=1000)
+        expt_log, all_boost_preds, labels = self._run_decomp_single_data(test_data, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer)
+        expt_log_train, all_boost_train_preds, train_labels = self._run_decomp_single_data(boost_data_train, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer, run_limit=1000)
         # Do WS
         preds = self.merge_boosted_preds(all_boost_preds, all_boost_train_preds, train_labels, expt_log, expt_log_train)
         # Get accuracies across all boost sets
@@ -654,7 +653,7 @@ class COPADecomp(Decomposition):
         report = classification_report(labels, preds, output_dict=True)
         return expt_log, expt_log_train, report["accuracy"], individual_accuracies
 
-    def _run_decomp_single_data(self, test_data, boost_dfs, manifest, overwrite_manifest, run_limit=-1):
+    def _run_decomp_single_data(self, test_data, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer, run_limit=-1):
         expt_log = {}
         all_boost_preds = []
         labels = []
@@ -692,16 +691,16 @@ class COPADecomp(Decomposition):
                 if boost_num < 1:
                     all_prompts = []
                     if 'as a consequence' in transition:
-                        answer, what_next_prompt = self.what_happened_next(question, boost_examples[0], example, transition, choice_a, choice_b, 'and so', manifest, overwrite_manifest)
+                        answer, what_next_prompt = self.what_happened_next(question, boost_examples[0], example, transition, choice_a, choice_b, 'and so', manifest_answer, overwrite_manifest_answer)
                     else:
                         answer, what_next_prompt = self.what_happened_next(
-                            question, boost_examples[0], example, transition, choice_a, choice_b, 'because', manifest, overwrite_manifest)
+                            question, boost_examples[0], example, transition, choice_a, choice_b, 'because', manifest_answer, overwrite_manifest_answer)
 
                     if 'as a consequence' in transition:
-                        answer2, what_next_prompt = self.what_happened_next(question, boost_examples[0], example, transition, choice_b, choice_a, 'and so', manifest, overwrite_manifest)
+                        answer2, what_next_prompt = self.what_happened_next(question, boost_examples[0], example, transition, choice_b, choice_a, 'and so', manifest_answer, overwrite_manifest_answer)
                     else:
                         answer2, what_next_prompt = self.what_happened_next(
-                            question, boost_examples[0], example, transition, choice_b, choice_a, 'because', manifest, overwrite_manifest)
+                            question, boost_examples[0], example, transition, choice_b, choice_a, 'because', manifest_answer, overwrite_manifest_answer)
 
                     if answer != answer2:
                         answer = ''
@@ -711,10 +710,10 @@ class COPADecomp(Decomposition):
 
                 elif boost_num < 2:
                     answer, what_next_prompt = self.get_what_next(
-                        example, choice_a, choice_b, transition, [what_next2], boost_examples, manifest, overwrite_manifest
+                        example, choice_a, choice_b, transition, [what_next2], boost_examples, manifest_answer, overwrite_manifest_answer
                     )
                     answer2, what_next_prompt = self.get_what_next(
-                        example, choice_b, choice_a, transition, [what_next2], boost_examples, manifest, overwrite_manifest
+                        example, choice_b, choice_a, transition, [what_next2], boost_examples, manifest_answer, overwrite_manifest_answer
                     )
                     if answer != answer2:
                         answer = ''
@@ -753,9 +752,9 @@ class COPADecomp(Decomposition):
                     all_prompts.append(prompt)
                     raw_answer, _ = get_response(
                         prompt.format(text=text),
-                        manifest,
+                        manifest_answer,
                         gold_choices=[options[0].replace("- ", "").strip(), options[1].replace("- ", "").strip()],
-                        overwrite=bool(overwrite_manifest),
+                        overwrite=bool(overwrite_manifest_answer),
                         max_toks=50,
                     )
                     answer = raw_answer.strip().lower()

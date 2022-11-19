@@ -194,8 +194,7 @@ class NQDecomp(Decomposition):
         self,
         test_data,
         few_shot_df,
-        manifest,
-        overwrite_manifest,
+        manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer,
         prompt_suffix="",
         do_few_shot=True,
     ):
@@ -236,8 +235,8 @@ class NQDecomp(Decomposition):
             prompt = prompt.format(question=question)
             raw_answer = get_response(
                 prompt, #prompt.format(question=question),
-                manifest,
-                overwrite=bool(overwrite_manifest),
+                manifest_answer,
+                overwrite=bool(overwrite_manifest_answer),
                 max_toks=20,
                 stop_token="\n\n",
             )
@@ -258,10 +257,10 @@ class NQDecomp(Decomposition):
         return expt_log, metric
 
     def run_decomposed_prompt(
-        self, test_data, boost_data_train, boost_dfs, manifest, overwrite_manifest
+        self, test_data, boost_data_train, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer
     ):
-        expt_log, all_boost_preds, labels = self._run_decomp_single_data(test_data, boost_dfs, manifest, overwrite_manifest)
-        expt_log_train, all_boost_train_preds, train_labels = self._run_decomp_single_data(boost_data_train, boost_dfs, manifest, overwrite_manifest, run_limit=1000)
+        expt_log, all_boost_preds, labels = self._run_decomp_single_data(test_data, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer)
+        expt_log_train, all_boost_train_preds, train_labels = self._run_decomp_single_data(boost_data_train, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer,run_limit=1000)
         
         # Do WS
         boost_test, boost_train = [], []
@@ -283,7 +282,7 @@ class NQDecomp(Decomposition):
         metric = accuracy_span_overlap(preds=preds, golds=labels)
         return expt_log, expt_log_train, metric, individual_accuracies
 
-    def _run_decomp_single_data(self, test_data, boost_dfs, manifest, overwrite_manifest, run_limit=-1):
+    def _run_decomp_single_data(self, test_data, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer,run_limit=-1):
         expt_log = {}
         all_boost_preds = []
         labels = []
@@ -312,8 +311,8 @@ class NQDecomp(Decomposition):
             )
             more_info_answer = get_response(
                     prompt.format(question=question),
-                    manifest,
-                    overwrite=bool(overwrite_manifest),
+                    manifest_answer,
+                    overwrite=bool(overwrite_manifest_answer),
                     max_toks=20,
                     stop_token="\n\n",
             )
@@ -330,8 +329,8 @@ class NQDecomp(Decomposition):
 
                 raw_answer = get_response(
                     prompt.format(text=more_info_answer, question=question),
-                    manifest,
-                    overwrite=bool(overwrite_manifest),
+                    manifest_answer,
+                    overwrite=bool(overwrite_manifest_answer),
                     max_toks=20,
                     stop_token="\n\n",
                 )

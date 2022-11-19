@@ -93,38 +93,38 @@ def get_args():
         choices=["davinci"],
     )
     parser.add_argument(
-        "--client_connection_question_module",
+        "--client_connection_question",
         type=str,
         default="http://127.0.0.1:5000",
         help="Client connection str for the question module",
     )
     parser.add_argument(
-        "--client_connection_answer_module",
+        "--client_connection_answer",
         type=str,
         default="http://127.0.0.1:5001",
         help="Client connection str for the answer module",
     )    
     parser.add_argument(
-        "--cache_connection_question_module",
+        "--cache_connection_question",
         type=str,
-        default="/home/manifest/final_runs_question_module.sqlite",
+        default="/home/manifest/final_runs_question.sqlite",
         help="Cache connection str",
     )
     parser.add_argument(
-        "--cache_connection_answer_module",
+        "--cache_connection_answer",
         type=str,
-        default="/home/manifest/final_runs_answer_module.sqlite",
+        default="/home/manifest/final_runs_answer.sqlite",
         help="Cache connection str",
     )    
     parser.add_argument(
-        "--overwrite_manifest_question_module",
+        "--overwrite_manifest_question",
         type=int,
         default=0,
         help="Overwrite manifest for the question module",
         choices=[0, 1],
     )
     parser.add_argument(
-        "--overwrite_manifest_answer_module",
+        "--overwrite_manifest_answer",
         type=int,
         default=0,
         help="Overwrite manifest for the answer module",
@@ -272,14 +272,14 @@ class Decomposition:
         runner_question, model_name_question = get_manifest_session(
             client_name=args.client_name,
             client_engine=args.client_engine,
-            client_connection=args.client_connection_question_module,
-            cache_connection=args.cache_connection_question_module,
+            client_connection=args.client_connection_question,
+            cache_connection=args.cache_connection_question,
         )
         runner_answer, model_name_answer = get_manifest_session(
             client_name=args.client_name,
             client_engine=args.client_engine,
-            client_connection=args.client_connection_answer_module,
-            cache_connection=args.cache_connection_answer_module,
+            client_connection=args.client_connection_answer,
+            cache_connection=args.cache_connection_answer,
         )
 
         
@@ -331,7 +331,7 @@ class Decomposition:
 
         if bool(args.run_zeroshot):
             # Zero Shot
-            run_name = f"{model_name}_0shot"
+            run_name = f"{model_name_question}_{model_name_answer}_0shot"
             exp_zero, metric_zero = self.zero_few_baseline(
                 test_data=data_test,
                 few_shot_df=mini_df,
@@ -346,7 +346,7 @@ class Decomposition:
 
         if bool(args.run_fewshot):
             # Few Shot
-            run_name = f"{model_name}_{args.k_shot}shot"
+            run_name = f"{model_name_question}_{model_name_answer}_{args.k_shot}shot"
             exp_few, metric_few = self.zero_few_baseline(
                 test_data=data_test,
                 few_shot_df=mini_df,
@@ -418,8 +418,8 @@ class Decomposition:
             print("Accuracy Zero Shot Decomposed", metric_zeroshot_decomposed)
         
         metrics = {
-            "model_name_question": model_name,
-            "model_name_answer": model_name,            
+            "model_name_question": model_name_question,
+            "model_name_answer": model_name_question,            
             "task_name": self.task_name,
             "today": today,
             "zero_shot": metric_zero,
