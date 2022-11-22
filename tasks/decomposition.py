@@ -419,7 +419,7 @@ class Decomposition:
         
         metrics = {
             "model_name_question": model_name_question,
-            "model_name_answer": model_name_question,            
+            "model_name_answer": model_name_answer,            
             "task_name": self.task_name,
             "today": today,
             "zero_shot": metric_zero,

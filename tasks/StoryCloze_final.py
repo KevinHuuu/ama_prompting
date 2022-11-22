@@ -377,7 +377,7 @@ class StoryCloze(Decomposition):
         self,
         test_data,
         few_shot_df,
-        manifest        manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer,
+        manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer,
         prompt_suffix="",
         do_few_shot=True,
     ):
@@ -530,7 +530,8 @@ class StoryCloze(Decomposition):
             sent = -1
         elif "neutral" in sent:
             sent = 0
-
+        else:
+            sent = 0
         return sent, sentiment_prompt
 
     def get_sentiment_more_pos(self, choice_a, choice_b, all_prompts, boost_examples, manifest, overwrite_manifest):
