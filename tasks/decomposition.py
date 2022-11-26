@@ -45,14 +45,14 @@ def get_args():
     parser.add_argument(
         "--run_zeroshot",
         type=int,
-        default=1,
+        default=0,
         help="Run zeroshot",
         choices=[0, 1],
     )
     parser.add_argument(
         "--run_fewshot",
         type=int,
-        default=1,
+        default=0,
         help="Run fewshot",
         choices=[0, 1],
     )
