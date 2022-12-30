@@ -293,6 +293,14 @@ class AGNews(Decomposition):
 
         labels_clean = [v for k, v in label_dict.items()]
 
+        ################
+        import os
+        import json
+        model_name_question = os.environ['EXP_MODE_QUESTION']
+        # question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
+        question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"        
+        ################        
+        
         for i, (ind, row) in tqdm(
             enumerate(test_data.iterrows()), total=len(test_data)
         ):
@@ -316,6 +324,15 @@ class AGNews(Decomposition):
                     max_toks=40,
                 )
                 summary = output.split("\n")[0].split(":")[-1].strip("\n")
+                
+                ####################
+                with open(question_file, 'a') as f:
+                    json_string = json.dumps({'prompt': summary_pmp, "completion":summary})
+                    f.write(json_string + '\n')             
+                ####################                        
+                
+                
+                
                 all_prompts.append(summary_pmp)
                 
                 prompt_suffix = categorize(boost_examples[1])

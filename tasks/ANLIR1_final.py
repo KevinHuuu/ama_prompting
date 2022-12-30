@@ -10,6 +10,17 @@ from decomposition import Decomposition, get_args, DATA_DIR
 from utils import get_response, InputOutputPrompt
 
 ##############################################################################################################################
+
+################
+import os
+import json
+model_name_question = os.environ['EXP_MODE_QUESTION']
+# question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
+question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + "_ANLIR1" + ".jsonl"        
+################  
+
+
+##############################################################################################################################
 # All prompts
 questioner_prompt = InputOutputPrompt(
     input_formatter=lambda x: f"Statement: {x['statement']}",
@@ -243,8 +254,7 @@ extraction_qa_examples = [
     ]),
 ]
 
-##############################################################################################################################
-
+ 
 
 class ANLIR1Decomp(Decomposition):
     def __init__(self, task_name, data_dir, val_split="validation"):
@@ -429,6 +439,8 @@ class ANLIR1Decomp(Decomposition):
             overwrite=bool(overwrite_manifest),
             max_toks=50,
         )
+           
+        
         answer = answer.replace("Question: ", "")
         answer = [a for a in answer.split("\n") if a]
         if answer:
@@ -442,6 +454,13 @@ class ANLIR1Decomp(Decomposition):
         ):
             answer = f"{statement}. Yes, no, or unknown?"
         answer = answer.split("\n")[0]
+        
+        ####################
+        with open(question_file, 'a') as f:
+            json_string = json.dumps({'prompt': question_pmp, "completion":answer})
+            f.write(json_string + '\n')             
+        ####################   
+        
         return answer, question_pmp
 
     def resolve_pred(self, answer):
@@ -482,7 +501,7 @@ class ANLIR1Decomp(Decomposition):
     ):
         expt_log = {}
         all_boost_preds = []
-        labels = []
+        labels = []       
         
         for i, (ind, row) in tqdm(
             enumerate(test_data.iterrows()), total=len(test_data)
@@ -511,6 +530,8 @@ class ANLIR1Decomp(Decomposition):
                     question, question_final_prompt = self.get_question(
                         statement, questioner_prompt, boost_examples[0], manifest_question, overwrite_manifest_question
                     )
+                     
+                    
                     all_prompts.append(question_final_prompt)
 
                     open_answer_f, extraction_final_prompt = self.get_extraction(

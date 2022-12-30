@@ -206,6 +206,15 @@ class DropDecomp(Decomposition):
         all_boost_preds = []
         labels = []
 
+
+        ################
+        import os
+        import json
+        model_name_question = os.environ['EXP_MODE_QUESTION']
+        # question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
+        question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"        
+        ################  
+        
         for i, (ind, row) in tqdm(
             enumerate(test_data.iterrows()), total=len(test_data)
         ):

@@ -248,6 +248,15 @@ class DBPediaDecomp(Decomposition):
         all_boost_preds = []
         labels = []
 
+
+        ################
+        import os
+        import json
+        model_name_question = os.environ['EXP_MODE_QUESTION']
+        # question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
+        question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"        
+        ################  
+        
         for i, (ind, row) in tqdm(
             enumerate(test_data.iterrows()), total=len(test_data)
         ):
@@ -273,6 +282,12 @@ class DBPediaDecomp(Decomposition):
                     max_toks=50,
                 )
                 summary = output.split("\n")[0].split(":")[-1].strip("\n")
+                ####################
+                with open(question_file, 'a') as f:
+                    json_string = json.dumps({'prompt': summary_pmp, "completion":summary})
+                    f.write(json_string + '\n')             
+                ####################   
+                
                 prompt_suffix = categorize(boost_examples[1])
                 category_prompt = f"{prompt_suffix}\n\nPassage: {{text:}}\nSummary: {{summary:}}\nThe summary \"Summary\" fits \"Category\":"
                 category_pmp = category_prompt.format(text=text, summary=summary)

@@ -295,12 +295,20 @@ class WSCDecomp(Decomposition):
             pmp = prompt.format(passage=passage)
             if i == 0:
                 print(pmp)
-            raw_answer = get_response(
-                pmp,
-                manifest_answer,
-                overwrite=bool(overwrite_manifest_answer),
-                max_toks=30,
-            )
+            # raw_answer = get_response(
+            #     pmp,
+            #     manifest_answer,
+            #     overwrite=bool(overwrite_manifest_answer),
+            #     max_toks=30,
+            # )
+
+            ##################################
+            raw_answer = 'placeholder yes no yes no'
+            ##################################                        
+                                            
+            
+            
+            
             answer = raw_answer.split("\n")
             answer = [a for a in answer if a]
             if len(answer) <= 0:
@@ -322,11 +330,8 @@ class WSCDecomp(Decomposition):
 
             entry = {
                 "ind": ind,
-                "example": text,
-                "base_prompt": pmp,
-                "raw_answer": raw_answer,
-                "pred": pred,
-                "gold": gold,
+                "prompt": pmp.strip(),
+                "completion": " " + gold.strip().capitalize(),
             }
             expt_log[ind] = entry
 
@@ -345,6 +350,15 @@ class WSCDecomp(Decomposition):
         pronoun,
         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer,
     ):
+        ################
+        import os
+        import json
+        model_name_question = os.environ['EXP_MODE_QUESTION']
+        # question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
+        question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"  
+        print('question_file: ', question_file)
+        ################     
+        
         prompt_suffix = all_prompts[0](boost_exs[0])
         extract_prompt = (
             f"{prompt_suffix}\n\nPassage: {{passage:}}\nExtract: phrase containing \"{{pronoun:}}\": "
@@ -358,6 +372,15 @@ class WSCDecomp(Decomposition):
         )
         relevant_phrase = relevant_phrase.split("\n")[0]
         relevant_phrase = relevant_phrase.replace('"', '')
+        
+        
+        ####################
+        with open(question_file, 'a') as f:
+            json_string = json.dumps({'prompt': extract_pmp.strip(), "completion":" " + relevant_phrase})
+            f.write(json_string + '\n')             
+        ####################             
+        
+        
         prompt_suffix = all_prompts[1](boost_exs[1])
         convert_prompt = f"{prompt_suffix}\n\nInput: {{relevant_phrase:}}\nQuestion:"
         convert_pmp = convert_prompt.format(relevant_phrase=relevant_phrase)
@@ -368,6 +391,15 @@ class WSCDecomp(Decomposition):
             max_toks=50,
         )
         converted = converted.split("\n")[0].replace("Question: ", "")
+        
+        ####################
+        with open(question_file, 'a') as f:
+            json_string = json.dumps({'prompt': convert_pmp.strip(), "completion":" " + converted})
+            f.write(json_string + '\n')             
+        ####################             
+        
+        
+        
         prompt_suffix = all_prompts[2](boost_exs[2])
         answer_prompt = f"{prompt_suffix}\n\nPassage: {{passage:}}\nQuestion: {{converted:}}\nAnswer:"
         answer_pmp = answer_prompt.format(passage=original_passage, converted=converted)
@@ -399,6 +431,9 @@ class WSCDecomp(Decomposition):
         all_boost_preds = []
         labels = []
 
+
+
+        
         for i, (ind, row) in tqdm(
             enumerate(test_data.iterrows()), total=len(test_data)
         ):

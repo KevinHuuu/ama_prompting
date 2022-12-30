@@ -252,6 +252,15 @@ class BoolQDecomp(Decomposition):
         labels = []
 
 
+        ################
+        import os
+        import json
+        model_name_question = os.environ['EXP_MODE_QUESTION']
+        # question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
+        question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"        
+        ################  
+        
+        
         for i, (ind, row) in tqdm(
             enumerate(test_data.iterrows()), total=len(test_data)
         ):
@@ -282,7 +291,12 @@ class BoolQDecomp(Decomposition):
                     print(extract_pmp)
                 
                 answer = output.strip("\n").lower()
-                answer = [a for a in answer.split("\n") if a][0]
+                try:
+                    answer = [a for a in answer.split("\n") if a][0]
+                except:
+                    ################
+                    answer = 'answer'
+                    ################                    
                 answer = "".join(
                     [a for a in answer if a not in [".", ",", "?", ";", ":", "'", '"']]
                 )

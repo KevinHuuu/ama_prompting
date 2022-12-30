@@ -10,6 +10,16 @@ from decomposition import Decomposition, get_args, DATA_DIR
 from utils import get_response, InputOutputPrompt
 
 ##############################################################################################################################
+
+################
+import os
+import json
+model_name_question = os.environ['EXP_MODE_QUESTION']
+# question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
+question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + '_ANLIR3' + ".jsonl"        
+################  
+
+##############################################################################################################################
 # All prompts
 questioner_prompt = InputOutputPrompt(
     input_formatter=lambda x: f"Statement: {x['statement']}",
@@ -441,6 +451,13 @@ class ANLIDecomp(Decomposition):
         ):
             answer = f"{statement}. Yes, no, or unknown?"
         answer = answer.split("\n")[0]
+        
+        ####################
+        with open(question_file, 'a') as f:
+            json_string = json.dumps({'prompt': question_pmp, "completion":answer})
+            f.write(json_string + '\n')             
+        ####################   
+        
         return answer, question_pmp
 
     def resolve_pred(self, answer):
@@ -483,6 +500,7 @@ class ANLIDecomp(Decomposition):
         all_boost_preds = []
         labels = []
 
+        
         for i, (ind, row) in tqdm(
             enumerate(test_data.iterrows()), total=len(test_data)
         ):
@@ -510,6 +528,8 @@ class ANLIDecomp(Decomposition):
                     question, question_final_prompt = self.get_question(
                         statement, questioner_prompt, boost_examples[0], manifest_question, overwrite_manifest_question
                     )
+
+                    
                     all_prompts.append(question_final_prompt)
 
                     open_answer_f, extraction_final_prompt = self.get_extraction(

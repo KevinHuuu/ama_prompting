@@ -470,7 +470,15 @@ class COPADecomp(Decomposition):
             manifest,
             max_toks= 4*len(choice_a.split()),
             overwrite=bool(overwrite_manifest))
-        answer = [q for q in raw_answer.split("\n") if q][0].lower()
+        
+        # print(f"raw_answer: ", raw_answer)
+        try:
+            answer = [q for q in raw_answer.split("\n") if q][0].lower()
+        #######################
+        except:
+            answer = ''
+        #######################            
+            
         pred = ''
         for n in range(5,50):
             for idx_offset in range(len(answer) - n + 1):
@@ -658,6 +666,15 @@ class COPADecomp(Decomposition):
         all_boost_preds = []
         labels = []
 
+
+        ################
+        import os
+        import json
+        model_name_question = os.environ['EXP_MODE_QUESTION']
+        # question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
+        question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"        
+        ################          
+        
         for i, (ind, row) in tqdm(
             enumerate(test_data.iterrows()), total=len(test_data)
         ):

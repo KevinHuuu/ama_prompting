@@ -11,6 +11,18 @@ from sklearn.metrics import classification_report
 from decomposition import Decomposition, get_args, DATA_DIR
 from utils import get_response, InputOutputPrompt
 
+
+##############################################################################################################################
+
+################
+import os
+import json
+model_name_question = os.environ['EXP_MODE_QUESTION']
+# question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
+question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + '_StoryCloze' + ".jsonl"        
+################  
+
+
 questioner = InputOutputPrompt(
     input_formatter=lambda x: f"Statement: {x['statement']}",
     output_formatter=lambda x: f"Question: {x['question']}",
@@ -330,7 +342,11 @@ class StoryCloze(Decomposition):
         super().__init__(task_name, data_dir, val_split)
 
     def read_data(self, save_dir, overwrite_data):
-        save_data = Path(f"{save_dir}/{self.task_name}/data.feather")
+        ############# I am using the processed data.feather because load_dataset("story_cloze", "2016", data_dir=self.data_dir) seenms to have the error cannot find story_cloze/story_cloze.py in Dec 18th.
+        save_data = Path('/nvmedata/changranh/fm_in_context_eval_data/story_cloze/data_feather/data.feather')
+        # save_data = Path(f"{save_dir}/{self.task_name}/data.feather")
+        #############
+        
         if not save_data.exists() or overwrite_data:
             dataset = load_dataset("story_cloze", "2016", data_dir=self.data_dir)
             test_data = dataset[self.val_split].to_pandas()
@@ -339,7 +355,12 @@ class StoryCloze(Decomposition):
             print(f"Reading test data from {save_data}")
             test_data = pd.read_feather(f"{save_data}")
 
-        save_data_train = Path(f"{save_dir}/{self.task_name}/train_data.feather")
+
+        ############# I am using the processed data.feather because load_dataset("story_cloze", "2016", data_dir=self.data_dir) seenms to have the error cannot find story_cloze/story_cloze.py in Dec 18th.
+        save_data_train = Path('/nvmedata/changranh/fm_in_context_eval_data/story_cloze/data_feather/train_data.feather')
+        # save_data_train = Path(f"{save_dir}/{self.task_name}/train_data.feather")
+        #############
+        
         if not save_data_train.exists() or overwrite_data:
             dataset = load_dataset("story_cloze", "2016", data_dir=self.data_dir)
             train_data = dataset["validation"].to_pandas()
@@ -463,6 +484,8 @@ class StoryCloze(Decomposition):
             question = f"{statement} Yes or no?"
         else:
             question = question[0]
+            
+            
         return question, question_prompt
 
     def answer_question(self, question, passage, all_prompts, boost_examples, manifest, overwrite_manifest, option=1):
@@ -496,6 +519,8 @@ class StoryCloze(Decomposition):
 
         # construct questions
         question_a, questioner_prompt = self.get_question(choice_a, all_prompts, boost_examples, manifest, overwrite_manifest)
+        
+        
         question_b, questioner_prompt = self.get_question(choice_b, all_prompts, boost_examples, manifest, overwrite_manifest)
 
         # ask questions

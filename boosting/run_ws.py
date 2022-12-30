@@ -16,19 +16,25 @@ def get_args():
     parser.add_argument("--symmetric", action="store_true")
     parser.add_argument("--model_prefix", type=str, default="EleutherAI_gpt-j-6B")
     parser.add_argument("--override_date", type=str, default=None)
+    parser.add_argument('--path_to_train_file', type=str, default=None)
 
     args = parser.parse_args()
     return args
 
-def get_data(task_name, data_dir, model_prefix, override_date=None):
+def get_data(args, task_name, data_dir, model_prefix, override_date=None):
     """
     Load in dataset from task_name depending on where files are saved.
     """       
     task_dir = os.path.join(data_dir, task_name)
     date = datetime.datetime.today().strftime("%m%d%Y") if not override_date else override_date
     print(f"Loading runs from {date}")
-    dpath = os.path.join(task_dir, f"{model_prefix}_decomposed_{date}.json")
-    train_dpath = os.path.join(task_dir, f"{model_prefix}_decomposed_{date}_train.json")
+    ###############
+    # dpath = os.path.join(task_dir, f"{model_prefix}_decomposed_{date}.json")
+    # train_dpath = os.path.join(task_dir, f"{model_prefix}_decomposed_{date}_train.json")
+    ###############
+    
+    dpath = args.path_to_train_file.replace("_train", "")
+    train_dpath = args.path_to_train_file
     
     print(dpath)
     print(train_dpath)
@@ -46,7 +52,8 @@ def get_data(task_name, data_dir, model_prefix, override_date=None):
                             'office products':7,
                             'tools and home improvement':8} 
 
-    elif task_name == 'wic':
+    # elif task_name == 'wic':
+    elif task_name == 'super_glue_wic':
         label_name_to_int = {"Yes": 1, "No": 0}
     elif task_name == 'super_glue_wsc':
         label_name_to_int = {"True": 1, "False": 0}
@@ -189,7 +196,7 @@ def main():
     data_dir = args.data_dir
     symmetric = args.symmetric
 
-    train_votes, train_gold, test_votes, test_gold = get_data(task_name, data_dir, args.model_prefix, args.override_date)
+    train_votes, train_gold, test_votes, test_gold = get_data(args, task_name, data_dir, args.model_prefix, args.override_date)
     classes = np.sort(np.unique(test_gold))
     vote_classes = np.sort(np.unique(test_votes))
     n_train, m = train_votes.shape
@@ -239,6 +246,10 @@ def main():
         scores = label_model.score((test_votes_scaled, test_gold_scaled), metric=['accuracy', 'precision', 'recall', 'f1'])
         print(scores)
 
+    # ###############
+    # import pdb
+    # pdb.set_trace()
+    # ###############    
     try:
         lm_probs = label_model.predict_proba(test_votes_scaled)
         agg = Aggregator(test_votes, test_gold, test_votes, test_gold, abstains, classes=[0, 1]) # 

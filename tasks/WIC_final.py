@@ -231,6 +231,10 @@ class WICDecomp(Decomposition):
         # synonyms
         prompt_suffix = synonym(all_boost_exs[0])
         prompt_combined = f'{prompt_suffix}\n\nIn "{{sent:}}", synonyms for the word \"{{word:}}\" are: '
+        
+        # ###########
+        # prompt_combined = f'{prompt_suffix}\n\nIn "{{sent:}}", synonyms for the word \"{{word:}}\" are:'        
+        # ###########        
         all_prompts.append(prompt_combined.format(sent=sent, word=word))
         synonyms = get_response(
             prompt_combined.format(sent=sent, word=word),
@@ -298,6 +302,15 @@ class WICDecomp(Decomposition):
         all_boost_preds = []
         labels = []
 
+
+        ################
+        import os
+        import json
+        model_name_question = os.environ['EXP_MODE_QUESTION']
+        # question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
+        question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"        
+        ################          
+        
         for i, (ind, row) in tqdm(
             enumerate(test_data.iterrows()), total=len(test_data)
         ):
