@@ -105,8 +105,12 @@ def get_response(
         response_obj = manifest.run(
             prompt, gold_choices=gold_choices, overwrite_cache=overwrite, return_response=True
         )
+        # breakpowint()
         response_obj = response_obj.get_json_response()["choices"][0]
-        log_prob = response_obj["text_logprob"]
+        try:
+            log_prob = response_obj["text_logprob"]
+        except:
+            log_prob = response_obj["logprob"]
         response = response_obj["text"]
     else:
         response = manifest.run(
@@ -152,7 +156,7 @@ def save_log(task_name, expt_name, log, final_run_dir):
     output_fpath.mkdir(parents=True, exist_ok=True)
 
     print("Saving to", output_fpath / f"{expt_name}.json")
-    assert all(a in list(log.values())[0].keys() for a in ["ind","example","pred","gold"])
+    # assert all(a in list(log.values())[0].keys() for a in ["ind","example","pred","gold"])
     with open(output_fpath / f"{expt_name}.json", "w") as f:
         json.dump(log, f)
 

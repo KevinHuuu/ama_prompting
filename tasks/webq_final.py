@@ -7,6 +7,9 @@ from tqdm.auto import tqdm
 from decomposition import Decomposition, get_args
 from utils import get_response, InputOutputPrompt, accuracy_span_overlap, load_hf_data
 
+from transformers import GPT2Tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
 extract = InputOutputPrompt(
     input_formatter=lambda x: f"Question: {x['question']}",
     output_formatter=lambda x: f"Answer: {x['answer']}",
@@ -178,6 +181,8 @@ class WebQDecomp(Decomposition):
                 icl_str = ""
                 if do_few_shot:
                     for s_ind, s_row in few_shot_df.iterrows():
+                        if len(tokenizer.encode(icl_str, truncation=False)) >= 3500:
+                            break                                              
                         s_question = s_row.question
                         if isinstance(s_row.answers, str):
                             label = ast.literal_eval(s_row.answers)

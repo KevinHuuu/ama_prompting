@@ -12,7 +12,10 @@ import datetime
 ################# Copy paste from /nvmedata/changranh/fm_in_context_eval_data_for_fewshot_data_collection/realtimeqa_public/scripts/utils/tools.py
 import json, jsonlines, datetime, string
 from collections import Counter
-        
+
+from transformers import GPT2Tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
 def read_jsonl(in_file):
     questions = []
     with open(in_file) as fin:
@@ -352,6 +355,8 @@ class RealtimeQADecomp(Decomposition):
             assert len(golds) == 1
             icl_str = ""
             if do_few_shot:
+                if len(tokenizer.encode(icl_str, truncation=False)) >= 3500:
+                    break                                      
                 # Taken from realtime_qa github repo
                 icl_str += f"Question: What is the capital city of Japan?\nAnswer: Tokyo\n\n"
 

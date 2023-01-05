@@ -9,6 +9,9 @@ from sklearn.metrics import classification_report
 from decomposition import Decomposition, get_args, DATA_DIR
 from utils import get_response, InputOutputPrompt
 
+from transformers import GPT2Tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
 ##############################################################################################################################
 
 ################
@@ -348,6 +351,8 @@ class ANLIR1Decomp(Decomposition):
 
                 if do_few_shot:
                     for s_ind, s_row in few_shot_df.iterrows():
+                        if len(tokenizer.encode(icl_str, truncation=False)) >= 3500:
+                            break                        
                         icl_str += f"{s_row['inputs_pretokenized']}{s_row['targets_pretokenized']}\n\n"
 
                 text = row["inputs_pretokenized"]

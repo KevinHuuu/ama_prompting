@@ -10,6 +10,9 @@ from sklearn.metrics import classification_report
 from decomposition import Decomposition, get_args, DATA_DIR
 from utils import get_response
 
+from transformers import GPT2Tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
 def format_data(lines):
     """from lines in dataset to two lists of sentences and labels respectively"""
     def process_raw_data_sst(lines):
@@ -135,6 +138,8 @@ class SST2Decomp(Decomposition):
                 icl_str = ""
                 if do_few_shot:
                     for s_ind, s_row in few_shot_df.iterrows():
+                        if len(tokenizer.encode(icl_str, truncation=False)) >= 3500:
+                            break                                              
                         if s_row["label"] == 0:
                             demo_label = "negative"
                         else:

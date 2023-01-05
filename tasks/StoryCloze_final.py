@@ -11,6 +11,8 @@ from sklearn.metrics import classification_report
 from decomposition import Decomposition, get_args, DATA_DIR
 from utils import get_response, InputOutputPrompt
 
+from transformers import GPT2Tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 
 ##############################################################################################################################
 
@@ -417,6 +419,8 @@ class StoryCloze(Decomposition):
                 icl_str = ""
                 if do_few_shot:
                     for s_ind, s_row in few_shot_df.iterrows():
+                        if len(tokenizer.encode(icl_str, truncation=False)) >= 3500:
+                            break                                              
                         s_text = f"{s_row['input_sentence_1']} {s_row['input_sentence_2']} {s_row['input_sentence_3']} {s_row['input_sentence_4']}\n\n"
                         if s_row['answer_right_ending'] == 1:
                             answer = s_row['sentence_quiz1']

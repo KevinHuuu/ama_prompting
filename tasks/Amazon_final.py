@@ -11,6 +11,9 @@ from sklearn.metrics import classification_report
 from decomposition import Decomposition, get_args, DATA_DIR
 from utils import get_response, InputOutputPrompt
 
+from transformers import GPT2Tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
 ##############################################################################################################################
 # All prompts
 summarize = InputOutputPrompt(
@@ -257,6 +260,8 @@ class AmazonProduct(Decomposition):
             if total_in_context == k_shot:
                 break
         mini_df = pd.concat(dfs)
+        print('mini_df')
+        print(mini_df.index)        
         return mini_df
 
     def zero_few_baseline(
@@ -280,13 +285,18 @@ class AmazonProduct(Decomposition):
             icl_str = f"{description_zeroshot}"
             if do_few_shot:
                 for s_ind, s_row in few_shot_df.iterrows():
+                    if len(tokenizer.encode(icl_str, truncation=False)) >= 3500:
+                        break                    
                     s_label = s_row['label'].replace("_", " ")
                     icl_str += f"\n\nProduct: {s_row['text']}\nCategory: {s_label}"
 
             prompt = f"{icl_str}\n\nProduct: {{text:}}\nCategory:"
             pmp = prompt.format(text=text)
-            if i == 0:
+            # if i == 0:
+            if i <= 3:            
+                print('########## prompt start ############')
                 print(pmp)
+                print('########## prompt end ############')                
 
             answer = get_response(
                 pmp,

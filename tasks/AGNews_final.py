@@ -9,6 +9,9 @@ from sklearn.metrics import classification_report
 from decomposition import Decomposition, get_args, DATA_DIR
 from utils import get_response, InputOutputPrompt
 
+from transformers import GPT2Tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
 ##############################################################################################################################
 # All prompts
 summarize = InputOutputPrompt(
@@ -210,6 +213,7 @@ class AGNews(Decomposition):
             if total_in_context == k_shot:
                 break
         mini_df = pd.concat(dfs)
+        print('mini_df')
         print(mini_df.index)
         return mini_df
 
@@ -235,7 +239,12 @@ class AGNews(Decomposition):
             if do_few_shot:
                 for s_ind, s_row in few_shot_df.iterrows():
                     s_label = label_dict[s_row['label']]
+                    
+                if len(tokenizer.encode(icl_str, truncation=False)) >= 3500:
+                    break
                     icl_str += f"\n\nPassage: {s_row['sentence']}\nCategory: {s_label}"
+
+                        
 
             prompt = f"{icl_str}\n\nPassage: {{text:}}\nCategory:"
             pmp = prompt.format(text=text)

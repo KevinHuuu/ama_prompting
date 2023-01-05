@@ -15,6 +15,9 @@ from utils import save_log, get_manifest_session
 
 DATA_DIR = os.environ.get("AMA_DATA", "/home/data")
 
+
+
+
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--seed", type=int, default=3)
@@ -90,7 +93,7 @@ def get_args():
         type=str,
         default=None,
         help="Client engine manifest. Only used for openai/ai21",
-        choices=["davinci"],
+        choices=["davinci", 'text-davinci-003'],
     )
     parser.add_argument(
         "--client_connection_question",
@@ -137,6 +140,7 @@ class Decomposition:
         self.task_name = task_name
         self.data_dir = data_dir
         self.val_split = val_split
+        np.random.seed(42)
 
     def read_data(self, save_dir, overwrite_data):
         save_data = Path(f"{save_dir}/{self.task_name}/data.feather")
@@ -356,8 +360,9 @@ class Decomposition:
                 overwrite_manifest_answer=args.overwrite_manifest_answer,                
                 do_few_shot=True,
             )
-            if save_results:
+            if save_results:          
                 save_log(self.task_name, run_name, exp_few, args.save_dir)
+                
 
         if bool(args.run_decomp):
             # Decomp

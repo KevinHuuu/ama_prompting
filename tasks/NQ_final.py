@@ -12,6 +12,9 @@ stops = set(stopwords.words("english"))
 from decomposition import Decomposition, get_args, DATA_DIR
 from utils import get_response, InputOutputPrompt, accuracy_span_overlap
 
+from transformers import GPT2Tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
 extract = InputOutputPrompt(
     input_formatter=lambda x: f"Question: {x['question']}",
     output_formatter=lambda x: f"Answer: {x['answer']}",
@@ -215,6 +218,8 @@ class NQDecomp(Decomposition):
             icl_str = ""
             if do_few_shot:
                 for s_ind, s_row in few_shot_df.iterrows():
+                    if len(tokenizer.encode(icl_str, truncation=False)) >= 3500:
+                        break                                          
                     input = s_row.question
                     s_question = s_row.question
                     if isinstance(s_row.answers, str):
