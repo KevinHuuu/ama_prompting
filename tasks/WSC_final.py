@@ -392,11 +392,11 @@ class WSCDecomp(Decomposition):
         )
         converted = converted.split("\n")[0].replace("Question: ", "")
         
-        ####################
-        with open(question_file, 'a') as f:
-            json_string = json.dumps({'prompt': convert_pmp.strip(), "completion":" " + converted})
-            f.write(json_string + '\n')             
-        ####################             
+        # ####################
+        # with open(question_file, 'a') as f:
+        #     json_string = json.dumps({'prompt': convert_pmp.strip(), "completion":" " + converted})
+        #     f.write(json_string + '\n')             
+        # ####################             
         
         
         
