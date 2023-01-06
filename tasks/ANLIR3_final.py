@@ -13,13 +13,13 @@ from transformers import GPT2Tokenizer
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 ##############################################################################################################################
 
-################
-import os
-import json
-model_name_question = os.environ['EXP_MODE_QUESTION']
-# question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
-question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + '_ANLIR3' + ".jsonl"        
-################  
+# ################
+# import os
+# import json
+# model_name_question = os.environ['EXP_MODE_QUESTION']
+# # question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
+# question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + '_ANLIR3' + ".jsonl"        
+# ################  
 
 ##############################################################################################################################
 # All prompts
@@ -456,11 +456,11 @@ class ANLIDecomp(Decomposition):
             answer = f"{statement}. Yes, no, or unknown?"
         answer = answer.split("\n")[0]
         
-        ####################
-        with open(question_file, 'a') as f:
-            json_string = json.dumps({'prompt': question_pmp, "completion":answer})
-            f.write(json_string + '\n')             
-        ####################   
+        # ####################
+        # with open(question_file, 'a') as f:
+        #     json_string = json.dumps({'prompt': question_pmp, "completion":answer})
+        #     f.write(json_string + '\n')             
+        # ####################   
         
         return answer, question_pmp
 

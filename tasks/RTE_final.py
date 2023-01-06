@@ -12,13 +12,13 @@ from utils import get_response, InputOutputPrompt
 
 ##############################################################################################################################
 
-################
-import os
-import json
-model_name_question = os.environ['EXP_MODE_QUESTION']
-# question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
-question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + '_RTE' + ".jsonl"        
-################  
+# ################
+# import os
+# import json
+# model_name_question = os.environ['EXP_MODE_QUESTION']
+# # question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
+# question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + '_RTE' + ".jsonl"        
+# ################  
 
 
 questioner = InputOutputPrompt(
@@ -433,11 +433,11 @@ class RTEDecomp(Decomposition):
             statement = statement.strip(".")
             return f"{statement}. Yes or no?"
         
-        ####################
-        with open(question_file, 'a') as f:
-            json_string = json.dumps({'prompt': quesiton_prompt, "completion":question})
-            f.write(json_string + '\n')             
-        ####################           
+        # ####################
+        # with open(question_file, 'a') as f:
+        #     json_string = json.dumps({'prompt': quesiton_prompt, "completion":question})
+        #     f.write(json_string + '\n')             
+        # ####################           
         return question, answer, quesiton_prompt
 
     def open_qa(self, question, passage, prompt, boost_ex, manifest, overwrite_manifest):

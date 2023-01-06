@@ -350,14 +350,14 @@ class WSCDecomp(Decomposition):
         pronoun,
         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer,
     ):
-        ################
-        import os
-        import json
-        model_name_question = os.environ['EXP_MODE_QUESTION']
-        # question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
-        question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"  
-        print('question_file: ', question_file)
-        ################     
+        # ################
+        # import os
+        # import json
+        # model_name_question = os.environ['EXP_MODE_QUESTION']
+        # # question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
+        # question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"  
+        # print('question_file: ', question_file)
+        # ################     
         
         prompt_suffix = all_prompts[0](boost_exs[0])
         extract_prompt = (
@@ -374,11 +374,11 @@ class WSCDecomp(Decomposition):
         relevant_phrase = relevant_phrase.replace('"', '')
         
         
-        ####################
-        with open(question_file, 'a') as f:
-            json_string = json.dumps({'prompt': extract_pmp.strip(), "completion":" " + relevant_phrase})
-            f.write(json_string + '\n')             
-        ####################             
+        # ####################
+        # with open(question_file, 'a') as f:
+        #     json_string = json.dumps({'prompt': extract_pmp.strip(), "completion":" " + relevant_phrase})
+        #     f.write(json_string + '\n')             
+        # ####################             
         
         
         prompt_suffix = all_prompts[1](boost_exs[1])

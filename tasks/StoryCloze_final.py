@@ -16,13 +16,13 @@ tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 
 ##############################################################################################################################
 
-################
-import os
-import json
-model_name_question = os.environ['EXP_MODE_QUESTION']
-# question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
-question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + '_StoryCloze' + ".jsonl"        
-################  
+# ################
+# import os
+# import json
+# model_name_question = os.environ['EXP_MODE_QUESTION']
+# # question_file = '/nvmedata/changranh/ama_question_synthetic_data/' + model_name_question + self.task_name + ".jsonl"
+# question_file = '/scratch/changranh/ama_question_synthetic_data/' + model_name_question + '_StoryCloze' + ".jsonl"        
+# ################  
 
 
 questioner = InputOutputPrompt(
