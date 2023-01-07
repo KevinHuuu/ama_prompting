@@ -55,6 +55,62 @@ questioner_examples = [
         {
             "statement": "The father and son went camping to California.",
             "question": "Did the father and son go camping?"
+        },
+        {
+            "statement": "the wind was blowing very fast",
+            "question": "Was the wind blowing very fast?"
+        },
+        {
+            "statement": "The bird couldn't fly away.",
+            "question": "Could the bird fly away?"
+        },
+        {
+            "statement": "The students were late to the class.",
+            "question": "Were the students late to the class?"
+        },
+        {
+            "statement": "She was the last one to leave the room.",
+            "question": "Was she the last one to leave the room?"
+        },
+        {
+            "statement": "The dog was barking all night.",
+            "question": "Was the dog barking all night?"
+        },
+        {
+            "statement": "The car was very expensive.",
+            "question": "Was the car very expensive?"
+        },
+        {
+            "statement": "He was the fastest runner in the race.",
+            "question": "Was he the fastest runner in the race?"
+        },
+        {
+            "statement": "They ate pizza for dinner.",
+            "question": "Did they eat pizza for dinner?"
+        },
+        {
+            "statement": "The cat was sleeping on the couch.",
+            "question": "Was the cat sleeping on the couch?"
+        },
+        {
+            "statement": "The mountain was beautiful.",
+            "question": "Was the mountain beautiful?"
+        },
+        {
+            "statement": "The river was too deep to cross.",
+            "question": "Was the river too deep to cross?"
+        },
+        {
+            "statement": "She was the leader of the team.",
+            "question": "Was she the leader of the team?"
+        },
+        {
+            "statement": "The movie was very funny.",
+            "question": "Was the movie very funny?"
+        },
+        {
+            "statement": "The ice cream was too cold.",
+            "question": "Was the ice cream too cold?"
         }
     ]),
 
@@ -82,6 +138,62 @@ questioner_examples = [
         {
             "statement": "The father and son went camping to California.",
             "question": "Did the father and son go camping?"
+        },
+        {
+            "statement": "The cake was delicious",
+            "question": "Was the cake delicious?"
+        },
+        {
+            "statement": "The new movie starts tomorrow",
+            "question": "When does the new movie start?"
+        },
+        {
+            "statement": "It was cloudy outside",
+            "question": "Was it cloudy outside?"
+        },
+        {
+            "statement": "The class went on a field trip yesterday.",
+            "question": "When did the class go on a field trip?"
+        },
+        {
+            "statement": "the weather was nice",
+            "question": "Was the weather nice?"
+        },
+        {
+            "statement": "The students worked on their project",
+            "question": "Did the students work on their project?"
+        },
+        {
+            "statement": "The teacher gave out extra credit",
+            "question": "Did the teacher give out extra credit?"
+        },
+        {
+            "statement": "The concert was sold out",
+            "question": "Was the concert sold out?"
+        },
+        {
+            "statement": "The family went to the beach",
+            "question": "Where did the family go?"
+        },
+        {
+            "statement": "the cat meowed",
+            "question": "Did the cat meow?"
+        },
+        {
+            "statement": "The store closed at 8 pm",
+            "question": "When does the store close?"
+        },
+        {
+            "statement": "the hockey game was cancelled",
+            "question": "Was the hockey game cancelled?"
+        },
+        {
+            "statement": "The house was painted yellow",
+            "question": "What color was the house painted?"
+        },
+        {
+            "statement": "The game was postponed",
+            "question": "Was the game postponed?"
         }
     ]),
 
@@ -102,6 +214,70 @@ questioner_examples = [
             "statement": "after school, Jim was going to go to the park",
             "question": "Was Jim going to go to the park after school?",
         },
+        {
+            "statement": "the car was parked in the driveway.",
+            "question": "Where was the car parked?",
+        },
+        {
+            "statement": "there were four people in the room.",
+            "question": "How many people were in the room?",
+        },
+        {
+            "statement": "the sun was shining brightly in the sky.",
+            "question": "Was the sun shining brightly in the sky?",
+        },
+        {
+            "statement": "the cat chased the bird away.",
+            "question": "What did the cat do to the bird?",
+        },
+        {
+            "statement": "the manager gave the employees a day off.",
+            "question": "Did the manager give the employees a day off?",
+        },
+        {
+            "statement": "the man walked to the store.",
+            "question": "Where did the man go?",
+        },
+        {
+            "statement": "the elephant was the biggest animal in the zoo.",
+            "question": "What was the biggest animal in the zoo?",
+        },
+        {
+            "statement": "the teacher asked the students a difficult question.",
+            "question": "Did the teacher ask the students a difficult question?",
+        },
+        {
+            "statement": "the rain was pouring down.",
+            "question": "What was happening with the rain?",
+        },
+        {
+            "statement": "the party was held in the garden.",
+            "question": "Where was the party held?",
+        },
+        {
+            "statement": "jane was reading a book in her room.",
+            "question": "What was Jane doing in her room?",
+        },
+        {
+            "statement": "the children were playing in the playground.",
+            "question": "Where were the children playing?",
+        },
+        {
+            "statement": "the dog barked at the stranger.",
+            "question": "What did the dog do to the stranger?",
+        },
+        {
+            "statement": "the man was running in the park.",
+            "question": "Where was the man running?",
+        },
+        {
+            "statement": "the teacher was talking about history.",
+            "question": "What was the teacher talking about?",
+        },
+        {
+            "statement": "the sky was a beautiful shade of blue.",
+            "question": "What color was the sky?",
+        }
     ]),
 
     pd.DataFrame([
@@ -121,6 +297,70 @@ questioner_examples = [
             "statement": "it took jenna 7 attempts to solve the problem",
             "question": "How many attempts did it take Jenna to solve the problem?\nAnswer: 7",
         },
+        {
+            "statement": "the mountain is located in the western part of the state",
+            "question": "Where is the mountain located?\nAnswer: western part of the state",
+        },
+        {
+            "statement": "the store is open 7 days a week",
+            "question": "How many days a week is the store open?\nAnswer: 7",
+        },
+        {
+            "statement": "she won the race with a time of 8 minutes and 12 seconds",
+            "question": "What was her time in the race?\nAnswer: 8 minutes and 12 seconds",
+        },
+        {
+            "statement": "the team worked together for 6 months",
+            "question": "How long did the team work together?\nAnswer: 6 months",
+        },
+        {
+            "statement": "The restaurant is located on Main Street",
+            "question": "Where is the restaurant located?\nAnswer: Main Street",
+        },
+        {
+            "statement": "The show starts at 8 o'clock",
+            "question": "What time does the show start?\nAnswer: 8 o'clock",
+        },
+        {
+            "statement": "He graduated from college in 2003",
+            "question": "What year did he graduate from college?\nAnswer: 2003",
+        },
+        {
+            "statement": "The store has been open for 10 years",
+            "question": "How long has the store been open?\nAnswer: 10 years",
+        },
+        {
+            "statement": "The conference is taking place in Paris",
+            "question": "Where is the conference taking place?\nAnswer: Paris",
+        },
+        {
+            "statement": "The party starts at 7 pm",
+            "question": "What time does the party start?\nAnswer: 7 pm",
+        },
+        {
+            "statement": "The movie was released in 2017",
+            "question": "In what year was the movie released?\nAnswer: 2017",
+        },
+        {
+            "statement": "The store closes at 9 pm",
+            "question": "What time does the store close?\nAnswer: 9 pm",
+        },
+        {
+            "statement": "The store is located on First Avenue",
+            "question": "Where is the store located?\nAnswer: First Avenue",
+        },
+        {
+            "statement": "The class starts at 10 am",
+            "question": "What time does the class start?\nAnswer: 10 am",
+        },
+        {
+            "statement": "The book was published in 2010",
+            "question": "What year was the book published?\nAnswer: 2010",
+        },
+        {
+            "statement": "The race ended in a tie",
+            "question": "How did the race end?\nAnswer: tie",
+        }
     ]),
 ]
 
@@ -150,6 +390,81 @@ openended_qa_examples = [
             "question": "Did WISS discover a new disease?",
             "answer": "Yes, new monkey disease"
         },
+        {
+            "passage": "The professor gave the students a difficult exam and asked them to turn it in by the end of the week.",
+            "question": "When was the exam due?",
+            "answer": "End of the week"
+        },
+        {
+            "passage": "The Smith family drove to their vacation home in Florida last weekend and stayed for a week.",
+            "question": "How long did the Smiths stay in Florida?",
+            "answer": "A week"
+        },
+        {
+            "passage": "The farmer harvested his crops and sold them at the local farmer's market this Saturday.",
+            "question": "Where did the farmer sell his crops?",
+            "answer": "Local farmer's market"
+        },
+        {
+            "passage": "The students went to the school library to study for the final exam.",
+            "question": "Where did the students go to study?",
+            "answer": "School library"
+        },
+        {
+            "passage": "The children ate their dinner at the kitchen table and then went outside to play.",
+            "question": "Where did the children eat their dinner?",
+            "answer": "Kitchen table"
+        },
+        {
+            "passage": "The hikers took a break at the top of the mountain and enjoyed the view.",
+            "question": "Where did the hikers take a break?",
+            "answer": "Top of the mountain"
+        },
+        {
+            "passage": "The firefighters rushed to the burning building and extinguished the blaze.",
+            "question": "What did the firefighters do?",
+            "answer": "Extinguished the blaze"
+        },
+        {
+            "passage": "The football team won their championship game last night.",
+            "question": "What did the football team do?",
+            "answer": "Won their championship game"
+        },
+        {
+            "passage": "The family went to the beach and had a picnic lunch.",
+            "question": "Where did the family go?",
+            "answer": "Beach"
+        },
+        {
+            "passage": "The police arrested the suspect for the crime.",
+            "question": "What did the police do?",
+            "answer": "Arrested the suspect"
+        },
+        {
+            "passage": "The detectives found the evidence they needed to solve the case.",
+            "question": "What did the detectives do?",
+            "answer": "Found the evidence"
+        },
+        {
+            "passage": "The doctor prescribed the patient medication to help with her pain.",
+            "question": "What did the doctor do?",
+            "answer": "Prescribed medication"
+        },
+        {
+            "passage": "The teacher gave the students an assignment to complete by the end of the day.",
+            "question": "When was the assignment due?",
+            "answer": "End of the day"
+        },
+        {
+            "passage": "The chef cooked dinner for the family and served it to them at the dinner table.",
+            "question": "Where did the chef serve dinner?",
+            "answer": "Dinner table"
+        },
+        {
+            "passage": "The construction workers built a new bridge over the river this month.",
+            "question": "What did the construction workers do?",
+            "answer": "Built a new bridge"
+        },
     ]),
 
     pd.DataFrame([
@@ -168,6 +483,76 @@ openended_qa_examples = [
             "question": "Did WISS discover a new species of monkeys?",
             "answer": "Unknown"
         },
+        {
+            "passage": "Jenny was walking to school when she saw a large cat cross the street. It had black and white fur.",
+            "question": "What color was the cat Jenny saw?",
+            "answer": "Black and white"
+        },
+        {
+            "passage": "The parents took their children to the beach last weekend. They stayed for 4 days.",
+            "question": "How long did the family stay at the beach?",
+            "answer": "4 days"
+        },
+        {
+            "passage": "Jane and her family went to the zoo last Sunday. They saw at least 4 different species of animals.",
+            "question": "How many different species of animals did Jane's family see?",
+            "answer": "At least 4"
+        },
+        {
+            "passage": "The cat knocked over the vase and broke it. It had been in the family for 5 generations.",
+            "question": "How long had the vase been in the family before it was broken?",
+            "answer": "5 generations"
+        },
+        {
+            "passage": "The mayor visited the school last week. He brought a gift of books with him.",
+            "question": "What did the mayor bring to the school?",
+            "answer": "Books"
+        },
+        {
+            "passage": "The teacher gave the students a quiz today. It had 10 questions.",
+            "question": "How many questions were on the quiz?",
+            "answer": "10"
+        },
+        {
+            "passage": "Bob and his family took a trip to the mountains this summer. They were there for 7 days.",
+            "question": "How long did Bob's family stay in the mountains?",
+            "answer": "7 days"
+        },
+        {
+            "passage": "The park ranger found a nest of baby birds in an old tree. He counted at least 10 baby birds in the nest.",
+            "question": "How many baby birds were in the nest?",
+            "answer": "At least 10"
+        },
+        {
+            "passage": "The students were studying in the library all day. They had 8 books checked out.",
+            "question": "How many books did the students have checked out?",
+            "answer": "8"
+        },
+        {
+            "passage": "The family had a picnic in the park. They stayed for 3 hours.",
+            "question": "How long did the family stay at the park for the picnic?",
+            "answer": "3 hours"
+        },
+        {
+            "passage": "The hikers saw 8 different types of wild animals on their adventure. 5 of them were never seen before.",
+            "question": "How many kinds of animals had the hikers never seen before?",
+            "answer": "5"
+        },
+        {
+            "passage": "The firemen responded to an emergency call. They arrived within 5 minutes.",
+            "question": "How long did it take for the firemen to arrive?",
+            "answer": "5 minutes"
+        },
+        {
+            "passage": "The students were playing basketball in the gym. They had been playing for 2 hours.",
+            "question": "How long had the students been playing basketball?",
+            "answer": "2 hours"
+        },
+        {
+            "passage": "The family visited the art museum this weekend. They saw at least 6 paintings from famous artists.",
+            "question": "How many paintings did the family see from famous artists?",
+            "answer": "At least 6"
+        }
     ]),
 
     pd.DataFrame([
@@ -186,6 +571,76 @@ openended_qa_examples = [
             "question": "Were Jack and John running for president?",
             "answer": "Yes, presidential election"
         },
+        {
+            "passage": "The soccer team won the game 3-2 in the last minute.",
+            "question": "What was the final score?",
+            "answer": "3-2"
+        },
+        {
+            "passage": "The new restaurant opened in the city center last night and people were queuing up to get in.",
+            "question": "Where did the restaurant open?",
+            "answer": "City center"
+        },
+        {
+            "passage": "The teacher gave the students a pop quiz and they all failed.",
+            "question": "What kind of quiz did the teacher give?",
+            "answer": "Pop quiz"
+        },
+        {
+            "passage": "The new laptop was released yesterday with a battery life of up to 10 hours.",
+            "question": "How long is the battery life of the laptop?",
+            "answer": "Up to 10 hours"
+        },
+        {
+            "passage": "The students are visiting the local museum as part of their history class.",
+            "question": "What class are the students taking?",
+            "answer": "History"
+        },
+        {
+            "passage": "The movie theater is showing the new superhero film this weekend.",
+            "question": "What type of film is being shown at the theater?",
+            "answer": "Superhero film"
+        },
+        {
+            "passage": "The store is having a sale on all items this weekend.",
+            "question": "When is the sale happening?",
+            "answer": "This weekend"
+        },
+        {
+            "passage": "The little girl was walking her dog in the park when she saw a rainbow.",
+            "question": "Where was the little girl walking her dog?",
+            "answer": "In the park"
+        },
+        {
+            "passage": "The musician was playing the piano in the concert hall.",
+            "question": "What instrument was the musician playing?",
+            "answer": "Piano"
+        },
+        {
+            "passage": "The family went to the beach for their summer vacation.",
+            "question": "Where did the family go for their vacation?",
+            "answer": "To the beach"
+        },
+        {
+            "passage": "The fire alarm went off in the building and everyone had to evacuate.",
+            "question": "Why did everyone have to leave the building?",
+            "answer": "Because the fire alarm went off"
+        },
+        {
+            "passage": "The children were playing in the backyard when a storm started.",
+            "question": "Where were the children playing?",
+            "answer": "In the backyard"
+        },
+        {
+            "passage": "The store was closed due to the snowstorm.",
+            "question": "Why was the store closed?",
+            "answer": "Due to the snowstorm"
+        },
+        {
+            "passage": "The students were taking their final exam in the classroom.",
+            "question": "Where were the students taking their exam?",
+            "answer": "In the classroom"
+        }
     ]),
 
     pd.DataFrame([
@@ -209,6 +664,76 @@ openended_qa_examples = [
             "question": "Who or what did the bullies punch?",
             "answer": "Unknown"
         },
+        {
+            "passage": "The new movie theater located in the mall is only open on weekends.",
+            "question": "When is the movie theater open?",
+            "answer": "weekends"
+        },
+        {
+            "passage": "The new iPhone has a faster processor and improved battery life.",
+            "question": "What is improved in the new iPhone?",
+            "answer": "processor and battery life"
+        },
+        {
+            "passage": "The new law requires all businesses to have a smoke detector installed.",
+            "question": "What do businesses need to have installed?",
+            "answer": "a smoke detector"
+        },
+        {
+            "passage": "The library's hours of operation have changed due to the pandemic.",
+            "question": "What has changed about the library?",
+            "answer": "hours of operation"
+        },
+        {
+            "passage": "The local park was closed for two weeks due to the storm damage.",
+            "question": "How long was the park closed for?",
+            "answer": "two weeks"
+        },
+        {
+            "passage": "The board meeting is scheduled for next Saturday.",
+            "question": "When is the board meeting?",
+            "answer": "next Saturday"
+        },
+        {
+            "passage": "The new restaurant in town offers free delivery for orders over $50.",
+            "question": "What does the restaurant offer for orders over $50?",
+            "answer": "free delivery"
+        },
+        {
+            "passage": "The class project is due in two weeks.",
+            "question": "When is the class project due?",
+            "answer": "two weeks"
+        },
+        {
+            "passage": "The city council voted to increase the sales tax by 3%. ",
+            "question": "How much did the city council vote to increase the sales tax by?",
+            "answer": "3%"
+        },
+        {
+            "passage": "The new park is located on the corner of Main Street and First Avenue.",
+            "question": "Where is the new park located?",
+            "answer": "on the corner of Main Street and First Avenue"
+        },
+        {
+            "passage": "The mayor's speech will be broadcast live on the local news channel.",
+            "question": "Where will the mayor's speech be broadcast?",
+            "answer": "on the local news channel"
+        },
+        {
+            "passage": "The new software update is available for download now.",
+            "question": "When is the new software update available?",
+            "answer": "now"
+        },
+        {
+            "passage": "The school board is offering a free online course for high school students.",
+            "question": "Who is the school board offering a free course to?",
+            "answer": "high school students"
+        },
+        {
+            "passage": "The store is offering a 10% discount on all purchases this weekend.",
+            "question": "What is the store offering this weekend?",
+            "answer": "a 10% discount"
+        }
     ]),
 ]
 
@@ -238,6 +763,70 @@ cloze_examples = [
         {
             "passage": "Welcome to New York.",
             "question": "Welcome to New"
+        },
+        {
+            "passage": "Rachel loves to play soccer.",
+            "question": "Rachel loves to play"
+        },
+        {
+            "passage": "This car costs $25,000.",
+            "question": "This car costs"
+        },
+        {
+            "passage": "Adam likes to watch horror movies.",
+            "question": "Adam likes to watch"
+        },
+        {
+            "passage": "I ate a banana for breakfast this morning.",
+            "question": "I ate a banana for"
+        },
+        {
+            "passage": "The cat slept all day yesterday.",
+            "question": "The cat slept all"
+        },
+        {
+            "passage": "My sister lives in London.",
+            "question": "My sister lives in"
+        },
+        {
+            "passage": "The movie theatre is 2 miles away.",
+            "question": "The movie theatre is"
+        },
+        {
+            "passage": "We went on a camping trip last week.",
+            "question": "We went on a camping"
+        },
+        {
+            "passage": "John won the race yesterday.",
+            "question": "John won the"
+        },
+        {
+            "passage": "The restaurant is closed on Monday.",
+            "question": "The restaurant is closed"
+        },
+        {
+            "passage": "My brother plays the guitar.",
+            "question": "My brother plays"
+        },
+        {
+            "passage": "I took the bus to school today.",
+            "question": "I took the bus to"
+        },
+        {
+            "passage": "The store is located on Main Street.",
+            "question": "The store is located on"
+        },
+        {
+            "passage": "My dad loves to eat pizza.",
+            "question": "My dad loves to eat"
+        },
+        {
+            "passage": "The dog barked all night.",
+            "question": "The dog barked all"
+        },
+        {
+            "passage": "The teacher gave us a quiz today.",
+            "question": "The teacher gave us a"
         }
     ]),
 ]
@@ -271,6 +860,78 @@ cloze_choice_examples = [
             "alternatives2":"is not part of a soccer team",
             "alternatives3":"is a character in a book"
         },
+        {
+            "example":"The capital of France is:",
+            "alternatives1":"Paris",
+            "alternatives2":"Amsterdam",
+            "alternatives3":"Berlin"
+        },
+        {
+            "example":"The Grand Canyon is located in:",
+            "alternatives1":"Colorado",
+            "alternatives2":"Arizona",
+            "alternatives3":"New Mexico"
+        },
+        {
+            "example":"The longest river in the world is:",
+            "alternatives1":"Nile",
+            "alternatives2":"Amazon",
+            "alternatives3":"Mississippi"
+        },
+        {
+            "example":"The movie Avatar was released in:",
+            "alternatives1":"2009",
+            "alternatives2":"2005",
+            "alternatives3":"2010"
+        },
+        {
+            "example":"The iPhone was released in:",
+            "alternatives1":"2007",
+            "alternatives2":"2008",
+            "alternatives3":"2006"
+        },
+        {
+            "example":"Mount Everest is located in:",
+            "alternatives1":"India",
+            "alternatives2":"China",
+            "alternatives3":"Nepal"
+        },
+        {
+            "example":"The periodic table includes:",
+            "alternatives1":"elements",
+            "alternatives2":"animals",
+            "alternatives3":"plants"
+        },
+        {
+            "example":"The Statue of Liberty is located in:",
+            "alternatives1":"New York",
+            "alternatives2":"New Jersey",
+            "alternatives3":"Connecticut"
+        },
+        {
+            "example":"The capital of the United States is:",
+            "alternatives1":"Washington D.C.",
+            "alternatives2":"New York",
+            "alternatives3":"Los Angeles"
+        },
+        {
+            "example":"The first President of the United States was:",
+            "alternatives1":"George Washington",
+            "alternatives2":"Thomas Jefferson",
+            "alternatives3":"Abraham Lincoln"
+        },
+        {
+            "example":"The Battle of Hastings was fought in:",
+            "alternatives1":"1066",
+            "alternatives2":"1812",
+            "alternatives3":"1314"
+        },
+        {
+            "example":"The currency of the United Kingdom is:",
+            "alternatives1":"Euros",
+            "alternatives2":"Pounds",
+            "alternatives3":"Dollars"
+        }
     ])
 ]
 
@@ -309,6 +970,62 @@ cloze_completion_examples = [
             "statement": "Apple computers are superior to",
             "answer": " Windows PC three"
         },
+        {
+            "passage":"The Amazon rainforest is the largest tropical rainforest in the world. It spans across nine countries in South America.",
+            "alternatives1":"Australia",
+            "alternatives2":"Africa",
+            "alternatives3":"South America",
+            "statement": "The Amazon rainforest is located in",
+            "answer": "South America"
+        },
+        {
+            "passage":"The Golden Gate Bridge is a suspension bridge spanning the Golden Gate strait, the 1-mile-wide, 3-mile-long channel connecting San Francisco Bay and the Pacific Ocean.",
+            "alternatives1":"San Francisco Bay and the Atlantic Ocean",
+            "alternatives2":"San Francisco Bay and the Pacific Ocean",
+            "alternatives3":"San Diego Bay and the Pacific Ocean",
+            "statement": "The Golden Gate Bridge connects",
+            "answer": "San Francisco Bay and the Pacific Ocean"
+        },
+        {
+            "passage":"The United Nations is an international organization founded in 1945. Its mission is to maintain international peace and security.",
+            "alternatives1":"promote human rights",
+            "alternatives2":"end poverty",
+            "alternatives3":"maintain international peace and security",
+            "statement": "The primary mission of the United Nations is to",
+            "answer": "maintain international peace and security"
+        },
+        {
+            "passage":"The Apollo 11 mission was the first spaceflight that landed humans on the Moon. It was launched on July 16, 1969, with Neil Armstrong and Edwin Aldrin as the astronauts.",
+            "alternatives1":"Neil Armstrong and Michael Collins",
+            "alternatives2":"Neil Armstrong and Edwin Aldrin",
+            "alternatives3":"Buzz Aldrin and Michael Collins",
+            "statement": "The Apollo 11 mission was manned by",
+            "answer": "Neil Armstrong and Edwin Aldrin"
+        },
+        {
+            "passage":"The Eiffel Tower is a wrought-iron lattice tower located in Paris, France. It was built in 1889 as the entrance arch for the 1889 World's Fair.",
+            "alternatives1":"Berlin, Germany",
+            "alternatives2":"Rome, Italy",
+            "alternatives3":"Paris, France",
+            "statement": "The Eiffel Tower is located in",
+            "answer": "Paris, France"
+        },
+        {
+            "passage":"The Louvre Museum is the world's largest art museum and a historic monument in Paris, France. It is home to many famous works of art such as the Mona Lisa.",
+            "alternatives1":"Venice, Italy",
+            "alternatives2":"Rome, Italy",
+            "alternatives3":"Paris, France",
+            "statement": "The Louvre Museum is located in",
+            "answer": "Paris, France"
+        },
+        {
+            "passage":"The Taj Mahal is a white marble mausoleum located in Agra, India. It was commissioned by Mughal emperor Shah Jahan in 1632.",
+            "alternatives1":"Bangkok, Thailand",
+            "alternatives2":"Agra, India",
+            "alternatives3":"Beijing, China",
+            "statement": "The Taj Mahal is located in",
+            "answer": "Agra, India"
+        }
     ])
 ]
 

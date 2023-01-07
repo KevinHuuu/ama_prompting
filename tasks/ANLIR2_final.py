@@ -54,6 +54,26 @@ questioner_prompt_examples = [
             "statement": "The father and son went camping to California.",
             "question": "Did the father and son go camping?",
         },
+        {
+            "statement": "The dog barked all night.",
+            "question": "Did the dog bark all night?",
+        },
+        {
+            "statement": "The car was broken.",
+            "question": "Was the car broken?",
+        },
+        {
+            "statement": "The house was painted yellow.",
+            "question": "Was the house painted yellow?",
+        },
+        {
+            "statement": "The teacher gave us a test.",
+            "question": "Did the teacher give us a test?",
+        },
+        {
+            "statement": "The students studied for the exam.",
+            "question": "Did the students study for the exam?",
+        }
     ]),
     pd.DataFrame([
         {
@@ -76,6 +96,68 @@ questioner_prompt_examples = [
             "statement": "The father and son went camping to California.",
             "question": "Did the father and son go camping?",
         },
+        {
+            "statement": "She has a beautiful smile.",
+            "question": "Does she have a beautiful smile?",
+        },
+        {
+            "statement": "The sky is blue.",
+            "question": "Is the sky blue?",
+        },
+        {
+            "statement": "The cat meowed loudly.",
+            "question": "Did the cat meow loudly?",
+        },
+        {
+            "statement": "The bus was late.",
+            "question": "Was the bus late?",
+        },
+        {
+            "statement": "The store closes at 8pm.",
+            "question": "Does the store close at 8pm?"
+        }
+    ]),
+    pd.DataFrame([
+        {
+            "statement": "most of the light comes from the sun",
+            "question": "Does most of the light come from the sun?"
+        },
+        {
+            "statement": "the test was not hard",
+            "question": "Was the test not hard?",
+        },
+        {
+            "statement": "it is a good idea to buy your parents gifts",
+            "question": "Is it a good idea to buy your parents gifts?",
+        },
+        {
+            "statement": "the balloon popped",
+            "question": "Did the balloon pop?",
+        },
+        {
+            "statement": "The father and son went camping to California.",
+            "question": "Did the father and son go camping?",
+        },
+        {
+            "statement": "The dog barked loudly at the mailman.",
+            "question": "Did the dog bark at the mailman?",
+        },
+        {
+            "statement": "I'm going to the store to buy some food.",
+            "question": "Are you going to the store to buy some food?",
+        },
+        {
+            "statement": "He was late to school because of the traffic.",
+            "question": "Was he late to school because of the traffic?",
+        },
+        {
+            "statement": "She loves to read books in her free time.",
+            "question": "Does she love to read books in her free time?",
+        },
+        {
+            "statement": "The mountain was too tall to climb.",
+            "question": "Was the mountain too tall to climb?",
+        }
     ]),
     pd.DataFrame([
         {
@@ -120,28 +202,26 @@ questioner_prompt_examples = [
             "statement": "The father and son went camping to California.",
             "question": "Did the father and son go camping?",
         },
-    ]),
-    pd.DataFrame([
         {
-            "statement": "most of the light comes from the sun",
-            "question": "Does most of the light come from the sun?"
+            "statement": "The cat loves to chase its tail.",
+            "question": "Does the cat love to chase its tail?",
         },
         {
-            "statement": "the test was not hard",
-            "question": "Was the test not hard?",
+            "statement": "The store is closed on Sundays.",
+            "question": "Is the store closed on Sundays?",
         },
         {
-            "statement": "it is a good idea to buy your parents gifts",
-            "question": "Is it a good idea to buy your parents gifts?",
+            "statement": "The moon is round.",
+            "question": "Is the moon round?",
         },
         {
-            "statement": "the balloon popped",
-            "question": "Did the balloon pop?",
+            "statement": "Eating healthy is good for you.",
+            "question": "Is eating healthy good for you?",
         },
         {
-            "statement": "The father and son went camping to California.",
-            "question": "Did the father and son go camping?",
-        },
+            "statement": "He went to the store.",
+            "question": "Did he go to the store?"
+        }
     ]),
 ]
 
@@ -170,6 +250,41 @@ extraction_qa_examples = [
             "question": "Based on the context, Is anti-matter made of electrons? ",
             "answer": "Unknown",
         },
+        {
+            "context": "The human brain is composed of about 100 billion neurons, and each neuron is connected to about 10,000 other neurons.",
+            "question": "Based on the context, How many neurons are in the human brain? ",
+            "answer": "100 billion neurons",
+        },
+        {
+            "context": "The theory of evolution states that all living organisms are descended from a common ancestor.",
+            "question": "Based on the context, Does the theory of evolution state that life had a single source of origin? ",
+            "answer": "Yes, a common ancestor",
+        },
+        {
+            "context": "The average temperature on Earth is 15 degrees Celsius.",
+            "question": "Based on the context, What is the average temperature on Earth? ",
+            "answer": "15 degrees Celsius",
+        },
+        {
+            "context": "The ozone layer protects the Earth from the sun's ultraviolet radiation.",
+            "question": "Based on the context, Does the ozone layer absorb ultraviolet radiation?  ",
+            "answer": "Yes, it absorbs ultraviolet radiation",
+        },
+        {
+            "context": "The Earth is estimated to be about 4.5 billion years old.",
+            "question": "Based on the context, How old is the Earth? ",
+            "answer": "4.5 billion years old",
+        },
+        {
+            "context": "Gravity is the force that holds the planets in their orbits around the sun.",
+            "question": "Based on the context, Does gravity affect the planets' orbits? ",
+            "answer": "Yes, gravity affects the planets' orbits",
+        },
+        {
+            "context": "The sun is composed primarily of hydrogen and helium.",
+            "question": "Based on the context, What are the main components of the sun? ",
+            "answer": "hydrogen and  helium",
+        }
     ]),
     pd.DataFrame([
         {
@@ -186,6 +301,41 @@ extraction_qa_examples = [
             "context": "Policies aiming at controlling unemployment and in particular at reducing its inequality-associated effects support economic growth.",
             "question": "Based on the context, Is confidence a factor in increasing self-esteem?",
             "answer": "unknown"
+        },
+        {
+            "context": "The Nile River is the longest river in the world, stretching 4,132 miles from its source in Burundi to its mouth in Egypt.",
+            "question": "Based on the context, What is the source of the Nile River?",
+            "answer": "Burundi"
+        },
+        {
+            "context": "The term 'social stratification' refers to the way in which people are divided into different classes or hierarchical levels in society.",
+            "question": "Based on the context, Does social stratification involve a division of labor?",
+            "answer": "Yes"
+        },
+        {
+            "context": "The theory of evolution states that all life is related and has descended from a common ancestor.",
+            "question": "Based on the context, Is the theory of evolution supported by scientific evidence?",
+            "answer": "Yes"
+        },
+        {
+            "context": "The Milky Way is a barred spiral galaxy, about 100,000 light-years across, containing 200-400 billion stars.",
+            "question": "Based on the context, What type of galaxy is the Milky Way?",
+            "answer": "Barred spiral"
+        },
+        {
+            "context": "The Pythagorean theorem states that in a right triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides.",
+            "question": "Based on the context, Is the hypotenuse always the longest side of the triangle?",
+            "answer": "Yes"
+        },
+        {
+            "context": "The theory of relativity explains the behavior and motion of objects in the universe and states that the speed of light is a constant.",
+            "question": "Based on the context, Is the speed of light affected by gravity?",
+            "answer": "Yes"
+        },
+        {
+            "context": "The atom is the smallest unit of matter that still retains all the properties of an element.",
+            "question": "Based on the context, Is a molecule smaller than an atom?",
+            "answer": "Yes"
         }
     ]),
     pd.DataFrame([
@@ -203,6 +353,41 @@ extraction_qa_examples = [
             "context": "WISS discovered a new monkey disease occurring in a remote tribe in the Amazon rainforrest.",
             "question": "Based on the context, Did WISS discover a new monkey species?",
             "answer": "No, a new monkey disease"
+        },
+        {
+            "context": "Jackson went to the store to buy some cereal and a new video game.",
+            "question": "Based on the context, What did Jackson go to the store to buy?",
+            "answer": "Cereal and a new video game"
+        },
+        {
+            "context": "The Smiths have been living in their house for 10 years.",
+            "question": "Based on the context, How long have the Smiths been living in their house?",
+            "answer": "10 years"
+        },
+        {
+            "context": "The fireman was able to save the dog from the burning house.",
+            "question": "Based on the context, What did the fireman save?",
+            "answer": "The dog"
+        },
+        {
+            "context": "The city council approved the new bridge project to span over the river.",
+            "question": "Based on the context, What was the new project approved by the city council?",
+            "answer": "A new bridge project"
+        },
+        {
+            "context": "The mayor of the city held a press conference to announce the new policy.",
+            "question": "Based on the context, What did the mayor announce at the press conference?",
+            "answer": "A new policy"
+        },
+        {
+            "context": "The students in Mrs. Smith's class are learning about the different types of plants and animals.",
+            "question": "Based on the context, What are the students in Mrs. Smith's class learning about?",
+            "answer": "Different types of plants and animals"
+        },
+        {
+            "context": "The family went to the park for a picnic and to play some sports.",
+            "question": "Based on the context, What did the family do at the park?",
+            "answer": "Have a picnic and play sports"
         }
     ]),
     pd.DataFrame([
@@ -236,9 +421,29 @@ extraction_qa_examples = [
             "question": "Based on the context, Is anti-matter made of electrons? ",
             "answer": "Unknown",
         },
+        {
+            "context": "A study of the benefits of practicing mindfulness showed that participants felt more positive emotions, better relationships, and improved overall well-being.",
+            "question": "Based on the context, Does mindfulness improve well-being?",
+            "answer": "Yes"
+        },
+        {
+            "context": "Developing countries are unable to fight poverty and maintain economic growth due to inadequate resources, infrastructure, and poverty-related factors.",
+            "question": "Based on the context, Do inadequate resources and infrastructure hinder economic growth?",
+            "answer": "Yes"
+        },
+        {
+            "context": "The risk of cyberattacks is increasing, with a growing number of connected devices and an increase in the sophistication of attackers.",
+            "question": "Based on the context, Is the risk of cyberattacks increasing?",
+            "answer": "Yes"
+        },
+        {
+            "context": "The sun is composed primarily of hydrogen and helium, which account for about 75% and 24% of its total mass respectively.",
+            "question": "Based on the context, Does the sun consist mostly of hydrogen and helium?",
+            "answer": "Yes"
+        }
     ]),
     pd.DataFrame([
-         {
+        {
             "context": "According to Biraben, the plague was present somewhere in Italy and affected 1,200 people.",
             "question": "Based on the context, Did the plague affect over 1,000 people?",
             "answer": "yes, 1,200 people",
@@ -252,6 +457,41 @@ extraction_qa_examples = [
             "context": "Policies aiming at controlling unemployment and in particular at reducing its inequality-associated effects support economic growth.",
             "question": "Based on the context, Is confidence a factor in increasing self-esteem?",
             "answer": "unknown"
+        },
+        {
+            "context": "The Big Bang Theory explains the origin of the universe and its expansion.",
+            "question": "Based on the context, Does the Big Bang Theory explain the origin of the universe?",
+            "answer": "yes"
+        },
+        {
+            "context": "The British empire was the largest empire in history, spanning 5 continents and ruling over a quarter of the world's population.",
+            "question": "Based on the context, Was the British empire the largest empire in history?",
+            "answer": "yes"
+        },
+        {
+            "context": "Albert Einstein developed the Theory of Relativity, which changed the way scientists think about the universe.",
+            "question": "Based on the context, Did Albert Einstein develop the Theory of Relativity?",
+            "answer": "yes"
+        },
+        {
+            "context": "The Industrial Revolution saw a massive increase in technology, leading to the mechanization of factories and the growth of cities.",
+            "question": "Based on the context, Was there an increase in technology during the Industrial Revolution?",
+            "answer": "yes"
+        },
+        {
+            "context": "The world's population has grown exponentially since the start of the 20th century, from 1.6 billion in 1900 to 7.6 billion in 2018.",
+            "question": "Based on the context, Has the world's population grown since the start of the 20th century?",
+            "answer": "yes"
+        },
+        {
+            "context": "The Romans were known for their engineering prowess, creating aqueducts and roads that spanned the length and breadth of their empire.",
+            "question": "Based on the context, Were the Romans known for their engineering prowess?",
+            "answer": "yes"
+        },
+        {
+            "context": "The internet has revolutionized communication, making it easier to stay in touch and access information.",
+            "question": "Based on the context, Has the internet revolutionized communication?",
+            "answer": "yes"
         }
     ]),
 ]

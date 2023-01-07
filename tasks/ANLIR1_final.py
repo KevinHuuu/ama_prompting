@@ -55,6 +55,26 @@ questioner_prompt_examples = [
             "statement": "The father and son went camping to California.",
             "question": "Did the father and son go camping?",
         },
+        {
+            "statement": "She ate the entire cake.",
+            "question": "Did she eat the entire cake?",
+        },
+        {
+            "statement": "The cat drank all of the milk.",
+            "question": "Did the cat drink all of the milk?",
+        },
+        {
+            "statement": "The dog barked at the postman.",
+            "question": "Did the dog bark at the postman?",
+        },
+        {
+            "statement": "John walked to the store.",
+            "question": "Did John walk to the store?",
+        },
+        {
+            "statement": "The children laughed at the clown.",
+            "question": "Did the children laugh at the clown?"
+        }
     ]),
     pd.DataFrame([
         {
@@ -77,6 +97,26 @@ questioner_prompt_examples = [
             "statement": "The father and son went camping to California.",
             "question": "Did the father and son go camping?",
         },
+        {
+            "statement": "The teacher gave a quiz today.",
+            "question": "Did the teacher give a quiz today?",
+        },
+        {
+            "statement": "The basketball team won the game.",
+            "question": "Did the basketball team win the game?",
+        },
+        {
+            "statement": "The cat was sleeping in the corner.",
+            "question": "Was the cat sleeping in the corner?",
+        },
+        {
+            "statement": "The ocean is a beautiful place to visit.",
+            "question": "Is the ocean a beautiful place to visit?",
+        },
+        {
+            "statement": "The girl painted a picture of a house.",
+            "question": "Did the girl paint a picture of a house?"
+        }
     ]),
     pd.DataFrame([
         {
@@ -99,6 +139,26 @@ questioner_prompt_examples = [
             "statement": "The father and son went camping to California.",
             "question": "Did the father and son go camping?",
         },
+        {
+            "statement": "I love going to the movies",
+            "question": "Do you love going to the movies?",
+        },
+        {
+            "statement": "She wants to go to school.",
+            "question": "Does she want to go to school?",
+        },
+        {
+            "statement": "There are 8 planets in the solar system.",
+            "question": "Are there 8 planets in the solar system?",
+        },
+        {
+            "statement": "I have a red car",
+            "question": "Do you have a red car?",
+        },
+        {
+            "statement": "My cat has four legs",
+            "question": "Does your cat have four legs?"
+        }
     ]),
     pd.DataFrame([
         {
@@ -121,6 +181,26 @@ questioner_prompt_examples = [
             "statement": "The father and son went camping to California.",
             "question": "Did the father and son go camping?",
         },
+        {
+            "statement": "The snow was very deep.",
+            "question": "How deep was the snow?",
+        },
+        {
+            "statement": "He has been to France twice.",
+            "question": "How many times has he been to France?",
+        },
+        {
+            "statement": "She was the only one who got the answer right.",
+            "question": "Who was the only one who got the answer right?",
+        },
+        {
+            "statement": "She has been living in the city for 5 years.",
+            "question": "How long has she been living in the city?"
+        },
+        {
+            "statement": "The ice cream was very sweet.",
+            "question": "How sweet was the ice cream?"
+        }
     ]),
     pd.DataFrame([
         {
@@ -143,6 +223,26 @@ questioner_prompt_examples = [
             "statement": "The father and son went camping to California.",
             "question": "Did the father and son go camping?",
         },
+        {
+            "statement": "She likes to play the piano.",
+            "question": "Does she like to play the piano?"
+        },
+        {
+            "statement": "He drives a car.",
+            "question": "Does he drive a car?"
+        },
+        {
+            "statement": "I am going to the store.",
+            "question": "Are you going to the store?"
+        },
+        {
+            "statement": "We have been friends for a long time.",
+            "question": "Have you been friends for a long time?"
+        },
+        {
+            "statement": "The cat is sleeping.",
+            "question": "Is the cat sleeping?"
+        }
     ]),
 ]
 
@@ -171,6 +271,41 @@ extraction_qa_examples = [
             "question": "Based on the context, Is anti-matter made of electrons? ",
             "answer": "Unknown",
         },
+        {
+            "context": "The Industrial Revolution was a period of dramatic change, marked by the introduction of new manufacturing processes and the development of new sources of energy.",
+            "question": "Based on the context, Was the Industrial Revolution a period of technological advancement?",
+            "answer": "Yes",
+        },
+        {
+            "context": "The Internet is a global network of computers that use the Internet Protocol Suite, a set of communications protocols, to link billions of devices worldwide.",
+            "question": "Based on the context, Was the Internet created to connect computers?",
+            "answer": "Yes",
+        },
+        {
+            "context": "In the early 20th century, Albert Einstein proposed the theory of relativity, which states that the laws of physics remain the same in all inertial frames of reference.",
+            "question": "Based on the context, Did Albert Einstein propose the theory of gravity?",
+            "answer": "No",
+        },
+        {
+            "context": "The English language is a West Germanic language that is spoken by more than 400 million people in the world.",
+            "question": "Based on the context, Is English a Germanic language?",
+            "answer": "Yes",
+        },
+        {
+            "context": "The Big Bang Theory is a cosmological model of the observable universe from the earliest known periods through its subsequent large-scale evolution.",
+            "question": "Based on the context, Does the Big Bang Theory explain the formation of the universe?",
+            "answer": "Yes",
+        },
+        {
+            "context": "The greenhouse effect is the process by which radiation from the atmosphere warms a planet's surface to a temperature above what it would be without its atmosphere.",
+            "question": "Based on the context, Does the greenhouse effect increase a planet's temperature?",
+            "answer": "Yes",
+        },
+        {
+            "context": "The Roman Empire was one of the largest empires in ancient history and spanned over three continents.",
+            "question": "Based on the context, Did the Roman Empire extend over more than one continent?",
+            "answer": "Yes"
+        }
     ]),
     pd.DataFrame([
         {
@@ -187,6 +322,41 @@ extraction_qa_examples = [
             "context": "Policies aiming at controlling unemployment and in particular at reducing its inequality-associated effects support economic growth.",
             "question": "Based on the context, Is confidence a factor in increasing self-esteem?",
             "answer": "unknown"
+        },
+        {
+            "context": "The brain is composed of a large number of highly specialized cells called neurons.",
+            "question": "Based on the context, How many types of cells are in the brain?",
+            "answer": "Many types, specifically neurons"
+        },
+        {
+            "context": "The human heart is a four-chambered organ made up of cardiac muscle.",
+            "question": "Based on the context, What type of organ is the human heart?",
+            "answer": "A four-chambered organ made up of cardiac muscle"
+        },
+        {
+            "context": "The United Nations is an intergovernmental organization that seeks to promote international cooperation and peace.",
+            "question": "Based on the context, What does the United Nations do?",
+            "answer": "It seeks to promote international cooperation and peace"
+        },
+        {
+            "context": "The Earth's atmosphere is divided into five main layers: troposphere, stratosphere, mesosphere, thermosphere, and exosphere.",
+            "question": "Based on the context, What is the highest layer of the Earth's atmosphere?",
+            "answer": "The exosphere"
+        },
+        {
+            "context": "Chlorine is a chemical element with atomic number 17 and symbol Cl.",
+            "question": "Based on the context, What is the atomic number of chlorine?",
+            "answer": "17"
+        },
+        {
+            "context": "The element carbon exists in nature in several forms, including graphite, diamond, and amorphous carbon.",
+            "question": "Based on the context, What elements can carbon be found in?",
+            "answer": "Graphite, diamond, and amorphous carbon"
+        },
+        {
+            "context": "The United States Constitution was written in 1787 and ratified in 1788.",
+            "question": "Based on the context, When was the United States Constitution ratified?",
+            "answer": "1788"
         }
     ]),
     pd.DataFrame([
@@ -204,6 +374,41 @@ extraction_qa_examples = [
             "context": "WISS discovered a new monkey disease occurring in a remote tribe in the Amazon rainforrest.",
             "question": "Based on the context, Did WISS discover a new monkey species?",
             "answer": "No, a new monkey disease"
+        },
+        {
+            "context": "The researchers used a new chemical compound to treat the patients suffering from cancer.",
+            "question": "Based on the context, Did the researchers use a chemical compound to cure cancer?",
+            "answer": "No, to treat"
+        },
+        {
+            "context": "The police found a suspicious package in the abandoned warehouse.",
+            "question": "Based on the context, Did the police find a dangerous package in the warehouse?",
+            "answer": "Unknown"
+        },
+        {
+            "context": "The little girl was very scared when the loud thunderstorm started.",
+            "question": "Based on the context, Did the little girl get scared by the thunder?",
+            "answer": "Yes"
+        },
+        {
+            "context": "The actor was nominated for an Oscar for his performance in the movie.",
+            "question": "Based on the context, Did the actor receive an Oscar for the movie?",
+            "answer": "Unknown"
+        },
+        {
+            "context": "The firemen managed to save five people from the burning building.",
+            "question": "Based on the context, Did the firemen save three people from the building?",
+            "answer": "No, five people"
+        },
+        {
+            "context": "The archaeologist found an ancient temple buried under the sand.",
+            "question": "Based on the context, Did the archaeologist find a pyramid buried under the sand?",
+            "answer": "No, a temple"
+        },
+        {
+            "context": "The hikers were warned about the dangerous animals that lived in the area.",
+            "question": "Based on the context, Were the hikers warned about the wild plants in the area?",
+            "answer": "No, dangerous animals"
         }
     ]),
     pd.DataFrame([
@@ -237,6 +442,26 @@ extraction_qa_examples = [
             "question": "Based on the context, Is anti-matter made of electrons? ",
             "answer": "Unknown",
         },
+        {
+            "context": "The current global population is estimated to be over 7 billion people.",
+            "question": "Based on the context, Is the global population growing?",
+            "answer": "Yes"
+        },
+        {
+            "context": "A study last year showed that the number of people using public transportation in the city had decreased by 3%.",
+            "question": "Based on the context, Has the use of public transportation decreased?",
+            "answer": "Yes"
+        },
+        {
+            "context": "Yoga is a form of exercise that helps to increase flexibility and strength.",
+            "question": "Based on the context, Does yoga help with flexibility?",
+            "answer": "Yes"
+        },
+        {
+            "context": "An apple a day keeps the doctor away.",
+            "question": "Based on the context, Does an apple a day help with health?",
+            "answer": "Yes"
+        }
     ]),
     pd.DataFrame([
          {
@@ -253,6 +478,41 @@ extraction_qa_examples = [
             "context": "Policies aiming at controlling unemployment and in particular at reducing its inequality-associated effects support economic growth.",
             "question": "Based on the context, Is confidence a factor in increasing self-esteem?",
             "answer": "unknown"
+        },
+        {
+            "context": "Da Vinci was a great painter, inventor and scientist from the Renaissance period.",
+            "question": "Based on the context, Was Da Vinci a famous artist?",
+            "answer": "Yes"
+        },
+        {
+            "context": "The World Health Organization has reported that the Covid-19 pandemic has caused over 1 million deaths around the world.",
+            "question": "Based on the context, Has the Covid-19 pandemic caused over 1 million deaths?",
+            "answer": "Yes, over 1 million deaths"
+        },
+        {
+            "context": "The United States is a federal republic composed of 50 states, a federal district, five major self-governing territories, and various possessions",
+            "question": "Based on the context, Does the United States consist of more than 50 states?",
+            "answer": "Yes, the United States consists of 50 states, a federal district, five major self-governing territories, and various possessions."
+        },
+        {
+            "context": "It has been found that people who exercise regularly have improved mental health and are less likely to suffer from depression.",
+            "question": "Based on the context, Does exercise have a positive effect on mental health?",
+            "answer": "Yes, exercise has been found to have a positive effect on mental health and reduce the risk of depression."
+        },
+        {
+            "context": "The human body is composed of 60% water. ",
+            "question": "Based on the context, Is the human body mostly composed of water?",
+            "answer": "Yes, the human body is composed of 60% water."
+        },
+        {
+            "context": "The world's coral reefs are in danger due to climate change, pollution, and unsustainable fishing practices.",
+            "question": "Based on the context, Are coral reefs threatened by human activities?",
+            "answer": "Yes, coral reefs are threatened by climate change, pollution, and unsustainable fishing practices."
+        },
+        {
+            "context": "The government is introducing a new education policy to increase the quality of teaching in schools.",
+            "question": "Based on the context, Is the government trying to improve the quality of teaching?",
+            "answer": "Yes, the government is introducing a new education policy to increase the quality of teaching in schools."
         }
     ]),
 ]
