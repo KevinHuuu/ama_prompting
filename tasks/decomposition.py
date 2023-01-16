@@ -133,6 +133,12 @@ def get_args():
         help="Overwrite manifest for the answer module",
         choices=[0, 1],
     )    
+    parser.add_argument(
+        "--max_seq_len",
+        type=int,
+        default=0,
+        help="The max_seq_length of current model, to truncate fewshot examples"
+    )        
     return parser.parse_args()
 
 class Decomposition:
@@ -140,6 +146,7 @@ class Decomposition:
         self.task_name = task_name
         self.data_dir = data_dir
         self.val_split = val_split
+        self.max_seq_len = None
         np.random.seed(42)
 
     def read_data(self, save_dir, overwrite_data):
@@ -243,6 +250,8 @@ class Decomposition:
     def run(self, args):
         print(json.dumps(vars(args), indent=4))
 
+        self.max_seq_len = args.max_seq_len
+        
         random.seed(args.seed)
         np.random.seed(args.seed)
         save_path = Path(f"{args.save_dir}/{self.task_name}")
