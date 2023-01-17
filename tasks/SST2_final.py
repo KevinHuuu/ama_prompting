@@ -242,11 +242,13 @@ class SST2Decomp(Decomposition):
                         demo_label = "negative"
                     else:
                         demo_label = "positive"
-                    icl = f"Text: {s_row['sentence']}\nSentiment: {demo_label}"
+                    # icl = f"Text: {s_row['sentence']}\nSentiment: {demo_label}"
+                    icl = f"TEXT: {s_row['sentence']}\nANSWER: {demo_label}"                    
+                    
                     icl_str += f"{icl}\n\n"
 
-                description = "For each snippet of text, label the sentiment of the text as positive or negative."
-                prompt = f"{description}\n\n{icl_str}Text: {{sentence:}}\nSentiment:"
+                description = "QUERY: For each snippet of text, label the sentiment of the text as positive or negative."
+                prompt = f"{description}\n\n{icl_str}TEXT: {{sentence:}}\nANSWER:"
                 pmp = prompt.format(sentence=sentence)
                 all_prompts.append(pmp)
                 if i == 0:
@@ -287,7 +289,7 @@ class SST2Decomp(Decomposition):
 
 def main():
     args = get_args()
-    args.num_boost = 3
+    # args.num_boost = 3
     task_name = "sst2"
     data_dir = f"{DATA_DIR}/sst2/"
     if not Path(data_dir).exists():

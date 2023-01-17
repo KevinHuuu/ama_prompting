@@ -74,7 +74,7 @@ questioner_prompt_examples = [
             "statement": "The students studied for the exam.",
             "question": "Did the students study for the exam?",
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "statement": "most of the light comes from the sun",
@@ -116,7 +116,7 @@ questioner_prompt_examples = [
             "statement": "The store closes at 8pm.",
             "question": "Does the store close at 8pm?"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "statement": "most of the light comes from the sun",
@@ -158,7 +158,7 @@ questioner_prompt_examples = [
             "statement": "The mountain was too tall to climb.",
             "question": "Was the mountain too tall to climb?",
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "statement": "most of the light comes from the sun",
@@ -180,7 +180,7 @@ questioner_prompt_examples = [
             "statement": "The father and son went camping to California.",
             "question": "Did the father and son go camping?",
         },
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "statement": "most of the light comes from the sun",
@@ -222,7 +222,7 @@ questioner_prompt_examples = [
             "statement": "He went to the store.",
             "question": "Did he go to the store?"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
 extraction_qa = InputOutputPrompt(
@@ -285,7 +285,7 @@ extraction_qa_examples = [
             "question": "Based on the context, What are the main components of the sun? ",
             "answer": "hydrogen and  helium",
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "context": "According to Biraben, the plague was present somewhere in Italy only between 1346 and 1671, and not after that.",
@@ -337,7 +337,7 @@ extraction_qa_examples = [
             "question": "Based on the context, Is a molecule smaller than an atom?",
             "answer": "Yes"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "context": "Jenna's 10th birthday was yesterday evening and at least 10 of her friends attended the party.",
@@ -389,7 +389,7 @@ extraction_qa_examples = [
             "question": "Based on the context, What did the family do at the park?",
             "answer": "Have a picnic and play sports"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "context": "When Judy and Jack went to school, they got in trouble with their teacher for being late. I didn't think it was very fair.",
@@ -441,7 +441,7 @@ extraction_qa_examples = [
             "question": "Based on the context, Does the sun consist mostly of hydrogen and helium?",
             "answer": "Yes"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "context": "According to Biraben, the plague was present somewhere in Italy and affected 1,200 people.",
@@ -493,7 +493,7 @@ extraction_qa_examples = [
             "question": "Based on the context, Has the internet revolutionized communication?",
             "answer": "yes"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
 ##############################################################################################################################

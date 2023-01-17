@@ -43,7 +43,7 @@ answer_prompt_examples = [
             "choice_question": "Is \"Quaker\" a correct answer?",
             "answer": "no"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "Earth processes have not changed over time. The way things happen now is the same way things happened in the past. Mountains grow and mountains slowly wear away. The same process is at work the same as it was billions of years ago. As the environment changes, living creatures adapt. They change over time. Some organisms may not be able to adapt. They become extinct. Becoming extinct means they die out completely. Some geologists study the history of the Earth. They want to learn about Earths past. They use clues from rocks and fossils. They use these clues to make sense of events. The goal is to place things in the order they happened. They also want to know how long it took for those events to happen. ",
@@ -69,7 +69,7 @@ answer_prompt_examples = [
             "choice_question": "Is \"West said she feels a custody order should be allowed to stand for the full term of the PFA - up to 18 months - as it does in many other counties in the state\" a correct answer?",
             "answer": "yes"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "Fossils give clues about major geological events. Fossils can also give clues about past climates. Fossils of ocean animals on the top of a mountain? Ocean animals have been found on the Earths tallest mountain. Its hard to believe, but it is true. These fossils were found at the top of Mt. Everest. Mt. Everest is the highest mountain on Earth. These fossils showed that this entire area was once at the bottom of a sea. It can only mean that Mt. Everest was uplifted. In fact, the entire Himalaya mountain range was raised. It was forced up from the collision of two continents. Fossils of plants are found in Antarctica. Now, Antarctica is almost completely covered with ice. Plants do not grow in Antarctica. According to fossils, they once did. This means that Antarctica was once much warmer than it is now. These fossils tell us about Antarcticas past climate. ",
@@ -95,7 +95,7 @@ answer_prompt_examples = [
             "choice_question": "Is \"For a getaway trip\" a correct answer?",
             "answer": "no"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
 ##############################################################################################################################

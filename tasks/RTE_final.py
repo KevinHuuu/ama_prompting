@@ -56,7 +56,7 @@ questioner_examples = [
             "statement": "The father and son went camping to California.",
             "question": "Did the father and son go camping?"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 
     pd.DataFrame([
         {
@@ -83,7 +83,7 @@ questioner_examples = [
             "statement": "The father and son went camping to California.",
             "question": "Did the father and son go camping?"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 
     pd.DataFrame([
         {
@@ -102,7 +102,7 @@ questioner_examples = [
             "statement": "after school, Jim was going to go to the park",
             "question": "Was Jim going to go to the park after school?",
         },
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 
     pd.DataFrame([
         {
@@ -121,7 +121,7 @@ questioner_examples = [
             "statement": "it took jenna 7 attempts to solve the problem",
             "question": "How many attempts did it take Jenna to solve the problem?\nAnswer: 7",
         },
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
 openended_qa = InputOutputPrompt(
@@ -150,7 +150,7 @@ openended_qa_examples = [
             "question": "Did WISS discover a new disease?",
             "answer": "Yes, new monkey disease"
         },
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 
     pd.DataFrame([
         {
@@ -168,7 +168,7 @@ openended_qa_examples = [
             "question": "Did WISS discover a new species of monkeys?",
             "answer": "Unknown"
         },
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 
     pd.DataFrame([
         {
@@ -186,7 +186,7 @@ openended_qa_examples = [
             "question": "Were Jack and John running for president?",
             "answer": "Yes, presidential election"
         },
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 
     pd.DataFrame([
         {
@@ -209,7 +209,7 @@ openended_qa_examples = [
             "question": "Who or what did the bullies punch?",
             "answer": "Unknown"
         },
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
 
@@ -239,7 +239,7 @@ cloze_examples = [
             "passage": "Welcome to New York.",
             "question": "Welcome to New"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
 cloze_choices = InputOutputPrompt(
@@ -271,7 +271,7 @@ cloze_choice_examples = [
             "alternatives2":"is not part of a soccer team",
             "alternatives3":"is a character in a book"
         },
-    ])
+    ]).sample(frac=1).reset_index(drop=True)
 ]
 
 cloze_completion = InputOutputPrompt(
@@ -309,7 +309,7 @@ cloze_completion_examples = [
             "statement": "Apple computers are superior to",
             "answer": " Windows PC three"
         },
-    ])
+    ]).sample(frac=1).reset_index(drop=True)
 ]
 
 

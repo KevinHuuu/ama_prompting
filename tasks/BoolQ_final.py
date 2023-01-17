@@ -35,6 +35,21 @@ extract_examples = [
             "context": "United States Department of Homeland Security -- In fiscal year 2017, it was allocated a net discretionary budget of $40.6 billion. With more than 240,000 employees, DHS is the third largest Cabinet department, after the Departments of Defense and Veterans Affairs. Homeland security policy is coordinated at the White House by the Homeland Security Council. Other agencies with significant homeland security responsibilities include the Departments of Health and Human Services, Justice, and Energy",
             "question": "is department of homeland security part of dod?",
             "answer": "no"
+        },
+        {
+            "context": "Atheism -- Atheism is, in the broadest sense, the absence of belief in the existence of deities. Less broadly, atheism is the rejection of belief that any deities exist. In an even narrower sense, atheism is specifically the position that there are no deities. Atheism is contrasted with theism, which, in its most general form, is the belief that at least one deity exists.",
+            "question": "does atheism mean the rejection of any kind of belief in gods?",
+            "answer": "yes"
+        },
+        {
+            "context": "Green energy -- Green energy is energy generated from natural sources such as sunlight, wind, rain, tides, and geothermal heat. These energy sources are renewable, meaning they are naturally replenished. In 2008, about 19% of global final energy consumption came from renewable sources, with 13% coming from traditional biomass, which is mainly used for heating, and 3.2% from hydroelectricity. New renewables (small hydro, modern biomass, wind, solar, geothermal, and biofuels) accounted for another 2.7%.",
+            "question": "is green energy renewable?",
+            "answer": "yes"
+        },
+        {
+            "context": "Alzheimer's disease -- Alzheimer's disease is a progressive, degenerative disorder that attacks the brain's nerve cells, or neurons, resulting in loss of memory, thinking and language skills, and changes in behavior. It is the most common cause of dementia, which involves memory loss, confusion, and problems with thinking and communication that are severe enough to affect daily life.",
+            "question": "is alzheimer's disease a form of dementia?",
+            "answer": "yes"
         }
     ]),
     pd.DataFrame([
@@ -52,6 +67,21 @@ extract_examples = [
             "context": "Windsor Castle -- Queen Victoria and Prince Albert made Windsor Castle their principal royal residence, despite Victoria complaining early in her reign that the castle was ``dull and tiresome'' and ``prison-like'', and preferring Osborne and Balmoral as holiday residences. The growth of the British Empire and Victoria's close dynastic ties to Europe made Windsor the hub for many diplomatic and state visits, assisted by the new railways and steamships of the period. Indeed, it has been argued that Windsor reached its social peak during the Victorian era, seeing the introduction of invitations to numerous prominent figures to ``dine and sleep'' at the castle. Victoria took a close interest in the details of how Windsor Castle was run, including the minutiae of the social events. Few visitors found these occasions comfortable, both due to the design of the castle and the excessive royal formality. Prince Albert died in the Blue Room at Windsor Castle in 1861 and was buried in the Royal Mausoleum built at nearby Frogmore, within the Home Park. The prince's rooms were maintained exactly as they had been at the moment of his death and Victoria kept the castle in a state of mourning for many years, becoming known as the ``Widow of Windsor'', a phrase popularised in the famous poem by Rudyard Kipling. The Queen shunned the use of Buckingham Palace after Albert's death and instead used Windsor Castle as her residence when conducting official business near London. Towards the end of her reign, plays, operas, and other entertainments slowly began to be held at the castle again, accommodating both the Queen's desire for entertainment and her reluctance to be seen in public.",
             "question": "is buckingham palace the same as windsor castle?",
             "answer": "no"
+        },
+        {
+            "context": "The piano -- The Piano is an acoustic, stringed musical instrument invented in Italy by Bartolomeo Cristofori around the year 1700. The piano is widely employed in classical, jazz, traditional and popular music for solo and ensemble performances, accompaniment, and for composing and rehearsals. The word piano is a shortened form of pianoforte, the Italian term for the instrument, which in turn derives from gravicembalo col piano e forte and fortepiano. The Italian musical terms piano and forte indicate "soft" and "loud" in this context referring to the variations in volume (i.e., loudness) produced in response to a pianist's touch or pressure on the keys.",
+            "question": "is the piano an acoustic instrument?",
+            "answer": "yes"
+        },
+        {
+            "context": "The Moon -- The Moon is Earth's only natural satellite and the fifth largest satellite in the Solar System. It is the largest natural satellite of a planet in the Solar System relative to the size of its primary, having a quarter the diameter of Earth and 1⁄81 its mass. The Moon is in synchronous rotation with Earth, always showing the same face with its near side marked by dark volcanic maria that fill between the bright ancient crustal highlands and the prominent impact craters. It is the second-brightest regularly visible celestial object in Earth's sky after the Sun, as measured by illuminance on the surface of Earth. Its surface is actually dark, although compared to the night sky it appears very bright, with a reflectance just slightly higher than that of worn asphalt.",
+            "question": "is the moon the second brightest object in the night sky?",
+            "answer": "yes"
+        },
+        {
+            "context": "The digestive system -- The digestive system is a series of organs that break down food into smaller molecules, which are then absorbed into the bloodstream. It consists of six major organs: the mouth, esophagus, stomach, small intestine, large intestine, and anus. The mouth is the first part of the digestive system, where food is chewed and mixed with saliva. The saliva contains enzymes that break down carbohydrates, such as starch, into smaller molecules. The esophagus then transports the food from the mouth to the stomach, where acid and enzymes further break down the food into smaller molecules. The small intestine is where most of the digestion and absorption of nutrients occurs. The large intestine absorbs water and minerals, and then pushes the waste material out of the body through the anus.",
+            "question": "does the digestive system break down food into small molecules?",
+            "answer": "yes"
         }
     ]),
     pd.DataFrame([
@@ -68,6 +98,21 @@ extract_examples = [
         {
             "context": "Washington, D.C. -- The signing of the Residence Act on July 16, 1790, approved the creation of a capital district located along the Potomac River on the country's East Coast. The U.S. Constitution provided for a federal district under the exclusive jurisdiction of the Congress and the District is therefore not a part of any state. The states of Maryland and Virginia each donated land to form the federal district, which included the pre-existing settlements of Georgetown and Alexandria. Named in honor of President George Washington, the City of Washington was founded in 1791 to serve as the new national capital. In 1846, Congress returned the land originally ceded by Virginia; in 1871, it created a single municipal government for the remaining portion of the District.",
             "question": "is washington dc a part of a state?",
+            "answer": "no"
+        },
+        {
+            "context": "Olympic Games -- The modern Olympic Games or Olympics (French: Jeux olympiques) are leading international sporting events featuring summer and winter sports competitions in which thousands of athletes from around the world participate in a variety of competitions. The Olympic Games are considered the world's foremost sports competition with more than 200 nations participating. The Olympic Games are held every four years, with the Summer and Winter Games alternating by occurring every four years but two years apart.",
+            "question": "are the olympic games held every two years?",
+            "answer": "no"
+        },
+        {
+            "context": "Cheesecake -- Cheesecake is a sweet dessert consisting of one or more layers. The main, and thickest layer, consists of a mixture of soft, fresh cheese (typically cream cheese or ricotta), eggs, and sugar; if there is a bottom layer it often consists of a crust or base made from crushed cookies (or digestive biscuits), graham crackers, pastry, or sometimes sponge cake. It may be baked or unbaked (usually refrigerated). Cheesecake is usually sweetened with sugar and may be flavored or topped with fruit, whipped cream, nuts, cookies, fruit sauce, and/or chocolate syrup.",
+            "question": "is cheesecake a savoury dish?",
+            "answer": "no"
+        },
+        {
+            "context": "Grizzly bear -- The grizzly bear (Ursus arctos horribilis), also known as the North American brown bear or simply grizzly, is a large population or subspecies of the brown bear inhabiting North America. Scientists generally do not use the name grizzly bear but call it the North American brown bear. Multiple morphological forms sometimes recognized as subspecies exist, including the mainland grizzly (Ursus arctos horribilis), Kodiak bear (U. a. middendorffi), peninsular grizzly (U. a. gyas), and the recently extinct California grizzly (U. a. californicus).",
+            "question": "is the grizzly bear native to africa?",
             "answer": "no"
         }
     ]),
@@ -86,6 +131,21 @@ extract_examples = [
             "context": "Pan-American Highway -- The Pan-American Highway is a network of roads measuring about 30,000 kilometres (19,000 mi) in total length. Except for a rainforest break of approximately 160 km (100 mi), called the Darién Gap, the road links almost all of the mainland countries of the Americas in a connected highway system. According to Guinness World Records, the Pan-American Highway is the world's longest ``motorable road''. However, because of the Darién Gap, it is not possible to cross between South America and Central America, alternatively being able to circumnavigate this terrestrial stretch by sea.",
             "question": "could you drive from north america to south america?",
             "answer": "no"
+        },
+        {
+            "context": "Comets - Comets are small, irregularly shaped celestial bodies composed of ice, dust, and rocky particles. As they approach the Sun, they experience increased solar radiation, which causes the ices to vaporize. This creates a visible coma, or atmosphere, around the nucleus of the comet, and a tail consisting of dust and gas, which point away from the Sun. Comets have been observed throughout history, and have even been used for navigational purposes. However, their orbits are highly unpredictable and can change significantly over time.",
+            "question": "can comets be used for navigation?",
+            "answer": "yes"
+        },
+        {
+            "context": "The Brooklyn Bridge -- The Brooklyn Bridge is a hybrid cable-stayed/suspension bridge in New York City and is one of the oldest bridges of either type in the United States. It stretches 5,989 feet (1,825 m) across the East River connecting the boroughs of Manhattan and Brooklyn. It opened on May 24, 1883, and was the first steel-wire suspension bridge constructed. Since its opening, it has become an icon of New York City and was designated a National Historic Landmark in 1964. However, it has also been the site of numerous accidents and disasters, including the collapse of its original wooden pedestrian walkway in 1884.",
+            "question": "was the brooklyn bridge designated a national historic landmark?",
+            "answer": "yes"
+        },
+        {
+            "context": "The Panama Canal -- The Panama Canal is a man-made waterway in Panama that links the Atlantic and Pacific Oceans. It stretches 48 miles (77 km) from the Caribbean Sea to the Pacific Ocean and is considered one of the most strategic and important waterways in the world. The canal was officially opened on August 15, 1914, and has since become a major shipping route for international trade. It is also a major source of revenue for the Panamanian government. However, the canal is only capable of accommodating ships which measure up to a certain size; ships larger than this are unable to pass through it.",
+            "question": "can ships larger than a certain size pass through the panama canal?",
+            "answer": "no"
         }
     ]),
     pd.DataFrame([
@@ -102,6 +162,21 @@ extract_examples = [
         {
             "context": "Buffy the Vampire Slayer Season Eight -- Buffy the Vampire Slayer Season Eight is a comic book series published by Dark Horse Comics from 2007 to 2011. The series serves as a canonical continuation of the television series Buffy the Vampire Slayer, and follows the events of that show's final televised season. It is produced by Joss Whedon, who wrote or co-wrote three of the series arcs and several one-shot stories. The series was followed by Season Nine in 2011.",
             "question": "is there a season 8 of buffy the vampire slayer?",
+            "answer": "yes"
+        },
+        {
+            "context": "Gymnastics -- Gymnastics is a sport that involves physical exercises performed on various apparatus, such as rings, bars, balance beams, mats, and trampolines. Gymnasts perform various routines on each apparatus, often using their strength, flexibility, and agility to perform complex stunts. Gymnastics originated in ancient Greece and has been practiced in various forms since then. It is one of the oldest sports in the world and is an official sport in the Olympic Games.",
+            "question": "is gymnastics an olympic sport?",
+            "answer": "yes"
+        },
+        {
+            "context": "Sofrito -- Sofrito is a traditional sauce used in Latin American, Spanish, and Italian cuisine. It is made from a base of tomatoes, garlic, onions, and peppers, and typically includes cilantro, oregano, and salt. It can be used as a marinade for meats, a base for soups, or a topping for rice, beans, and other dishes. Sofrito is a versatile sauce that can be used in a variety of different dishes and recipes.",
+            "question": "does sofrito include tomatoes?",
+            "answer": "yes"
+        },
+        {
+            "context": "Culinary Arts -- Culinary arts is the art of preparing and cooking food. It involves the selection, preparation, and presentation of food in a creative and delicious manner. A culinary artist must have a wide range of skills, including knowledge of food, nutrition, and food safety. They must also have an understanding of kitchen equipment and tools, as well as the ability to create unique and delicious dishes. Culinary arts is a diverse and ever-evolving field, and chefs must stay up-to-date with new trends and techniques in order to stay competitive.",
+            "question": "does culinary arts involve food preparation?",
             "answer": "yes"
         }
     ]),
@@ -120,6 +195,21 @@ extract_examples = [
             "context": "Blacklight -- A blacklight (or often black light), also referred to as a UV-A light, Wood's lamp, or simply ultraviolet light, is a lamp that emits long-wave (UV-A) ultraviolet light and not much visible light.",
             "question": "are black lights and uv lights the same thing?",
             "answer": "yes"
+        },
+        {
+            "context": "Mars -- Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System after Mercury. In English, Mars carries a name of the Roman god of war, and is often referred to as the 'Red Planet' because the iron oxide prevalent on its surface gives it a reddish appearance.",
+            "question": "is mars the fourth planet from the sun?",
+            "answer": "yes"
+        },
+        {
+            "context": "Giraffe -- The giraffe (Giraffa camelopardalis) is an African even-toed ungulate mammal, the tallest living terrestrial animal and the largest ruminant. Its scientific name, which is similar to its archaic English name of camelopard, refers to its irregular patches of color on a light background, which bear a token resemblance to a leopard's spots.",
+            "question": "is the giraffe the tallest living terrestrial animal?",
+            "answer": "yes"
+        },
+        {
+            "context": "Gravity -- Gravity, or gravitation, is a natural phenomenon by which all things with mass or energy—including planets, stars, galaxies, and even light—are brought toward (or gravitate toward) one another. On Earth, gravity gives weight to physical objects, and the Moon's gravity causes the ocean tides.",
+            "question": "does gravity cause the ocean tides?",
+            "answer": "yes"
         }
     ]),
     pd.DataFrame([
@@ -136,6 +226,21 @@ extract_examples = [
         {
             "context": "The Mother (How I Met Your Mother) -- Tracy McConnell, better known as ``The Mother'', is the title character from the CBS television sitcom How I Met Your Mother. The show, narrated by Future Ted, tells the story of how Ted Mosby met The Mother. Tracy McConnell appears in 8 episodes from ``Lucky Penny'' to ``The Time Travelers'' as an unseen character; she was first seen fully in ``Something New'' and was promoted to a main character in season 9. The Mother is played by Cristin Milioti.",
             "question": "does how i met your mother ever show ted's wife?",
+            "answer": "yes"
+        },
+        {
+            "context": "The Golden Gate Bridge -- The Golden Gate Bridge is a suspension bridge spanning the Golden Gate, the one-mile-wide (1.6 km) strait connecting San Francisco Bay and the Pacific Ocean. The structure links the American city of San Francisco, California – the northern tip of the San Francisco Peninsula – to Marin County, carrying both U.S. Route 101 and California State Route 1 across the strait.",
+            "question": "is the golden gate bridge in california?",
+            "answer": "yes"
+        },
+        {
+            "context": "The Great Barrier Reef -- The Great Barrier Reef is the world's largest coral reef system composed of over 2,900 individual reefs and 900 islands stretching for over 2,300 kilometres (1,400 mi) over an area of approximately 344,400 square kilometres (133,000 sq mi). The reef is located in the Coral Sea, off the coast of Queensland, Australia.",
+            "question": "is the great barrier reef located in australia?",
+            "answer": "yes"
+        },
+        {
+            "context": "Giraffe -- The giraffe (Giraffa) is a genus of African even-toed ungulate mammals, the tallest living terrestrial animals and the largest ruminants. The genus currently consists of one species, Giraffa camelopardalis, the type species. Seven other species are extinct, prehistoric species known from fossils.",
+            "question": "are giraffes the largest living terrestrial animals?",
             "answer": "yes"
         }
     ]),

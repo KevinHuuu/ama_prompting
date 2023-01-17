@@ -75,7 +75,7 @@ questioner_prompt_examples = [
             "statement": "The children laughed at the clown.",
             "question": "Did the children laugh at the clown?"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "statement": "most of the light comes from the sun",
@@ -117,7 +117,7 @@ questioner_prompt_examples = [
             "statement": "The girl painted a picture of a house.",
             "question": "Did the girl paint a picture of a house?"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "statement": "most of the light comes from the sun",
@@ -159,7 +159,7 @@ questioner_prompt_examples = [
             "statement": "My cat has four legs",
             "question": "Does your cat have four legs?"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "statement": "most of the light comes from the sun",
@@ -201,7 +201,7 @@ questioner_prompt_examples = [
             "statement": "The ice cream was very sweet.",
             "question": "How sweet was the ice cream?"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "statement": "most of the light comes from the sun",
@@ -243,7 +243,7 @@ questioner_prompt_examples = [
             "statement": "The cat is sleeping.",
             "question": "Is the cat sleeping?"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
 extraction_qa = InputOutputPrompt(
@@ -306,7 +306,7 @@ extraction_qa_examples = [
             "question": "Based on the context, Did the Roman Empire extend over more than one continent?",
             "answer": "Yes"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "context": "According to Biraben, the plague was present somewhere in Italy only between 1346 and 1671, and not after that.",
@@ -358,7 +358,7 @@ extraction_qa_examples = [
             "question": "Based on the context, When was the United States Constitution ratified?",
             "answer": "1788"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "context": "Jenna's 10th birthday was yesterday evening and at least 10 of her friends attended the party.",
@@ -410,7 +410,7 @@ extraction_qa_examples = [
             "question": "Based on the context, Were the hikers warned about the wild plants in the area?",
             "answer": "No, dangerous animals"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "context": "When Judy and Jack went to school, they got in trouble with their teacher for being late. I didn't think it was very fair.",
@@ -462,7 +462,7 @@ extraction_qa_examples = [
             "question": "Based on the context, Does an apple a day help with health?",
             "answer": "Yes"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
          {
             "context": "According to Biraben, the plague was present somewhere in Italy and affected 1,200 people.",
@@ -514,7 +514,7 @@ extraction_qa_examples = [
             "question": "Based on the context, Is the government trying to improve the quality of teaching?",
             "answer": "Yes, the government is introducing a new education policy to increase the quality of teaching in schools."
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
  

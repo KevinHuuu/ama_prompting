@@ -37,7 +37,7 @@ more_info_examples = [
             "question": "when was the last season of FRIENDS released?",
             "answer": "The series finale aired on May 6, 2004, and was watched by around 52.5 million American viewers, making it the fifth-most-watched series finale in television history"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 
 ]
 
@@ -77,7 +77,7 @@ answer_question = [
             'question': 'who played kitt in knight rider?', 
             'answer': 'William Daniels'
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             'context': 'leonardo da vinci invented the parachute, the helicopter, double hull, an armored fighting vehicle,', 
@@ -104,7 +104,7 @@ answer_question = [
             'question': 'what movie did rihanna play in?', 
             'answer': 'This Is the End'
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             'context': 'st vincent de paul is buried in the 6th arrondisment of Paris.', 
@@ -130,7 +130,7 @@ answer_question = [
             'question': 'what country is located in the balkan peninsula?', 
             'answer': 'Lake Prespa'
         }
-    ])
+    ]).sample(frac=1).reset_index(drop=True)
 
 ]
 

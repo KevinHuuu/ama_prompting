@@ -29,7 +29,7 @@ synonym_examples = [
             "passage": "In \"She acted in a play on Broadway\", synonyms for the word \"play\" are:",
             "answer": "show",
         },
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "In \"She rode around the park on her cycle.\", synonyms for the word \"cycle\" are:",
@@ -43,7 +43,7 @@ synonym_examples = [
             "passage": "In \"The present is like no other time.\", synonyms for the word \"present\" are:",
             "answer": "current moment",
         },
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "In \"The movie was awful.\", synonyms for the word \"aweful\" are:",
@@ -57,7 +57,7 @@ synonym_examples = [
             "passage": "In \"It was quite cool out so she wore a jacket\", synonyms for the word \"cool\" are:",
             "answer": "cold and chilly",
         },
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "In \"There are so many flies near the food.\", synonyms for the word \"flies\" are:",
@@ -71,7 +71,7 @@ synonym_examples = [
             "passage": "In \"She and her husband went on a trip.\", synonyms for the word \"trip\" are:",
             "answer": "vacation",
         },
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "In \"It was definitely a cry for help.\", synonyms for the word \"cry\" are:",
@@ -85,7 +85,7 @@ synonym_examples = [
             "passage": "In \"The beginning of the book was fine, but the end was terrible.\", synonyms for the word \"beginning\" are:",
             "answer": "start",
         },
-    ])
+    ]).sample(frac=1).reset_index(drop=True)
 ]
 
 description = InputOutputPrompt(
@@ -113,7 +113,7 @@ description_examples = [
             "sentence": "The book is of [MASK] interest.",
             "answer": "widespread",
         },
-    ])
+    ]).sample(frac=1).reset_index(drop=True)
 ]
 
 class WICDecomp(Decomposition):

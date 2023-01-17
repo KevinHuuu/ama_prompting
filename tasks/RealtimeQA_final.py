@@ -196,7 +196,7 @@ art1_answer_examples = [
             "question": "Which social media giant announced a new shopping platform this week?",
             "answer": "\"Facebook\""
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passages": "Article 1: During the initial outbreak in Wuhan, the virus and disease were commonly referred to as \"coronavirus\", \"Wuhan coronavirus\", \"the coronavirus outbreak\" and the \"Wuhan coronavirus outbreak\", with the disease sometimes called \"Wuhan pneumonia\".",
@@ -248,7 +248,7 @@ art1_answer_examples = [
             "question": "Who recently visited Iraq on the first papal visit in over 20 years?",
             "answer": "\"Pope Francis\""
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passages": "Article 1: Japan\'s Sakurajima volcano erupts, prompting evacuation alerts.",
@@ -305,7 +305,7 @@ art1_answer_examples = [
             "question": "Who is the current head of the Catholic Church?",
             "answer": "\"Pope Francis\""
         }
-    ])
+    ]).sample(frac=1).reset_index(drop=True)
 ]
 all_answer_examples = [
     pd.DataFrame([
@@ -334,7 +334,7 @@ all_answer_examples = [
             "question": "How many new stores is Starbucks planning to open in mainland China by 2022?",
             "answer": "\"More than 3,000\""
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passages": "Article 1: During the initial outbreak in Wuhan, the virus and disease were commonly referred to as \"coronavirus\", \"Wuhan coronavirus\", \"the coronavirus outbreak\" and the \"Wuhan coronavirus outbreak\", with the disease sometimes called \"Wuhan pneumonia\".\nArticle 2: The first known outbreak started in Wuhan, Hubei, China, in November 2019.\nArticle 3: A cluster of patients in China\’s Hubei Province, in the city of Wuhan, begin to experience the symptoms of an atypical pneumonia-like illness that does not respond well to standard treatments.\nArticle 4: The World Health Organization(WHO) has released its plan to investigate the origins of the COVID pandemic. The search will start in Wuhan.\nArticle 5: The World Health Organization(WHO) Country Office in China is informed of several cases of a pneumonia of unknown etiology(cause) with symptoms including shortness of breath and fever occurring in Wuhan, China.\n",
@@ -356,7 +356,7 @@ all_answer_examples = [
             "question": "How many UNESCO World Heritage Sites are there in the world?",
             "answer": "\"851\""
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passages": "Article 1: Japan\'s Sakurajima volcano erupts, prompting evacuation alerts.\nArticle 2: (CNN) Here\'s a tip if you are among the millions of people quitting your job: Don\'t cash out your 401(k)! As tempting as it may seem, there are other options that will give you better returns in the long run.\nArticle 3: (CNN) Did you take your vitamins this morning? Daily vitamin D and fish oil supplements may help prevent some adults from developing autoimmune disorders such as arthritis and psoriasis.\nArticle 4: (CNN) The federal tax filing season is underway. And even though the IRS still hasn\'t processed millions of returns from last year due to Covid-19 and a lack of funding, there are still ways to help ensure your tax filing experience is hassle-free.\nArticle 5: (CNN) Happy Valentine\'s Day, and happy Conveniently Call In Sick to Work Day for all the Los Angeles Rams fans out there.\n",
@@ -378,7 +378,7 @@ all_answer_examples = [
             "question": "How much will individuals making less than $75,000 annually receive in the proposed relief checks?",
             "answer": "\"$1,400\""
         }
-    ])
+    ]).sample(frac=1).reset_index(drop=True)
 ]
 # Taken from realtimeQA github repo
 # https://github.com/realtimeqa/realtimeqa_public

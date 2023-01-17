@@ -58,7 +58,7 @@ questioner_examples = [
             "statement": "The cat slept on the bed.",
             "question": "Where did the cat sleep?"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "statement": "most of the light comes from the sun",
@@ -100,7 +100,7 @@ questioner_examples = [
             "statement": "The family went to the beach",
             "question": "Did the family go to the beach?"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "statement": "she prefers kittens over puppies.",
@@ -142,7 +142,7 @@ questioner_examples = [
             "statement": "The sun is shining today",
             "question": "Is the sun shining today?",
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
 openended_qa = InputOutputPrompt(
@@ -206,7 +206,7 @@ openended_qa_examples = [
             "question": "Was it raining when the person went for a run?",
             "answer": "Yes"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "Jack recommends his least favorite books of the year to his followers. The least favorite book this year was Harry Potter and the 7 Rings.",
@@ -263,7 +263,7 @@ openended_qa_examples = [
             "question": "What are some of the features of the iPhone 11 Pro?",
             "answer": "The iPhone 11 Pro has an improved camera and a faster processor."
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "Anna's mother always told her to be confident even if she feels nervous on the inside",
@@ -315,7 +315,7 @@ openended_qa_examples = [
             "question": "What did the students have to do to pass the class?",
             "answer": "They had to take a test before the end of the semester."
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
 class CBDecomp(Decomposition):
@@ -448,6 +448,13 @@ class CBDecomp(Decomposition):
     def run_decomposed_prompt(
         self, test_data, boost_data_train, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer
     ):
+    
+        import random
+        import numpy as np
+        seed = 1000
+        random.seed(seed)
+        np.random.seed(seed)
+        
         expt_log, all_boost_preds, labels = self._run_decomp_single_data(test_data, boost_dfs, manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer)
         expt_log_train, all_boost_train_preds, train_labels = self._run_decomp_single_data(boost_data_train, boost_dfs, manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer, run_limit=-1)
         # Do WS

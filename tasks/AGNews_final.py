@@ -36,7 +36,7 @@ summarize_examples = [
             "passage": "3 injured in plant fire in Japan. TOKYO, Aug. 20 (Xinhuanet) -- Fire broke out Friday at a tire plant belonging to Bridgestone Corp. in Amagi, western Fukuoka Prefecture of Japan, leaving 13 people injured.",
             "summarize": "The passage is about a plant fire."
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "Abramovich faces rich list challenge. Lakshmi Mittal, the Indian-born steel magnate, yesterday staked a claim to overtake Roman Abramovich as Britain's richest man with a 10bn deal to create the world's largest steelmaker.",
@@ -50,7 +50,7 @@ summarize_examples = [
             "passage": "Tennis: Serena Williams Reaches Finals of China Open. Top seed Serena Williams of the United States has powered her way into the finals of the China Open tennis tournament in Beijing with a straight sets (6-2, 6-3) victory over fourth-seeded Vera Zvonareva of Russia.",
             "summarize": "The passage is about tennis."
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "San Francisco at Atlanta, 1:05 PM. ATLANTA (Ticker) -- Rookie Noah Lowry looks to win his fourth straight decision when he starts for the San Francisco Giants in the finale of a four-game series with the Atlanta Braves.",
@@ -64,7 +64,7 @@ summarize_examples = [
             "passage": "Merrill, UBS Up Apple Stock Estimates. As consumers start spending on Christmas, two brokerage houses raised their estimates on Apple Computer (AAPL) stock Monday to more than US $77, predicting.",
             "summarize": "The passage is about Apple Stock Estimates."
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
 categorize = InputOutputPrompt(
@@ -92,7 +92,7 @@ categorize_examples = [
             "summary": "The passage is about a plant fire.",
             "category": "World News"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "Abramovich faces rich list challenge. Lakshmi Mittal, the Indian-born steel magnate, yesterday staked a claim to overtake Roman Abramovich as Britain's richest man with a 10bn deal to create the world's largest steelmaker.",
@@ -109,7 +109,7 @@ categorize_examples = [
             "summary": "The passage is about tennis",
             "category": "Sports"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "San Francisco at Atlanta, 1:05 PM. ATLANTA (Ticker) -- Rookie Noah Lowry looks to win his fourth straight decision when he starts for the San Francisco Giants in the finale of a four-game series with the Atlanta Braves.",
@@ -126,7 +126,7 @@ categorize_examples = [
             "summary": "The passage is about Apple Stock Estimates.",
             "category": "Business"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 description_zeroshot="""
 Pick the correct category for the passage.

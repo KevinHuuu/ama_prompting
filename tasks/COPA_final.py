@@ -11,12 +11,12 @@ from decomposition import Decomposition, get_args, DATA_DIR
 from utils import get_response, InputOutputPrompt
 
 what_next = InputOutputPrompt(
-    input_formatter=lambda x: f"Question: {x['example']}",
+    input_formatter=lambda x: f"TEXT: {x['example']}",
     output_formatter=lambda x: f"{x['continue']}",
     required_keys=["example", "continue"],
     input_output_sep=" ",
     example_sep="\n\n",
-    instruction="Pick the correct ending for the example.\n\n"
+    instruction="QUERY: Pick the correct ending for the example.\n\n"
 )
 
 what_next_examples = [
@@ -61,7 +61,7 @@ what_next_examples = [
             "example": "(because 'he was not honest', because 'he was not trustworthy') The man was not given the position because?", 
             "continue": "'he was not honest'",
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "example": "(so 'he is always tired', so 'he is always sleeping') My dad works very hard so",
@@ -103,16 +103,16 @@ what_next_examples = [
             "example": "(so 'he studied', so 'he passed') John wanted to get an A so", 
             "continue": "'he studied'",
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
 question = InputOutputPrompt(
-    input_formatter=lambda x: f"Question: {x['example']}",
-    output_formatter=lambda x: f"Answer: {x['continue']}",
+    input_formatter=lambda x: f"TEXT: {x['example']}",
+    output_formatter=lambda x: f"ANSWER: {x['continue']}",
     required_keys=["example", "continue"],
     input_output_sep="\n",
     example_sep="\n\n",
-    instruction="Pick the correct ending for the example.\n\n"
+    instruction="QUERY: Pick the correct ending for the example.\n\n"
 )
 
 question_examples = [
@@ -157,16 +157,16 @@ question_examples = [
             "example": "What best continues the sentence \"My sister was happy because\"?",
             "continue": "\"she got a new bike\"",
         }
-    ])
+    ]).sample(frac=1).reset_index(drop=True)
 ]
 
 questioner = InputOutputPrompt(
-    input_formatter=lambda x: f"Statement: {x['statement']}",
-    output_formatter=lambda x: f"Question: {x['question']}",
+    input_formatter=lambda x: f"TEXT: {x['statement']}",
+    output_formatter=lambda x: f"ANSWER: {x['question']}",
     required_keys=["statement", "question"],
     input_output_sep="\n",
     example_sep="\n\n",
-    instruction="Rewrite the statement as a yes/no question.\n\n"
+    instruction="QUERY: Rewrite the statement as a yes/no question.\n\n"
 )
 
 questioner_examples = [
@@ -212,7 +212,7 @@ questioner_examples = [
             "question": "Were you born in the year 2000?",
         }
 
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "statement": "most of the light comes from the sun",
@@ -254,7 +254,7 @@ questioner_examples = [
             "statement": "The students studied for the test.",
             "question": "Did the students study for the test?",
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "statement": "most of the light comes from the sun",
@@ -297,12 +297,12 @@ questioner_examples = [
             "question": "Did the mother cook dinner for the family?"
         }
 
-    ])
+    ]).sample(frac=1).reset_index(drop=True)
 ]
 
 openended_qa = InputOutputPrompt(
-    input_formatter=lambda x: f"Passage: {x['context']}\nQuestion: {x['question']}",
-    output_formatter=lambda x: f"Answer: {x['answer']}",
+    input_formatter=lambda x: f"TEXT: {x['context']}\nQuestion: {x['question']}",
+    output_formatter=lambda x: f"ANSWER: {x['answer']}",
     required_keys=["passage", "question", "answer"],
     input_output_sep="\n",
     example_sep="\n\n",
@@ -361,7 +361,7 @@ openended_qa_examples = [
             "question": "Was the movie popular?",
             "answer": "Yes, the movie was a hit."
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "context": "It was a beautiful summer day outside. Bob decided to go for a walk at the park. Bob walked along the path and admired the scenery. He found a twenty dollar bill on the ground.",
@@ -413,7 +413,7 @@ openended_qa_examples = [
             "question": "What did John do?",
             "answer": "He stopped and gave the homeless man some money and food"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "context": "My aunt is a nurse she works a lot. Last week was especially bad and she was constantly working many hours.",
@@ -465,16 +465,16 @@ openended_qa_examples = [
             "question": "Was my friend happy about her new job?",
             "answer": "Yes, she was happy."
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
 sentiment = InputOutputPrompt(
-    input_formatter=lambda x: f"Passage: {x['statement']}",
-    output_formatter=lambda x: f"Sentiment: {x['sentiment']}",
+    input_formatter=lambda x: f"TEXT: {x['statement']}",
+    output_formatter=lambda x: f"ANSWER: {x['sentiment']}",
     required_keys=["statement", "question"],
     input_output_sep="\n",
     example_sep="\n\n",
-    instruction="Is the sentiment of the passage positive, negative, or neutral?\n\n"
+    instruction="QUERY: Is the sentiment of the passage positive, negative, or neutral?\n\n"
 )
 
 sentiment_examples = [
@@ -519,7 +519,7 @@ sentiment_examples = [
             "statement": "the coursework was difficult but manageable",
             "sentiment": "neutral",
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "statement": "Mary saw the animal",
@@ -561,7 +561,7 @@ sentiment_examples = [
             "statement": "the new policy was confusing and difficult to understand",
             "sentiment": "negative",
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "statement": "Mary saw the animal",
@@ -603,16 +603,16 @@ sentiment_examples = [
             "statement": "the restaurant had decent food but poor service",
             "sentiment": "neutral",
         }
-    ])
+    ]).sample(frac=1).reset_index(drop=True)
 ]
 
 what_next2 = InputOutputPrompt(
-    input_formatter=lambda x: f"Choices:\n- {x['choice_a']}\n- {x['choice_b']}\n\nPassage: {x['passage']}",
+    input_formatter=lambda x: f"TEXT: Choices:\n- {x['choice_a']}\n- {x['choice_b']}\n\nPassage: {x['passage']}",
     output_formatter=lambda x: f"{x['answer']}",
     required_keys=["choice_a", "choice_b", "passage", "answer"],
     input_output_sep=" ",
     example_sep="\n\n----\n\n",
-    instruction="Pick the best choice for the passage.\n\n"
+    instruction="QUERY: Pick the best choice for the passage.\n\n"
 )
 
 what_next_examples2 = [
@@ -677,7 +677,7 @@ what_next_examples2 = [
             "choice_b": "it was time to wake up",
             "answer": "it was time to wake up"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "The girl went to college and graduated with honors.",
@@ -745,7 +745,7 @@ what_next_examples2 = [
             "choice_b": "He failed the exam.",
             "answer": "He passed the exam."
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
       {
             "passage": "Sam and Jade were excited to see the new movie.",
@@ -807,7 +807,7 @@ what_next_examples2 = [
             "choice_b": "They were eating lunch.",
             "answer": "They were eating lunch."
         }
-    ])
+    ]).sample(frac=1).reset_index(drop=True)
 ]
 
 
@@ -927,7 +927,7 @@ class COPADecomp(Decomposition):
         choice_b = choice_b.lower()
         transition = transition.strip()
         prompt_suffix = prompt(boost_ex)
-        ex_prompt = f"{prompt_suffix}\n\nQuestion: ({{word:}} \'{{choice_a:}}\', {{word:}} \'{{choice_b:}}\') {{example:}} {{word:}}?"
+        ex_prompt = f"{prompt_suffix}\n\nQUERY: ({{word:}} \'{{choice_a:}}\', {{word:}} \'{{choice_b:}}\') {{example:}} {{word:}}?"
         raw_answer = get_response(
             ex_prompt.format(word=word, choice_a=choice_a, choice_b=choice_b, example=example), 
             manifest,
@@ -958,7 +958,7 @@ class COPADecomp(Decomposition):
         choice_b = choice_b.lower()
         transition = transition.strip()
         prompt_suffix = prompt(boost_ex)
-        ex_prompt = f"{prompt_suffix}\n\nQuestion: What best continues the sentence \"{{example:}}\"?\nAnswer:"
+        ex_prompt = f"{prompt_suffix}\n\nQUERY: What best continues the sentence \"{{example:}}\"?\nAnswer:"
         ex_pmp = ex_prompt.format(example=example)
         raw_answer, log_prob = get_response(
             ex_pmp, 
@@ -983,7 +983,7 @@ class COPADecomp(Decomposition):
     def answer_question(self, question, passage, all_prompts, boost_examples, manifest, overwrite_manifest, option=1):
         one_at_a_time = all_prompts[1](boost_examples[1])
 
-        answer_prompt = f"{one_at_a_time}\n\nPassage: {{passage:}}\nQuestion: {{question:}}\n"
+        answer_prompt = f"{one_at_a_time}\n\nTEXT: {{passage:}}\nQUERY: {{question:}}\n"
         answer = get_response(
             answer_prompt.format(passage=passage, question=question), 
             manifest, 
@@ -1038,7 +1038,7 @@ class COPADecomp(Decomposition):
 
     def get_sentiment(self, statement, all_prompts, boost_examples, manifest, overwrite_manifest):
         sentiment_prompt = all_prompts[0](boost_examples[0])
-        prompt = f"{sentiment_prompt}\n\nPassage: {{statement:}}\nSentiment: "
+        prompt = f"{sentiment_prompt}\n\nTEXT: {{statement:}}\nANSWER: "
         raw_answer = get_response(
             prompt.format(statement=statement), 
             manifest,
@@ -1072,12 +1072,13 @@ class COPADecomp(Decomposition):
     def get_question(self, statement, all_prompts, boost_examples, manifest, overwrite_manifest):
         questioner = all_prompts[0](boost_examples[0])
 
-        question_prompt = f"{questioner}\n\nStatement: {{statement:}}\n"
+        question_prompt = f"{questioner}\n\nTEXT: {{statement:}}\n"
         question = get_response(
             question_prompt.format(statement=statement), 
             manifest, 
             max_toks= 4*len(statement.split()))
         question = question.replace("Question: ", "")
+        question = question.replace("QUERY: ", "")        
         question = [q for q in question.split("\n") if q]
         if not question:
             question = f"{statement} Yes or no?"
@@ -1089,9 +1090,9 @@ class COPADecomp(Decomposition):
     def get_what_next(self, example, choice_a, choice_b, transition, all_prompts, boost_examples, manifest, overwrite_manifest):
         what_next_prompt = all_prompts[0](boost_examples[0])
         if "result of":
-            prompt = f"{what_next_prompt}\n\n----\n\nChoices:\n- {{choice_a:}}\n- {{choice_b:}}\n\nPassage: {{example:}} Because?"
+            prompt = f"{what_next_prompt}\n\n----\n\nChoices:\n- {{choice_a:}}\n- {{choice_b:}}\n\nTEXT: {{example:}} Because?"
         elif "consequence":
-            prompt = f"{what_next_prompt}\n\n----\n\nChoices:\n- {{choice_a:}}\n- {{choice_b:}}\n\nPassage: {{example:}} So?"
+            prompt = f"{what_next_prompt}\n\n----\n\nChoices:\n- {{choice_a:}}\n- {{choice_b:}}\n\nTEXT: {{example:}} So?"
         raw_answer = get_response(
             prompt.format(choice_a=choice_a, choice_b=choice_b, example=example), 
             manifest,
@@ -1113,6 +1114,12 @@ class COPADecomp(Decomposition):
     def run_decomposed_prompt(
         self, test_data, boost_data_train, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer
     ):
+        import random
+        import numpy as np
+        seed = 1000
+        random.seed(seed)
+        np.random.seed(seed)
+        
         expt_log, all_boost_preds, labels = self._run_decomp_single_data(test_data, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer)
         expt_log_train, all_boost_train_preds, train_labels = self._run_decomp_single_data(boost_data_train, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer, run_limit=1000)
         # Do WS
