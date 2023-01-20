@@ -84,7 +84,7 @@ class SST2Decomp(Decomposition):
 
 
     def get_boost_decomp_examples(self, train_data, boost_id):
-        seed = [1, 2, 3][boost_id]
+        seed = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16][boost_id]
         k_shot = 16  
         random.seed(seed)
         np.random.seed(seed)
