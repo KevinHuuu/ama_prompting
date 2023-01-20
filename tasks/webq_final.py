@@ -180,9 +180,7 @@ class WebQDecomp(Decomposition):
 
                 icl_str = ""
                 if do_few_shot:
-                    for s_ind, s_row in few_shot_df.iterrows():
-                        if len(tokenizer.encode(icl_str, truncation=False)) >= 3500:
-                            break                                              
+                    for s_ind, s_row in few_shot_df.iterrows():                                         
                         s_question = s_row.question
                         if isinstance(s_row.answers, str):
                             label = ast.literal_eval(s_row.answers)
