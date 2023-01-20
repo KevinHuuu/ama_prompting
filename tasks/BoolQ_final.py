@@ -9,6 +9,9 @@ from sklearn.metrics import classification_report
 from decomposition import Decomposition, get_args, DATA_DIR
 from utils import get_response, InputOutputPrompt
 
+from transformers import GPT2Tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
 extract = InputOutputPrompt(
     input_formatter=lambda x: f"Context: {x['context']}\n\nQuestion: {x['question']}",
     output_formatter=lambda x: f"Answer: {x['answer']}",
@@ -199,7 +202,14 @@ class BoolQDecomp(Decomposition):
                     s_text = s_row['inputs_pretokenized']
                     s_passage = s_text.split("\nQuestion")[0].strip("\n").strip()
                     s_question = s_text.split("\nQuestion")[-1].split("\nAnswer")[0].strip().strip(":").strip().strip("\n").strip("?").strip()
-                    icl_str += f"\n\nContext: {s_passage}\nQuestion: {s_question}?\nAnswer: {s_row['targets_pretokenized']}"
+
+                    
+                    current_example = f"\n\nContext: {s_passage}\nQuestion: {s_question}?\nAnswer: {s_row['targets_pretokenized']}"
+                    buffer_token = 30
+                    if len(tokenizer.encode(icl_str + current_example + passage+ question, truncation=False)) + buffer_token >= self.max_seq_len:
+                        break                          
+                    icl_str += current_example                       
+                    
 
             prompt = f"{icl_str}\n\nContext: {passage}\nQuestion: {question}?\nAnswer:"
 

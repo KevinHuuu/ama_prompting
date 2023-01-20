@@ -9,6 +9,9 @@ from datasets import load_dataset
 from decomposition import Decomposition, get_args
 from utils import get_response, text_f1, InputOutputPrompt, load_hf_data
 
+from transformers import GPT2Tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
 extract = InputOutputPrompt(
     input_formatter=lambda x: f"Context: {x['context']}\nQuestion: {x['question']}",
     output_formatter=lambda x: f"Answer: {x['answer']}",
@@ -153,7 +156,11 @@ class DropDecomp(Decomposition):
                             label = "unknown"
                         else:
                             label = s_row.answers_spans["spans"][0]
-                        icl_str += f"Passage: {input}\nQuestion: {s_question}\nAnswer: {label}\n\n"
+                        current_example = f"Passage: {input}\nQuestion: {s_question}\nAnswer: {label}\n\n"
+                        buffer_token = 30
+                        if len(tokenizer.encode(icl_str + current_example + text + question, truncation=False)) + buffer_token >= self.max_seq_len:
+                            break                          
+                        icl_str += current_example                              
 
                 prompt = (
                     icl_str

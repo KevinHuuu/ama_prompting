@@ -9,6 +9,9 @@ from tqdm.auto import tqdm
 from decomposition import Decomposition, get_args, DATA_DIR
 from utils import get_response, InputOutputPrompt
 
+from transformers import GPT2Tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
 answer_prompt = InputOutputPrompt(
     input_formatter=lambda x: f"Passage: {x['passage']}\nQuestion: {x['question']}\n{x['choice_question']}",
     output_formatter=lambda x: f"Answer: {x['answer']}",
@@ -182,9 +185,14 @@ class MultiRCDecomp(Decomposition):
             fs_exs = []
             if do_few_shot:
                 cnt = 0
+                total_length = 0
                 for s_ind, s_row in few_shot_df.iterrows():
                     passage = s_row["passage"]
                     question = s_row["question"]
+                    total_length += len(tokenizer.encode(passage + question + gold))
+                    buffer_token = 30
+                    if total_length + buffer_token > self.max_seq_len:
+                        break                    
                     for choice_q, gold in zip(s_row["choice_questions"], s_row["answers"]):
                         cnt += 1
                         fs_exs.append({

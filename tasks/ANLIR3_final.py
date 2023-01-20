@@ -343,18 +343,20 @@ class ANLIDecomp(Decomposition):
                 pred = expt_log[ind]["pred"]
                 gold = expt_log[ind]["gold"]
             else:
-                icl_str = ""
-
-                if do_few_shot:
-                    for s_ind, s_row in few_shot_df.iterrows():
-                        if len(tokenizer.encode(icl_str, truncation=False)) >= 3500:
-                            break                                              
-                        icl_str += f"{s_row['inputs_pretokenized']}{s_row['targets_pretokenized']}\n\n"
-
                 text = row["inputs_pretokenized"]
                 text = text.replace("True, False, or Neither?", "").strip().strip("\n")
                 text = text + " True, False, or Neither? "
                 gold = row["targets_pretokenized"]
+                
+                icl_str = ""                
+                if do_few_shot:
+                    for s_ind, s_row in few_shot_df.iterrows():
+                        current_example = f"{s_row['inputs_pretokenized']}{s_row['targets_pretokenized']}\n\n"
+                        buffer_token = 30
+                        if len(tokenizer.encode(icl_str + current_example + text, truncation=False)) + buffer_token >= self.max_seq_len:
+                            break                          
+                        icl_str += current_example                
+                
                 prompt = f"{icl_str}{{text:}}"
                 pmp = prompt.format(text=text)
                 if i == 0:

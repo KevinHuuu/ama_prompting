@@ -217,16 +217,18 @@ class NQDecomp(Decomposition):
 
             icl_str = ""
             if do_few_shot:
-                for s_ind, s_row in few_shot_df.iterrows():
-                    if len(tokenizer.encode(icl_str, truncation=False)) >= 3500:
-                        break                                          
+                for s_ind, s_row in few_shot_df.iterrows():                                       
                     input = s_row.question
                     s_question = s_row.question
                     if isinstance(s_row.answers, str):
                         label = ast.literal_eval(s_row.answers)
                     else:
                         label = s_row.answers.tolist()
-                    icl_str += f"Question: {s_question}\nAnswer: {label[0]}\n\n"
+                    current_example = f"Question: {s_question}\nAnswer: {label[0]}\n\n"
+                    buffer_token = 30
+                    if len(tokenizer.encode(icl_str + current_example  + prompt_suffix + question, truncation=False)) + buffer_token >= self.max_seq_len:
+                        break                          
+                    icl_str += current_example                             
 
             prompt = (
                 icl_str

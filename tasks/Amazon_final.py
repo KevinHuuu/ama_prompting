@@ -284,20 +284,25 @@ class AmazonProduct(Decomposition):
             
             icl_str = f"{description_zeroshot}"
             if do_few_shot:
-                for s_ind, s_row in few_shot_df.iterrows():
-                    if len(tokenizer.encode(icl_str, truncation=False)) >= 3500:
-                        break                    
+                for s_ind, s_row in few_shot_df.iterrows():         
                     s_label = s_row['label'].replace("_", " ")
-                    icl_str += f"\n\nProduct: {s_row['text']}\nCategory: {s_label}"
+                    current_example = f"\n\nProduct: {s_row['text']}\nCategory: {s_label}"
+                    buffer_token = 30
+                    if len(tokenizer.encode(icl_str + current_example + text, truncation=False)) + buffer_token >= self.max_seq_len:
+                        break                    
+                    icl_str += current_example                   
+                    
 
             prompt = f"{icl_str}\n\nProduct: {{text:}}\nCategory:"
-            pmp = prompt.format(text=text)
-            # if i == 0:
-            if i <= 3:            
-                print('########## prompt start ############')
-                print(pmp)
-                print('########## prompt end ############')                
+            pmp = prompt.format(text=text)         
 
+            if i <= 3:
+                print("########icl_str")
+                print(icl_str)
+                print('########pmp')
+                print(pmp)
+                print("########end")     
+                
             answer = get_response(
                 pmp,
                 manifest_answer,

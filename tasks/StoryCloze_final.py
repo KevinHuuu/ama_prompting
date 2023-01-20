@@ -416,18 +416,7 @@ class StoryCloze(Decomposition):
                 gold = entry["gold"]
             else:
                 instruction = "Given two possible next sentences A) and B), choose the best next sentence to complete the story. Answer with A or B."
-                icl_str = ""
-                if do_few_shot:
-                    for s_ind, s_row in few_shot_df.iterrows():
-                        if len(tokenizer.encode(icl_str, truncation=False)) >= 3500:
-                            break                                              
-                        s_text = f"{s_row['input_sentence_1']} {s_row['input_sentence_2']} {s_row['input_sentence_3']} {s_row['input_sentence_4']}\n\n"
-                        if s_row['answer_right_ending'] == 1:
-                            answer = s_row['sentence_quiz1']
-                        elif s_row['answer_right_ending'] == 2:
-                            answer = s_row['sentence_quiz2']
-                        choices = f"A) {s_row['sentence_quiz1']}\nB) {s_row['sentence_quiz2']}\n\n"
-                        icl_str += f"{s_text}{choices}Answer: {answer}\n\n\n"
+
                 
                 text = f"{row['input_sentence_1']} {row['input_sentence_2']} {row['input_sentence_3']} {row['input_sentence_4']}\n\n"
                 choices = f"A) {row['sentence_quiz1']}\nB) {row['sentence_quiz2']}\n\n"
@@ -436,6 +425,25 @@ class StoryCloze(Decomposition):
                     gold = row['sentence_quiz1']
                 elif row['answer_right_ending'] == 2:
                     gold = row['sentence_quiz2']
+                    
+                icl_str = ""
+                if do_few_shot:
+                    for s_ind, s_row in few_shot_df.iterrows():                                         
+                        s_text = f"{s_row['input_sentence_1']} {s_row['input_sentence_2']} {s_row['input_sentence_3']} {s_row['input_sentence_4']}\n\n"
+                        if s_row['answer_right_ending'] == 1:
+                            answer = s_row['sentence_quiz1']
+                        elif s_row['answer_right_ending'] == 2:
+                            answer = s_row['sentence_quiz2']
+                        choices = f"A) {s_row['sentence_quiz1']}\nB) {s_row['sentence_quiz2']}\n\n"
+                        
+                        current_example = f"{s_text}{choices}Answer: {answer}\n\n\n"
+                        buffer_token = 30
+                        if len(tokenizer.encode(icl_str + current_example  + instruction + text + choices, truncation=False)) + buffer_token >= self.max_seq_len:
+                            break                             
+                        
+                        icl_str += current_example                    
+                    
+                    
                 prompt = f"{instruction}\n\n\n{icl_str}{text}{choices}Answer: "
 
                 raw_answer = get_response(prompt, manifest_answer, max_toks=50) 

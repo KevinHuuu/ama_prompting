@@ -13,6 +13,9 @@ from utils import get_response, InputOutputPrompt, load_hf_data
 
 from decomposition import Decomposition, get_args
 
+from transformers import GPT2Tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
 extract_relevant_phrase = InputOutputPrompt(
     input_formatter=lambda x: f"Passage: {x['passage']}",
     output_formatter=lambda x: f"Extract: {x['extract']}",
@@ -289,7 +292,13 @@ class WSCDecomp(Decomposition):
                     s_text_toks = s_text_toks_prefix + [f'"{s_pronoun}"'] + s_text_toks_suffix
                     s_passage = " ".join(s_text_toks).strip(".").strip() + "."
                     s_question = f"Passage: {s_passage}\nQuestion: In the passage above, does the pronoun \"{s_pronoun}\" refer to {s_subject}?"
-                    icl_str += f"{s_question}\nAnswer: {s_gold}\n\n"
+
+                    current_example = f"{s_question}\nAnswer: {s_gold}\n\n"
+                    buffer_token = 30
+                    if len(tokenizer.encode(icl_str + current_example  + question, truncation=False)) + buffer_token >= self.max_seq_len:
+                        break                          
+                    icl_str += current_example                      
+                    
 
             prompt = f"{icl_str}Passage: {{passage:}}\n{question}\nAnswer:"
             pmp = prompt.format(passage=passage)

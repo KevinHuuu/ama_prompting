@@ -9,6 +9,8 @@ import json
 import string
 import datetime
 
+
+
 ################# Copy paste from /nvmedata/changranh/fm_in_context_eval_data_for_fewshot_data_collection/realtimeqa_public/scripts/utils/tools.py
 import json, jsonlines, datetime, string
 from collections import Counter
@@ -354,13 +356,25 @@ class RealtimeQADecomp(Decomposition):
             golds = row["gold_answers"]
             assert len(golds) == 1
             icl_str = ""
-            if do_few_shot:
-                if len(tokenizer.encode(icl_str, truncation=False)) >= 3500:
-                    break                                      
+            if do_few_shot:                                   
                 # Taken from realtime_qa github repo
-                icl_str += f"Question: What is the capital city of Japan?\nAnswer: Tokyo\n\n"
+                current_example = f"Question: What is the capital city of Japan?\nAnswer: Tokyo\n\n"
+                buffer_token = 30
+                if len(tokenizer.encode(icl_str + current_example + passages + question, truncation=False)) + buffer_token >= self.max_seq_len:
+                    pass
+                else:
+                    icl_str += current_example                                              
 
             pmp = f"{icl_str}{passages}Question: {question}\nAnswer:"
+            
+            if i <= 3:
+                print("########icl_str")
+                print(icl_str)
+                print('########pmp')
+                print(pmp)
+                print("########end")   
+                
+                
             if i == 0:
                 print(pmp)
             try:

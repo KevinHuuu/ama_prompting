@@ -9,6 +9,11 @@ from sklearn.metrics import classification_report
 from decomposition import Decomposition, get_args, DATA_DIR
 from utils import get_response, InputOutputPrompt
 
+
+from transformers import GPT2Tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
+
 summarize = InputOutputPrompt(
     input_formatter=lambda x: f"Passage: {x['passage']}",
     output_formatter=lambda x: f"Summarize: the passage \"Passage\": {x['summary']}",
@@ -198,7 +203,11 @@ class DBPediaDecomp(Decomposition):
                     s_body = s_input.split("written work. ")[-1]
                     s_title = s_input.split("written work. ")[0] + "written work."
                     s_output = s_row.targets_pretokenized.strip()
-                    icl_str += f"Passage: {s_body}\nCategory: {s_output}\n\n"
+                    current_example = f"Passage: {s_body}\nCategory: {s_output}\n\n"
+                    buffer_token = 30
+                    if len(tokenizer.encode(icl_str + current_example + body, truncation=False)) + buffer_token >= self.max_seq_len:
+                        break                          
+                    icl_str += current_example                     
 
             icl_str = f"{title}\n\n{icl_str}"
             prompt = f"{icl_str}Passage: {{body:}}\nCategory:"

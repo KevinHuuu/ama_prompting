@@ -10,6 +10,9 @@ from sklearn.metrics import classification_report
 from decomposition import Decomposition, get_args, DATA_DIR
 from utils import get_response, InputOutputPrompt
 
+from transformers import GPT2Tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
 ##############################################################################################################################
 
 # ################
@@ -358,7 +361,11 @@ class RTEDecomp(Decomposition):
                 icl_str = ""
                 if do_few_shot:
                     for s_ind, s_row in few_shot_df.iterrows():
-                        icl_str += f"{s_row['inputs_pretokenized']} {s_row['targets_pretokenized']}\n\n\n"
+                        current_example = f"{s_row['inputs_pretokenized']} {s_row['targets_pretokenized']}\n\n\n"
+                        buffer_token = 30
+                        if len(tokenizer.encode(icl_str + current_example  + text, truncation=False)) + buffer_token >= self.max_seq_len:
+                            break                          
+                        icl_str += current_example                           
 
                 prompt = f"{icl_str}{{text:}}"
                 pmp = prompt.format(text=text)

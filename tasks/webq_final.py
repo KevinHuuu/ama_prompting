@@ -188,7 +188,13 @@ class WebQDecomp(Decomposition):
                             label = ast.literal_eval(s_row.answers)
                         else:
                             label = s_row.answers.tolist()
-                        icl_str += f"Question: {s_question}\nAnswer: {label[0]}\n\n"
+
+                        
+                        current_example = f"Question: {s_question}\nAnswer: {label[0]}\n\n"
+                        buffer_token = 30
+                        if len(tokenizer.encode(icl_str + current_example  + question, truncation=False)) + buffer_token >= self.max_seq_len:
+                            break                          
+                        icl_str += current_example                              
 
                 prompt = (
                     icl_str
@@ -196,10 +202,19 @@ class WebQDecomp(Decomposition):
                     + prompt_suffix
                     + "\nAnswer:"
                 )
-
+                 
                 if i == 0:
                     print(prompt.format(question=question))
                 prompt = prompt.format(question=question)
+                
+                
+                if i <= 3:
+                    print("########icl_str")
+                    print(icl_str)
+                    print('########pmp')
+                    print(prompt)
+                    print("########end")                  
+                
                 raw_answer = get_response(
                     prompt, #prompt.format(question=question),
                     manifest_answer,

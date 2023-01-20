@@ -13,6 +13,9 @@ import string
 from decomposition import Decomposition, get_args, DATA_DIR
 from utils import get_response, InputOutputPrompt
 
+from transformers import GPT2Tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
 cloze_completion = InputOutputPrompt(
     input_formatter=lambda x: f"Context: {x['context']}",
     output_formatter=lambda x: f"{x['answer']}",
@@ -191,6 +194,10 @@ class ReCoRDDecomp(Decomposition):
                         icl_str += f"Context: {s_text}\n\nAnswer: {s_answer}"
                     else:
                         icl_str += f"Context: {s_text}\n\nAnswer: {s_answer}\n\n----\n\n"
+                        
+                    if len(tokenizer.encode(icl_str, truncation=False)) + buffer_token >= int(0.8 * self.max_seq_len):
+                        break   
+                        
             
             text = " ".join(row['inputs_pretokenized'].split("\n\n")[1:]).strip()
             query = text.split("\n")[-1]

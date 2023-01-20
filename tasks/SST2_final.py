@@ -137,15 +137,17 @@ class SST2Decomp(Decomposition):
 
                 icl_str = ""
                 if do_few_shot:
-                    for s_ind, s_row in few_shot_df.iterrows():
-                        if len(tokenizer.encode(icl_str, truncation=False)) >= 3500:
-                            break                                              
+                    for s_ind, s_row in few_shot_df.iterrows():                                              
                         if s_row["label"] == 0:
                             demo_label = "negative"
                         else:
                             demo_label = "positive"
-                        icl = f"Text: {s_row['sentence']}\nSentiment: {demo_label}"
-                        icl_str += f"{icl}\n\n"
+                            
+                        current_example = f"Text: {s_row['sentence']}\nSentiment: {demo_label}" + '\n\n'
+                        buffer_token = 30
+                        if len(tokenizer.encode(icl_str + current_example  + description + sentence, truncation=False)) + buffer_token >= self.max_seq_len:
+                            break                          
+                        icl_str += current_example                      
 
                 description = "For each snippet of text, label the sentiment of the text as positive or negative."
                 prompt = f"{description}\n\n{icl_str}Text: {{sentence:}}\nSentiment:"
