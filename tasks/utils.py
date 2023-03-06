@@ -6,6 +6,16 @@ import re
 import pandas as pd
 from typing import Callable, List
 from manifest import Manifest
+from flask import Flask
+import json
+import requests
+import ssl
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+import warnings
+from sklearn.exceptions import UndefinedMetricWarning
+warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
+import os
 
 
 class InputOutputPrompt:
@@ -89,7 +99,6 @@ def get_manifest_session(
         model_name += f"_{params['engine']}"
     return manifest, model_name
 
-
 def get_response(
     prompt,
     manifest,
@@ -100,32 +109,31 @@ def get_response(
     verbose=False,
 ):
     prompt = prompt.strip()
-    if gold_choices:
-        gold_choices = [" " + g.strip() for g in gold_choices]
-        response_obj = manifest.run(
-            prompt, gold_choices=gold_choices, overwrite_cache=overwrite, return_response=True
+    url = os.environ.get("DAAS_URL")
+
+    headers = {
+    'key': os.environ.get("DAAS_KEY"),
+    'Content-Type': 'application/json',
+    }
+
+    body = {
+    'inputs': [
+        json.dumps(
+          {
+            'prompt': prompt,
+            'completion': ''
+          }
         )
-        # breakpowint()
-        response_obj = response_obj.get_json_response()["choices"][0]
-        try:
-            log_prob = response_obj["text_logprob"]
-        except:
-            log_prob = response_obj["logprob"]
-        response = response_obj["text"]
-    else:
-        response = manifest.run(
-            prompt,
-            max_tokens=max_toks,
-            stop_token=stop_token,
-            overwrite_cache=overwrite,
-        )
-        log_prob = None
-    if verbose:
-        print("\n***Prompt***\n", prompt)
-        print("\n***Response***\n", response)
-    if log_prob:
-        return response, log_prob
-    return response
+    ],
+    "params":{"max_tokens_to_generate":{"type":"int","value":str(max_toks)},"temperature":{"type":"float","value":"1"},"top_p":{"type":"float","value":"1"}}
+    }
+    
+    response = json.loads(requests.post(url, headers=headers, json=body, verify=False).content)
+    response_text = response['data'][0]  
+    response_text = response_text[len(prompt):]
+    # print('This is using SambaNova DaaS')
+    # print('response_text', response_text)
+    return response_text
 
 def load_hf_data(save_dir, task_name, val_split, hf_name, overwrite_data):
     save_data = Path(f"{save_dir}/{task_name}/data.feather")
