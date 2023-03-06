@@ -42,8 +42,28 @@ questioner_examples = [
         {
             "statement": "The father and son went camping to California.",
             "question": "Did the father and son go camping?"
+        },
+        {
+            "statement": "Cats are cute and cuddly.",
+            "question": "Are cats cute and cuddly?"
+        },
+        {
+            "statement": "The sky is blue.",
+            "question": "What color is the sky?"
+        },
+        {
+            "statement": "The sun rises in the east.",
+            "question": "Which direction does the sun rise?"
+        },
+        {
+            "statement": "The dog can fetch a ball.",
+            "question": "Can the dog fetch a ball?"
+        },
+        {
+            "statement": "The cat slept on the bed.",
+            "question": "Where did the cat sleep?"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "statement": "most of the light comes from the sun",
@@ -64,8 +84,28 @@ questioner_examples = [
         {
             "statement": "The father and son went camping to California.",
             "question": "Did the father and son go camping?"
+        } ,
+        {
+            "statement": "The boy was happy",
+            "question": "Was the boy happy?"
+        },
+        {
+            "statement": "The teacher gave out the papers",
+            "question": "Did the teacher give out the papers?"
+        },
+        {
+            "statement": "The shower was cold",
+            "question": "Was the shower cold?"
+        },
+        {
+            "statement": "John ate the cake",
+            "question": "Did John eat the cake?"
+        },
+        {
+            "statement": "The family went to the beach",
+            "question": "Did the family go to the beach?"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "statement": "she prefers kittens over puppies.",
@@ -83,7 +123,31 @@ questioner_examples = [
             "statement": "it took jenna 7 attempts to solve the problem",
             "question": "Did it take Jenna 7 attempts to solve the problem?",
         },
-    ]),
+        {
+            "statement": "The team won the championship",
+            "question": "Did the team win the championship?",
+        },
+        {
+            "statement": "The bird was singing in the tree",
+            "question": "Was the bird singing in the tree?",
+        },
+        {
+            "statement": "Spencer has been living in London for 5 years",
+            "question": "Has Spencer been living in London for 5 years?",
+        },
+        {
+            "statement": "The show starts at 8 pm",
+            "question": "Does the show start at 8 pm?",
+        },
+        {
+            "statement": "The restaurant was crowded",
+            "question": "Was the restaurant crowded?",
+        },
+        {
+            "statement": "The sun is shining today",
+            "question": "Is the sun shining today?",
+        }
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
 openended_qa = InputOutputPrompt(
@@ -112,7 +176,42 @@ openended_qa_examples = [
             "question": "Does socializing help you find a boyfriend?",
             "answer": "Yes"
         },
-    ]),
+        {
+            "passage": "I took my dog to the vet today and the doctor said she had a serious infection. He put her on antibiotics.",
+            "question": "Did the vet prescribe antibiotics?",
+            "answer": "Yes"
+        },
+        {
+            "passage": "The new exhibit at the art museum is amazing. I would highly recommend it to anyone who likes modern art.",
+            "question": "Would you recommend the museum exhibit?",
+            "answer": "Yes"
+        },
+        {
+            "passage": "The new technology has revolutionized the way businesses operate. It has made communication and collaboration easier than ever.",
+            "question": "Has the new technology made communication and collaboration easier?",
+            "answer": "Yes"
+        },
+        {
+            "passage": "John studied for hours, but he still failed the math test. He was so disappointed.",
+            "question": "Did John pass the math test?",
+            "answer": "No"
+        },
+        {
+            "passage": "The police officer was very kind and understanding when I got pulled over for speeding. He let me off with a warning.",
+            "question": "Did the police officer give the driver a ticket?",
+            "answer": "No"
+        },
+        {
+            "passage": "My boss was so impressed with my presentation that he gave me a raise. I was so happy.",
+            "question": "Did the boss give the employee a raise?",
+            "answer": "Yes"
+        },
+        {
+            "passage": "I decided to go for a run, even though it was raining. It was an invigorating experience.",
+            "question": "Was it raining when the person went for a run?",
+            "answer": "Yes"
+        }
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "Jack recommends his least favorite books of the year to his followers. The least favorite book this year was Harry Potter and the 7 Rings.",
@@ -133,8 +232,43 @@ openended_qa_examples = [
             "passage": "Put yourself out there. The more time you spend dating and socializing, the more likely you will find a boyfriend you like.",
             "question": "Does socializing help you find a boyfriend?",
             "answer": "Yes, it helps you find a boyfriend."
+        },
+        {
+            "passage": "John was a great basketball player. He was always the one to make the winning shot.",
+            "question": "What did John do well?",
+            "answer": "John was a great basketball player and he was always the one to make the winning shot."
+        },
+        {
+            "passage": "The government is trying to make it easier for people to get healthcare. They are increasing funding and expanding access.",
+            "question": "What is the government doing to help with healthcare?",
+            "answer": "The government is increasing funding and expanding access to make it easier for people to get healthcare."
+        },
+        {
+            "passage": "George was always a great friend. He was always there when I needed someone to talk to.",
+            "question": "What did George do for you?",
+            "answer": "George was always a great friend and he was always there when I needed someone to talk to."
+        },
+        {
+            "passage": "The new law states that all drivers must have car insurance. It is important for everyone to have the proper coverage.",
+            "question": "What does the law say about car insurance?",
+            "answer": "The law states that all drivers must have car insurance. It is important for everyone to have the proper coverage."
+        },
+        {
+            "passage": "John was always so kind and generous. He was always willing to lend a helping hand.",
+            "question": "What was John like?",
+            "answer": "John was always so kind and generous. He was always willing to lend a helping hand."
+        },
+        {
+            "passage": "The weather is expected to be sunny and hot for the next few days. Make sure to bring sunscreen if you plan on going out.",
+            "question": "What type of weather is expected?",
+            "answer": "The weather is expected to be sunny and hot for the next few days."
+        },
+        {
+            "passage": "The new iPhone 11 Pro has a lot of great features. It has an improved camera and a faster processor.",
+            "question": "What are some of the features of the iPhone 11 Pro?",
+            "answer": "The iPhone 11 Pro has an improved camera and a faster processor."
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "Anna's mother always told her to be confident even if she feels nervous on the inside",
@@ -156,7 +290,37 @@ openended_qa_examples = [
             "question": "Did representatives from more than 20 countries attend FSP?",
             "answer": "Yes"
         },
-    ]),
+        {
+            "passage": "The students had to read the book before the end of the semester in order to get a good grade.",
+            "question": "What did the students have to do to get a good grade?",
+            "answer": "They had to read the book before the end of the semester."
+        },
+        {
+            "passage": "John and his friends decided to take a road trip to a nearby beach. They were all very excited.",
+            "question": "Were John and his friends excited about the road trip?",
+            "answer": "Yes, they were all very excited."
+        },
+        {
+            "passage": "Leslie was a very talented artist and she enjoyed creating artwork in her free time.",
+            "question": "Did Leslie enjoy creating artwork?",
+            "answer": "Yes, she enjoyed creating artwork in her free time."
+        },
+        {
+            "passage": "The new bridge opened this week and the community was very excited about it.",
+            "question": "Was the community excited about the new bridge?",
+            "answer": "Yes, the community was very excited about it."
+        },
+        {
+            "passage": "Brian's parents were very strict and never allowed him to stay out late.",
+            "question": "Did Brian's parents allow him to stay out late?",
+            "answer": "No, they never allowed him to stay out late."
+        },
+        {
+            "passage": "The students had to take a test before the end of the semester in order to pass the class.",
+            "question": "What did the students have to do to pass the class?",
+            "answer": "They had to take a test before the end of the semester."
+        }
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
 class CBDecomp(Decomposition):
@@ -297,6 +461,13 @@ class CBDecomp(Decomposition):
     def run_decomposed_prompt(
         self, test_data, boost_data_train, boost_dfs,         manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer
     ):
+    
+        import random
+        import numpy as np
+        seed = 1000
+        random.seed(seed)
+        np.random.seed(seed)
+        
         expt_log, all_boost_preds, labels = self._run_decomp_single_data(test_data, boost_dfs, manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer)
         expt_log_train, all_boost_train_preds, train_labels = self._run_decomp_single_data(boost_data_train, boost_dfs, manifest_question, manifest_answer, overwrite_manifest_question, overwrite_manifest_answer, run_limit=-1)
         # Do WS

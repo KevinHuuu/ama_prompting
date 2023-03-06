@@ -38,7 +38,7 @@ extract_relevant_phrase_examples = [
             "passage": "Jeff gave his son some money because \"he\" wanted to buy lunch.",
             "extract": "phrase containing \"he\": \"he\" wanted to buy"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "The dog chased the cat. The cat ran up a tree and \"it\" waited at the top.",
@@ -52,7 +52,7 @@ extract_relevant_phrase_examples = [
             "passage": "John couldn't see the stage with Billy in front of him because \"he\" is so short.",
             "extract": "phrase containing \"he\": \"he\" is so short"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "The candle gave some light during the blackout, but after a while \"it\" also burned out.",
@@ -66,7 +66,7 @@ extract_relevant_phrase_examples = [
             "passage": "Mary invited Jenna to \"her\" birthday party, but didn't invite Anna.",
             "extract": "phrase containing \"her\": \"her\" birthday party"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
 convert_reason_to_q = InputOutputPrompt(
@@ -107,7 +107,7 @@ convert_reason_to_q_examples = [
             "input": "her friend jennfier",
             "question": "Whose friend Jennifer?"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "input": "it was made of glass",
@@ -137,7 +137,7 @@ convert_reason_to_q_examples = [
             "input": "her friend jennfier",
             "question": "Whose friend Jennifer?"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "input": "it was made of glass",
@@ -167,7 +167,7 @@ convert_reason_to_q_examples = [
             "input": "her friend jennfier",
             "question": "Whose friend Jennifer?"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
 answer_q_in_passage = InputOutputPrompt(
@@ -195,7 +195,7 @@ answer_q_in_passage_examples = [
             "question": "Who could buy lunch?",
             "answer": "Mark"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "Joe gave Mark some money so he could buy lunch.",
@@ -212,7 +212,7 @@ answer_q_in_passage_examples = [
             "question": "Whose son?",
             "answer": "Mark"
         },
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "passage": "The candle burned out after some time. It dripped a lot of wax.",
@@ -229,7 +229,7 @@ answer_q_in_passage_examples = [
             "question": "Whose birthday party?",
             "answer": "Mary"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
 ]
 
 class WSCDecomp(Decomposition):

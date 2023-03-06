@@ -38,7 +38,7 @@ summarize_examples = [
             "product": "So these tights are tighter than most tights I own and when I take these off, they leave my legs feeling like they've been squeezed to death.",
             "summarize": "The product is tights."
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "product": "This bra is extremely comfortable, affordable and pretty too! My only complaint, and the reason for 4 stars is that the straps can't be adjusted very much.",
@@ -52,7 +52,7 @@ summarize_examples = [
             "product": "I have used the Sanford highlighters for close to 20 years. there are nice. They are almost a disaster when highlighting textbooks.",
             "summarize": "The product is a highlighter."
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "product": "bought a pack of these at a b&m; store, and you'd think pens are pens... especially if you paid a measly $2 for a 12 pack. But negative. These pens I bought were dry.",
@@ -66,7 +66,7 @@ summarize_examples = [
             "product": "I purchased this sander nearly one year ago and can't say I have any complaints about it. The dust collection works surprisingly well, though if the bag isn't pushed in all",
             "summarize": "The product is a sander."
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "product": "I have 7 guitars in my cramped little bedroom studio and I quickly ran out of space to hold them easily. Floor space is dominated by my desk and drum set and I wanted my guitars to be out of the way and safe so they didn't get tripped over or dinged.",
@@ -80,7 +80,7 @@ summarize_examples = [
             "product": "I was looking for decent Levi's for a few years and Amazon had them!!! I wanted the stiff unwashed jeans because they last quite a few years.",
             "summarize": "The product is jeans."
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "product": "I get a lot of grease on my guitar from lotion, sweat, fingerprints, dust, what have you; I take some of this, spray it on a cloth, give it some elbow grease, and my guitars are shiny as the day it was made.",
@@ -94,7 +94,7 @@ summarize_examples = [
             "product": "The parts of this book that dealt with the main character in old age, were very insightful and I enjoyed that. But quite honestly had I known that it would detail the abuse of the circus animals and then also the detailed sex acts I would never had purchased this.",
             "summarize": "The product is a book."
         }
-    ])
+    ]).sample(frac=1).reset_index(drop=True)
 ]
 
 categorize = InputOutputPrompt(
@@ -122,7 +122,7 @@ categorize_examples = [
             "summary": "The product is tights.",
             "category": "Clothing Shoes and Jewelry"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "product": "This bra is extremely comfortable, affordable and pretty too! My only complaint, and the reason for 4 stars is that the straps can't be adjusted very much. ",
@@ -139,7 +139,7 @@ categorize_examples = [
             "summary": "The product is a highlighter.",
             "category": "Office Products"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "product": "bought a pack of these at a b&m; store, and you'd think pens are pens... especially if you paid a measly $2 for a 12 pack. But negative. These pens I bought were dry.",
@@ -156,7 +156,7 @@ categorize_examples = [
             "summary": "The product is a sander.",
             "category": "Tools and Home Improvement"
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "product": "I have 7 guitars in my cramped little bedroom studio and I quickly ran out of space to hold them easily. Floor space is dominated by my desk and drum set and I wanted my guitars to be out of the way and safe so they didn't get tripped over or dinged.",
@@ -173,7 +173,7 @@ categorize_examples = [
             "summary": 'The product is jeans',
             "category": 'Clothing Shoes and Jewelry',
         }
-    ]),
+    ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
         {
             "product": "I get a lot of grease on my guitar from lotion, sweat, fingerprints, dust, what have you; I take some of this, spray it on a cloth, give it some elbow grease, and my guitars are shiny as the day it was made.",
@@ -190,7 +190,7 @@ categorize_examples = [
             "summary": "The product is a bra.",
             "category": "Clothing Shoes and Jewelry"
         }
-    ])
+    ]).sample(frac=1).reset_index(drop=True)
 ]
 description_zeroshot="""
 Pick the correct category for the product.
