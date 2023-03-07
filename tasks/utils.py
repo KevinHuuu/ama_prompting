@@ -128,11 +128,15 @@ def get_response(
     "params":{"max_tokens_to_generate":{"type":"int","value":str(max_toks)},"temperature":{"type":"float","value":"1"},"top_p":{"type":"float","value":"1"}}
     }
     
+    
     response = json.loads(requests.post(url, headers=headers, json=body, verify=False).content)
     response_text = response['data'][0]  
-    response_text = response_text[len(prompt):]
-    # print('This is using SambaNova DaaS')
-    # print('response_text', response_text)
+    response_text = response_text[len(prompt):].replace("<|endoftext|>","")
+
+    with open("my_data.txt", 'a') as file:
+        file.write("###\n" + prompt + '\n\nprediction\n\n' + response_text + "\n###\n")
+
+    
     return response_text
 
 def load_hf_data(save_dir, task_name, val_split, hf_name, overwrite_data):
