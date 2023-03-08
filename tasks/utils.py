@@ -16,7 +16,32 @@ import warnings
 from sklearn.exceptions import UndefinedMetricWarning
 warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
 import os
+import sqlite3
 
+def create_cache_table():
+    conn = sqlite3.connect('cache.db')
+    c = conn.cursor()
+    c.execute('CREATE TABLE IF NOT EXISTS cache (prompt TEXT PRIMARY KEY, completion TEXT)')
+    conn.commit()
+    conn.close()
+
+def cache_response(prompt, completion):
+    conn = sqlite3.connect('cache.db')
+    c = conn.cursor()
+    c.execute('INSERT OR REPLACE INTO cache (prompt, completion) VALUES (?, ?)', (prompt, completion))
+    conn.commit()
+    conn.close()
+
+def get_cached_response(prompt):
+    conn = sqlite3.connect('cache.db')
+    c = conn.cursor()
+    c.execute('SELECT completion FROM cache WHERE prompt=?', (prompt,))
+    result = c.fetchone()
+    conn.close()
+    if result is not None:
+        return result[0]
+    else:
+        return None
 
 class InputOutputPrompt:
     def __init__(self,
@@ -99,16 +124,14 @@ def get_manifest_session(
         model_name += f"_{params['engine']}"
     return manifest, model_name
 
-def get_response(
-    prompt,
-    manifest,
-    overwrite=False,
-    max_toks=10,
-    stop_token=None,
-    gold_choices=[],
-    verbose=False,
-):
+def get_response(prompt, manifest, overwrite=False, max_toks=10, stop_token=None, gold_choices=[], verbose=False):
     prompt = prompt.strip()
+
+    # Check if response is in cache
+    cached_response = get_cached_response(prompt)
+    if cached_response is not None:
+        return cached_response
+
     url = os.environ.get("DAAS_URL")
 
     headers = {
@@ -125,7 +148,7 @@ def get_response(
           }
         )
     ],
-    "params":{"max_tokens_to_generate":{"type":"int","value":str(max_toks)},"temperature":{"type":"float","value":"1"},"top_p":{"type":"float","value":"1"}}
+    "params":{"max_tokens_to_generate":{"type":"int","value":str(max_toks)},"temperature":{"type":"float","value":"0.001"},"top_p":{"type":"float","value":"1"}}
     }
     
     
