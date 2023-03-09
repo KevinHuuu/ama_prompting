@@ -18,6 +18,8 @@ warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
 import os
 import sqlite3
 
+
+
 def create_cache_table():
     conn = sqlite3.connect('cache.db')
     c = conn.cursor()
@@ -42,7 +44,8 @@ def get_cached_response(prompt):
         return result[0]
     else:
         return None
-
+    
+    
 class InputOutputPrompt:
     def __init__(self,
         input_formatter: Callable,
@@ -96,33 +99,36 @@ def get_manifest_session(
     temperature=0,
     top_p=1.0,
 ):
-    if client_name == "huggingface" and temperature == 0:
-        params = {
-            "temperature": 0.001,
-            "do_sample": False,
-            "top_p": top_p,
-        }
-    elif client_name in {"openai", "ai21"}:
-        params = {
-            "temperature": temperature,
-            "top_p": top_p,
-            "engine": client_engine,
-        }
-    else:
-        raise ValueError(f"{client_name} is not a valid client name")
-    manifest = Manifest(
-        client_name=client_name,
-        client_connection=client_connection,
-        cache_name="sqlite",
-        cache_connection=cache_connection,
-        session_id=None,
-        **params,
-    )
-    params = manifest.client.get_model_params()
-    model_name = params["model_name"]
-    if "engine" in params:
-        model_name += f"_{params['engine']}"
-    return manifest, model_name
+    # if client_name == "huggingface" and temperature == 0:
+    #     params = {
+    #         "temperature": 0.001,
+    #         "do_sample": False,
+    #         "top_p": top_p,
+    #     }
+    # elif client_name in {"openai", "ai21"}:
+    #     params = {
+    #         "temperature": temperature,
+    #         "top_p": top_p,
+    #         "engine": client_engine,
+    #     }
+    # else:
+    #     raise ValueError(f"{client_name} is not a valid client name")
+    # manifest = Manifest(
+    #     client_name=client_name,
+    #     client_connection=client_connection,
+    #     cache_name="sqlite",
+    #     cache_connection=cache_connection,
+    #     session_id=None,
+    #     **params,
+    # )
+    # params = manifest.client.get_model_params()
+    # model_name = params["model_name"]
+    # if "engine" in params:
+    #     model_name += f"_{params['engine']}"
+    
+    # Create the "cache" table if it does not already exist
+    create_cache_table()
+    return None, "sn_llm"
 
 def get_response(prompt, manifest, overwrite=False, max_toks=10, stop_token=None, gold_choices=[], verbose=False):
     prompt = prompt.strip()

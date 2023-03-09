@@ -42,48 +42,6 @@ questioner_examples = [
         {
             "statement": "The father and son went camping to California.",
             "question": "Did the father and son go camping?"
-        },
-        {
-            "statement": "Cats are cute and cuddly.",
-            "question": "Are cats cute and cuddly?"
-        },
-        {
-            "statement": "The sky is blue.",
-            "question": "What color is the sky?"
-        },
-        {
-            "statement": "The sun rises in the east.",
-            "question": "Which direction does the sun rise?"
-        },
-        {
-            "statement": "The dog can fetch a ball.",
-            "question": "Can the dog fetch a ball?"
-        },
-        {
-            "statement": "The cat slept on the bed.",
-            "question": "Where did the cat sleep?"
-        }
-    ]).sample(frac=1).reset_index(drop=True),
-    pd.DataFrame([
-        {
-            "statement": "most of the light comes from the sun",
-            "question": "Does most of the light come from the sun?"
-        },
-        {
-            "statement": "the test was not",
-            "question": "Was the test hard?"
-        },
-        {
-            "statement": "it is a good idea to buy your parents gifts",
-            "question": "Is it a good idea to buy your parents gifts?"
-        },
-        {
-            "statement": "the balloon popped",
-            "question": "Did the balloon pop?"
-        },
-        {
-            "statement": "The father and son went camping to California.",
-            "question": "Did the father and son go camping?"
         } ,
         {
             "statement": "The boy was happy",
@@ -104,6 +62,48 @@ questioner_examples = [
         {
             "statement": "The family went to the beach",
             "question": "Did the family go to the beach?"
+        }
+    ]).sample(frac=1).reset_index(drop=True),     
+    pd.DataFrame([
+        {
+            "statement": "most of the light comes from the sun",
+            "question": "Does most of the light come from the sun?"
+        },
+        {
+            "statement": "the test was not",
+            "question": "Was the test hard?"
+        },
+        {
+            "statement": "it is a good idea to buy your parents gifts",
+            "question": "Is it a good idea to buy your parents gifts?"
+        },
+        {
+            "statement": "the balloon popped",
+            "question": "Did the balloon pop?"
+        },
+        {
+            "statement": "The father and son went camping to California.",
+            "question": "Did the father and son go camping?"
+        },
+        {
+            "statement": "Cats are cute and cuddly.",
+            "question": "Are cats cute and cuddly?"
+        },
+        {
+            "statement": "The sky is blue.",
+            "question": "What color is the sky?"
+        },
+        {
+            "statement": "The sun rises in the east.",
+            "question": "Which direction does the sun rise?"
+        },
+        {
+            "statement": "The dog can fetch a ball.",
+            "question": "Can the dog fetch a ball?"
+        },
+        {
+            "statement": "The cat slept on the bed.",
+            "question": "Where did the cat sleep?"
         }
     ]).sample(frac=1).reset_index(drop=True),
     pd.DataFrame([
