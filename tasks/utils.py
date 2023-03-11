@@ -6,7 +6,6 @@ import re
 import pandas as pd
 from typing import Callable, List
 from manifest import Manifest
-from flask import Flask
 import json
 import requests
 import ssl
