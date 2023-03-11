@@ -69,6 +69,7 @@ Then run [ama_prompting/download_p3.py](./download_p3.py). We use the GPT3-Style
 
 3. Experiments
 
+### CB full run
 ```
 export DAAS_URL=<your_daas_url>
 export DAAS_KEY=<your_daas_key>
@@ -90,3 +91,16 @@ Accuracy Boost Decomposed 0.8214285714285714
 Saved metrics to ../ama_logs/metrics.jsonl
 Saved final data to ../ama_logs/ama_final_runs/super_glue_cb
 ```
+
+### AGNews example run
+
+```
+python3 tasks/AGNews_final.py \
+    --run_zeroshot 1\
+    --num_boost 3 \
+    --output_metrics_file ../ama_logs/metrics.jsonl \
+    --cache_connection_question ../ama_logs/question_manifest_cache.sqlite \
+    --cache_connection_answer ../ama_logs/answer_manifest_cache.sqlite \
+    --save_dir ../ama_logs/ama_final_runs  --num_run 1 --boost_train_examples 0
+```
+    
