@@ -36,12 +36,6 @@ git clone git@github.com:HazyResearch/ama_prompting.git
 cd ama_prompting
 pip install -r requirements.txt
 
-# Weak supervision code
-cd metal-ama
-git submodule init
-git submodule update
-pip install -e .
-
 # Manifest 
 git clone git@github.com:HazyResearch/manifest.git
 cd manifest
