@@ -34,7 +34,9 @@ Clone as follows:
 # Ask Me Anything code
 git clone git@github.com:HazyResearch/ama_prompting.git
 cd ama_prompting
+git checkout changranh/daas
 pip install -r requirements.txt
+
 
 # Manifest 
 git clone git@github.com:HazyResearch/manifest.git
